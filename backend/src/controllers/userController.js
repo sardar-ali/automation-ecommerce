@@ -19,7 +19,7 @@ const signUpUser = async (req, res) => {
 
         // create new user
         const user = await User.create(req?.body);
-
+       
         if (user) {
             user.password = undefined;
         }
@@ -28,7 +28,12 @@ const signUpUser = async (req, res) => {
         res.json({
             status: true,
             data: {
-                user,
+                user: {
+                    first_name: user?.first_name,
+                    last_name: user?.last_name,
+                    email: user?.email,
+                    token: generateToken(user?._id)
+                },
                 message: "User created successfully"
             }
         })

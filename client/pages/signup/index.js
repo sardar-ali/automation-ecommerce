@@ -17,11 +17,9 @@ function Signup() {
                     <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your last name"/>
           
                 </div>
-                <div className="form-group">
-                    {/* <label for="exampleInputEmail1">Email address</label> */}
+                {/* <div className="form-group">
                     <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your phone"/>
-          
-                </div>
+                </div> */}
                 <div className="form-group">
                     {/* <label for="exampleInputEmail1">Email address</label> */}
                     <input type="email" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email"/>

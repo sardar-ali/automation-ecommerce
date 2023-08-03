@@ -93,7 +93,7 @@ function Header() {
                                         0
                                     </span>
                                 </a>
-                                <a href="" className="btn px-0 ml-2">
+                                <Link href="/cart" className="btn px-0 ml-2">
                                     <i className="fas fa-shopping-cart text-dark" />
                                     <span
                                         className="badge text-dark border border-dark rounded-circle"
@@ -101,7 +101,7 @@ function Header() {
                                     >
                                         0
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

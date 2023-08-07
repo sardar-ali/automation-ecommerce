@@ -19,7 +19,7 @@ const signUpUser = async (req, res) => {
 
         // create new user
         const user = await User.create(req?.body);
-       
+
         if (user) {
             user.password = undefined;
         }
@@ -29,9 +29,11 @@ const signUpUser = async (req, res) => {
             status: true,
             data: {
                 user: {
+                    id:user?._id,
                     first_name: user?.first_name,
                     last_name: user?.last_name,
                     email: user?.email,
+                    isAdmin: user?.isAdmin,
                     token: generateToken(user?._id)
                 },
                 message: "User created successfully"
@@ -46,10 +48,10 @@ const signUpUser = async (req, res) => {
     }
 }
 
-
 // user Login
 const loginUser = async (req, res) => {
     try {
+
         const { email, password } = req?.body;
 
         if (!email || !password) {
@@ -61,6 +63,7 @@ const loginUser = async (req, res) => {
         }
 
         const isUser = await User.findOne({ email }).select("+password");
+
 
         if (!isUser) {
             // return next(new CustomError("Invalid Email  or Password!", 400))
@@ -78,27 +81,29 @@ const loginUser = async (req, res) => {
             })
         }
 
-        const refreshToken = await generateRefreshToken(isUser?.id);
+        // const refreshToken = await generateRefreshToken(isUser?.id);
+        // const updateUser = await User.findOneAndUpdate(isUser?._id, {
+        //     refreshToken: refreshToken,
+        // }, {
+        //     new: true
+        // })
 
-        const updateUser = await User.findOneAndUpdate(isUser?._id, {
-            refreshToken: refreshToken,
-        }, {
-            new: true
-        })
+        // res.cookie("refreshToken", refreshToken, {
+        //     httpOnly: true,
+        //     maxAge: 72 * 60 * 60 * 1000
+        // })
 
-        res.cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            maxAge: 72 * 60 * 60 * 1000
-        })
+
         //response back to user
         res.status(200).json({
             status: true,
             data: {
                 user: {
-                    firstName: isUser?.firstName,
-                    lastName: isUser?.lastName,
+                    id:isUser?._id,
+                    first_name: isUser?.first_name,
+                    last_name: isUser?.last_name,
                     email: isUser?.email,
-                    phone: isUser?.phone,
+                    isAdmin: isUser?.isAdmin,
                     token: generateToken(isUser?._id)
                 },
                 message: "Logged in successfully"
@@ -114,9 +119,8 @@ const loginUser = async (req, res) => {
     }
 }
 
-
 // admin Login
-const loginAdmin = async (req, res, next) => {
+const loginAdmin = async (req, res) => {
     try {
         const { email, password } = req?.body;
 
@@ -128,9 +132,9 @@ const loginAdmin = async (req, res, next) => {
             })
         }
 
-        const isAdmin = await User.findOne({ email }).select("+password");
+        const Admin = await User.findOne({ email }).select("+password");
 
-        if (!isAdmin) {
+        if (!Admin) {
             // return next(new CustomError("Invalid Email  or Password!", 400))
             return res.status(400).json({
                 status: false,
@@ -138,7 +142,7 @@ const loginAdmin = async (req, res, next) => {
             })
         }
 
-        if (isAdmin && isAdmin?.role !== "admin") {
+        if (Admin && !Admin?.isAdmin) {
             // return next(new CustomError("You are not Authorized", 400))
             return res.status(400).json({
                 status: false,
@@ -146,7 +150,7 @@ const loginAdmin = async (req, res, next) => {
             })
         }
 
-        if (! await isAdmin?.isPasswordMatched(password, isAdmin?.password)) {
+        if (! await Admin?.isPasswordMatched(password, Admin?.password)) {
             // return next(new CustomError("Invalid  credentials!", 400))
             return res.status(400).json({
                 status: false,
@@ -161,21 +165,22 @@ const loginAdmin = async (req, res, next) => {
         //     new: true
         // })
 
-        res.cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            maxAge: 72 * 60 * 60 * 1000
-        })
+        // res.cookie("refreshToken", refreshToken, {
+        //     httpOnly: true,
+        //     maxAge: 72 * 60 * 60 * 1000
+        // })
 
         //response back to user
         res.status(200).json({
             status: true,
             data: {
                 user: {
-                    firstName: isAdmin?.firstName,
-                    lastName: isAdmin?.lastName,
-                    email: isAdmin?.email,
-                    phone: isAdmin?.phone,
-                    token: generateToken(isAdmin?._id)
+                    id:Admin?._id,
+                    first_name: Admin?.first_name,
+                    last_name: Admin?.last_name,
+                    email: Admin?.email,
+                    isAdmin: Admin?.isAdmin,
+                    token: generateToken(Admin?._id)
                 },
                 message: "Logged in successfully"
             }
@@ -191,4 +196,54 @@ const loginAdmin = async (req, res, next) => {
 }
 
 
-module.exports = { signUpUser, loginUser, loginAdmin }
+// update user
+const updateUser = async (req, res) => {
+
+    try {
+
+        if (req?.body?.password) {
+            return res.status(400).json({
+                status: false,
+                message: "User cannot updated has password here!"
+            })
+        }
+
+        const user = await User.findByIdAndUpdate(req?.params?.id, {
+            first_name: req?.body?.first_name,
+            last_name: req?.body?.last_name,
+            email: req?.body?.email,
+        }, {
+            new: true
+        }).select("-password")
+
+
+        if (!user) {
+            // return next(new CustomError("User is not updated!", 400))
+            return res.status(400).json({
+                status: false,
+                message: "User is not updated!"
+            })
+        }
+
+        res.status(200).json({
+            status: true,
+            data: {
+                user,
+                message: "User updated successfully"
+            }
+        })
+
+
+
+    } catch (error) {
+        return res.status(404).json({
+            status: true,
+            data: {
+                user,
+                error
+            }
+        })
+    }
+}
+
+module.exports = { signUpUser, loginUser, loginAdmin, updateUser }

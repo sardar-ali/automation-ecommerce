@@ -4,7 +4,7 @@ const User = require("../models/userModal");
 // signup user
 const signUpUser = async (req, res) => {
     try {
-
+console.log("body ::", )
         const email = req?.body?.email;
 
         //check if user already exist throw error
@@ -36,7 +36,7 @@ const signUpUser = async (req, res) => {
                     isAdmin: user?.isAdmin,
                     token: generateToken(user?._id)
                 },
-                message: "User created successfully"
+                message: "User signup successfully!"
             }
         })
 
@@ -194,7 +194,6 @@ const loginAdmin = async (req, res) => {
     }
 
 }
-
 
 // update user
 const updateUser = async (req, res) => {

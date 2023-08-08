@@ -17,21 +17,21 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     category: {
-        type: String,
+        // type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
         required: true,
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: "Category",
     },
     // in_stack:{
     //     type: Number,
     //     required: true,
     // },
-    brand: {
+    // brand: {
+    //     type: String,
+    //     required: true,
+    // },
+    image: {
         type: String,
-        required: true,
-    },
-    images: {
-        type: Array,
     },
     short_description: {
         type: String,

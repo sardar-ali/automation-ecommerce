@@ -1,4 +1,6 @@
 import React from "react"
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Layout from '../components/layout/Layout';
 import Head from 'next/head'
 
@@ -39,6 +41,16 @@ function MyApp({ Component, pageProps }) {
                     <script async src="js/main.js"></script>
                 </Head>
                 <Component {...pageProps} />
+                <ToastContainer
+                    position="top-right"
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </>
         );
     };

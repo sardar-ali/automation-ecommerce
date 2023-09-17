@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import { userSignup } from '../../services/api\'s/auth';
+import { userSignup } from '../../services/api/auth/index';
 
 function Signup() {
     const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ function Signup() {
         const result = await userSignup(formData)
         console.log("result ::", result)
 
-        if(result?.data?.status){
+        if (result?.data?.status) {
             toast.success(result?.data?.data?.message);
             console.log("result ::", result?.data?.data)
 

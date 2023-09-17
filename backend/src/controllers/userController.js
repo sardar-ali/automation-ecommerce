@@ -4,11 +4,11 @@ const User = require("../models/userModal");
 // signup user
 const signUpUser = async (req, res) => {
     try {
-console.log("body ::", )
         const email = req?.body?.email;
 
         //check if user already exist throw error
-        const isExist = await User.findOne({ email });
+        const isExist = await User.findOne({ email: email });
+
 
         if (isExist) {
             return res.status(400).json({
@@ -25,11 +25,11 @@ console.log("body ::", )
         }
 
         //send response back to user
-        res.json({
+        return res.status(200).json({
             status: true,
             data: {
                 user: {
-                    id:user?._id,
+                    id: user?._id,
                     first_name: user?.first_name,
                     last_name: user?.last_name,
                     email: user?.email,
@@ -99,7 +99,7 @@ const loginUser = async (req, res) => {
             status: true,
             data: {
                 user: {
-                    id:isUser?._id,
+                    id: isUser?._id,
                     first_name: isUser?.first_name,
                     last_name: isUser?.last_name,
                     email: isUser?.email,
@@ -175,7 +175,7 @@ const loginAdmin = async (req, res) => {
             status: true,
             data: {
                 user: {
-                    id:Admin?._id,
+                    id: Admin?._id,
                     first_name: Admin?.first_name,
                     last_name: Admin?.last_name,
                     email: Admin?.email,

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { USER_LOGIN, USER_SIGNUP, ADMIN_LOGIN } from '../index';
+import { USER_LOGIN, USER_SIGNUP, ADMIN_LOGIN } from '../../index';
 
 
 export const userSignup = async (data) => {

@@ -17,7 +17,7 @@ function Categories() {
         getCategoryList()
     }, [])
 
-    
+
     return (
         <div className="container-fluid pt-5">
             <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
@@ -28,7 +28,7 @@ function Categories() {
                     return (
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <a className="text-decoration-none" href="">
-                                <div className="cat-item d-flex align-items-center mb-4">
+                                <div className="cat-item d-flex align-items-center mb-4" style={{position:"relative"}}>
                                     <div
                                         className="overflow-hidden"
                                         style={{ width: 100, height: 100 }}
@@ -36,7 +36,6 @@ function Categories() {
                                         <img
                                             className="img-fluid category-img"
                                             src={itm?.image}
-                                            //  src="img/cat-1.jpg" 
                                             alt="" />
                                     </div>
                                     <div className="flex-fill pl-3">
@@ -44,6 +43,11 @@ function Categories() {
                                         <small className="text-body">100 Products</small>
                                     </div>
                                 </div>
+                                <div style={{ position:"absolute" , display: "flex" , flexDirection:"column", justifyConten:"center", alignItem:"center", margin:"1rem 1rem", fontSize:"1.2rem", top:"0.5rem", right:"1rem" }}>
+                                        <i class="fa-solid fa-trash" style={{color:"red"}}></i>
+                                        <i class="fa-solid fa-pen-to-square" style={{margin:"1rem 0", color:"black"}}></i>
+                                    </div>
+
                             </a>
                         </div>
                     )

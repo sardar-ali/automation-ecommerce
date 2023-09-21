@@ -21,6 +21,7 @@ class MyDocument extends Document {
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
                     rel="stylesheet"
                 />
+                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css"></link>
                 <link href="lib/animate/animate.min.css" rel="stylesheet" />
                 <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
                 <link href="css/style.css" rel="stylesheet" />

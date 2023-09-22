@@ -1,5 +1,16 @@
+const cloudinary = require('cloudinary').v2;
+const fs = require("fs");
 const Product = require("../models/productModel")
 const Category = require("../models/categoryModel")
+// const ulid = require("ulid");
+const uploadImageOnCloudinary = require("../middleware/uploadFileOnCloudinary")
+// cloudinary.config({
+//     cloud_name: process.env.CLOUDE_NAME,
+//     api_key: process.env.API_KEY,
+//     api_secret: process.env.API_SECRET
+// });
+
+
 
 
 //create Product
@@ -22,11 +33,14 @@ const createProduct = async (req, res) => {
             })
         }
 
-        const basePath = `${req?.protocol}://${req.get("host")}/public/images/product/`;
-        const fileName = req?.file?.filename;
+        const imageUrl = await uploadImageOnCloudinary(req?.file?.path)
 
-        const product = await Product.create({ ...req?.body, image: `${basePath}${fileName}` });
+        // const basePath = `${req?.protocol}://${req.get("host")}/public/images/product/`;
+        // const fileName = req?.file?.filename;
 
+        // const product = await Product.create({ ...req?.body, image: `${basePath}${fileName}` });
+
+        const product = await Product.create({ ...req?.body, image: `${imageUrl}` });
         if (!product) {
             return res.status(400).json({
                 status: false,
@@ -85,9 +99,10 @@ const updateProduct = async (req, res) => {
         let imageUrl;
 
         if (req?.file) {
-            const basePath = `${req?.protocol}://${req?.get("host")}/public/images/product/`;
-            const fileName = req?.file?.filename;
-            imageUrl = `${basePath}${fileName}`;
+            imageUrl = await uploadImageOnCloudinary(req?.file?.path)
+            // const basePath = `${req?.protocol}://${req?.get("host")}/public/images/product/`;
+            // const fileName = req?.file?.filename;
+            // imageUrl = `${basePath}${fileName}`;
         } else {
             imageUrl = req?.body?.image
         }

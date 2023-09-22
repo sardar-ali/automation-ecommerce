@@ -1,4 +1,5 @@
 const Category = require("../models/categoryModel");
+const uploadImageOnCloudinary = require("../middleware/uploadFileOnCloudinary")
 
 // create category 
 const createCategory = async (req, res) => {
@@ -14,10 +15,13 @@ const createCategory = async (req, res) => {
             })
         }
 
-        const basePath = `${req?.protocol}://${req?.get("host")}/public/images/category/`
-        const fileName = req?.file?.filename
+        const imageUrl = await uploadImageOnCloudinary(req?.file?.path);
 
-        const category = await Category.create({ ...req?.body, image: `${basePath}${fileName}` });
+        // const basePath = `${req?.protocol}://${req?.get("host")}/public/images/category/`
+        // const fileName = req?.file?.filename
+        // const category = await Category.create({ ...req?.body, image: `${basePath}${fileName}` });
+       
+        const category = await Category.create({ ...req?.body, image: `${imageUrl}` });
 
 
 
@@ -104,9 +108,10 @@ const updateCategory = async (req, res) => {
         if (!file) {
             imageUrl = req?.body?.image
         } else {
-            const basePath = `${req?.protocol}://${req?.get("host")}/public/images/category/`
-            const fileName = req?.file?.filename
-            imageUrl = `${basePath}${fileName}`;
+            imageUrl = await uploadImageOnCloudinary(req?.file?.path);
+            // const basePath = `${req?.protocol}://${req?.get("host")}/public/images/category/`
+            // const fileName = req?.file?.filename
+            // imageUrl = `${basePath}${fileName}`;
         }
 
         const category = await Category.findByIdAndUpdate(req?.params?.id, { ...req?.body, image: imageUrl }, { new: true });

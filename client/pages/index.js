@@ -1,9 +1,11 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import Carousel from "../components/dashboard/Carousel.js"
 import Categories from "../components/dashboard/Categories.js"
 import Products from "../components/dashboard/Products.js"
-    
 function Home() {
+    const user = useSelector((state) => state.user);
+    console.log("user ::", user)
     return (
 
         <>
@@ -745,7 +747,7 @@ function Home() {
                 </div> */}
                 {/* Offer End */}
                 {/* Products Start */}
-{/*                 
+                {/*                 
                 <div className="container-fluid pt-5 pb-3">
                     <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
                         <span className="bg-secondary pr-3">Recent Products</span>

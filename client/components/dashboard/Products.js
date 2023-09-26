@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector} from 'react-redux';
+import { addToCart } from '../../redux/slices/cartSlice';
 import { useRouter } from "next/router";
 import { getProduct } from '../../services/api/product';
 
 
 function Products() {
     const router = useRouter();
+    const cart = useSelector((state)=> state?.cart);
+    const dispatch = useDispatch();
+
     const [productList, setProductList] = useState([]);
+
+console.log("cart :::", cart)
 
     const detailHandler = () => {
         router.push("/product-details/1")
@@ -84,6 +91,12 @@ function Products() {
     }, [])
 
 
+
+    const handleAddToCart = (item) => {
+        dispatch(addToCart({...item, quantity:1}));
+      };
+
+
     return (
         <>
             <div className="container-fluid pt-5 pb-3">
@@ -105,7 +118,7 @@ function Products() {
                                             // src="img/product-1.jpg" 
                                             alt="" />
                                         <div className="product-action">
-                                            <a className="btn btn-outline-dark btn-square" href="">
+                                            <a className="btn btn-outline-dark btn-square" onClick={()=> handleAddToCart(product)}>
                                                 <i className="fa fa-shopping-cart" />
                                             </a>
                                             <a className="btn btn-outline-dark btn-square" href="">

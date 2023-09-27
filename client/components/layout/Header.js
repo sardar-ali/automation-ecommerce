@@ -138,7 +138,7 @@ function Header() {
                         </form>
                     </div>
                     <div className="col-lg-4 col-6 text-right">
-                       <WhatsappButton  text={"For Quick Shopping Click Here"}/>
+                       <WhatsappButton  text={"Quick Shop Now"}/>
                     </div>
                 </div>
             </div>

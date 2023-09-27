@@ -133,7 +133,7 @@ function ProductDetails() {
                         <div className="d-flex pt-2">
                             {/* <strong className="text-dark mr-2">Share on:</strong> */}
                             {/* <div className="d-inline-flex"> */}
-                            <WhatsappButton  text={"For Quick Shopping Click Here"}/>
+                            <WhatsappButton  text={"Quick Shopping Click"}/>
                             {/* </div> */}
                         </div>
                     </div>

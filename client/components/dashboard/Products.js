@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/slices/cartSlice';
 import { useRouter } from "next/router";
 import { getProduct } from '../../services/api/product';
@@ -7,12 +7,11 @@ import { getProduct } from '../../services/api/product';
 
 function Products() {
     const router = useRouter();
-    const cart = useSelector((state)=> state?.cart);
+    const cart = useSelector((state) => state?.cart?.cartItems);
     const dispatch = useDispatch();
 
     const [productList, setProductList] = useState([]);
 
-console.log("cart :::", cart)
 
     const detailHandler = () => {
         router.push("/product-details/1")
@@ -20,57 +19,64 @@ console.log("cart :::", cart)
 
     const products = [
         {
+            id:1,
             name: "product name",
-            price: "$123.00",
+            price: "123.00",
             reviews: 99,
             image: "https://cdn.centennialcollege.ca/widencdn/img/centennialcollege/9tzcdepxzy/700x350px/new-parking-gates.jpeg?keep=c&quality=100&u=gxypq6",
 
         },
         {
+            id:2,
             name: "product name",
-            price: "$130.00",
+            price: "130.00",
             reviews: 98,
             image: "https://automaticgatesystems.com.au/wp-content/uploads/2018/01/IMG_6519-e1401375250282-1-1.jpg"
         },
         {
+            id:3,
             name: "product name",
-            price: "$132.00",
+            price: "132.00",
             reviews: 102,
             image: "img/moter-1.jpg",
         },
-        {
+        { id:4,
             name: "product name",
-            price: "$122.00",
+            price: "122.00",
             reviews: 102,
             image: "https://www.alamy.com/aggregator-api/download?url=https://c8.alamy.com/comp/HDRKB2/parking-lot-gate-and-entrance-HDRKB2.jpg"
         },
         {
+            id:5,
             name: "product name",
-            price: "$222.00",
+            price: "222.00",
             reviews: 102,
             image: "https://tse4.mm.bing.net/th?id=OIP.-x5UO5fFhlbBCeuIIOkwaAHaE4&pid=Api&P=0&h=180"
         },
         {
+            id:6,
             name: "product name",
-            price: "$111.00",
+            price: "111.00",
             reviews: 102,
             image: "https://tse4.mm.bing.net/th?id=OIP.pi55WI9XPhvbvZN1TJA75gHaE8&pid=Api&P=0&h=180"
         },
         {
+            id:7,
             name: "product name",
-            price: "$544.00",
+            price: "544.00",
             reviews: 102,
             image: "https://tse3.mm.bing.net/th?id=OIP.jRbZoud-eoU5ni7lsTjRKwHaHa&pid=Api&P=0&h=180"
         },
         {
+            id:8,
             name: "product name",
-            price: "$333.00",
+            price: "333.00",
             reviews: 102,
             image: "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180"
         },
-        {
+        { id:9,
             name: "product name",
-            price: "$567.00",
+            price: "567.00",
             reviews: 102,
             image: "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180"
         },
@@ -93,8 +99,8 @@ console.log("cart :::", cart)
 
 
     const handleAddToCart = (item) => {
-        dispatch(addToCart({...item, quantity:1}));
-      };
+        dispatch(addToCart({ ...item, quantity: 1 }));
+    };
 
 
     return (
@@ -107,7 +113,7 @@ console.log("cart :::", cart)
                     {products?.map((product, ind) => {
                         return (
 
-                            <div className="col-lg-3 col-md-4 col-sm-6 pb-1" onClick={detailHandler} key={ind}>
+                            <div className="col-lg-3 col-md-4 col-sm-6 pb-1" key={ind}>
 
                                 <div className="product-item bg-light mb-4">
                                     <div className="product-img position-relative overflow-hidden" style={{ position: "relative" }}>
@@ -118,24 +124,24 @@ console.log("cart :::", cart)
                                             // src="img/product-1.jpg" 
                                             alt="" />
                                         <div className="product-action">
-                                            <a className="btn btn-outline-dark btn-square" onClick={()=> handleAddToCart(product)}>
+                                            <a className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
                                                 <i className="fa fa-shopping-cart" />
                                             </a>
-                                            <a className="btn btn-outline-dark btn-square" href="">
+                                            {/* <a className="btn btn-outline-dark btn-square" href="">
                                                 <i className="far fa-heart" />
-                                            </a>
-                                            <a className="btn btn-outline-dark btn-square" href="">
+                                            </a> */}
+                                            {/* <a className="btn btn-outline-dark btn-square" href="">
                                                 <i className="fa fa-sync-alt" />
-                                            </a>
-                                            <a className="btn btn-outline-dark btn-square" href="">
+                                            </a> */}
+                                            {/* <a className="btn btn-outline-dark btn-square" href="">
                                                 <i className="fa fa-search" />
-                                            </a>
+                                            </a> */}
                                         </div>
 
 
                                     </div>
                                     <div className="text-center py-4">
-                                        <a className="h6 text-decoration-none text-truncate" href="">
+                                        <a className="h6 text-decoration-none text-truncate cursor-pointer" onClick={detailHandler}>
                                             {product?.name}
                                         </a>
                                         <div className="d-flex align-items-center justify-content-center mt-2">
@@ -153,9 +159,9 @@ console.log("cart :::", cart)
                                             <small>{product?.reviews}</small>
                                         </div>
 
-                                        <div style={{  display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem"}}>
-                                            <i class="fa-solid fa-trash" style={{ color: "red" }}></i>
-                                            <i class="fa-solid fa-pen-to-square" style={{  color: "black" }}></i>
+                                        <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
+                                            <i class="fa-solid fa-trash cursor-pointer" style={{ color: "red" }}></i>
+                                            <i class="fa-solid fa-pen-to-square cursor-pointer" style={{ color: "black" }}></i>
                                         </div>
                                     </div>
 

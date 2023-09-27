@@ -1,5 +1,5 @@
 import React from 'react'
-
+import WhatsappButton from "../../components/whatsappButton"
 function ProductDetails() {
     const product = [
         "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180",
@@ -131,21 +131,10 @@ function ProductDetails() {
                                 Cart</button>
                         </div>
                         <div className="d-flex pt-2">
-                            <strong className="text-dark mr-2">Share on:</strong>
-                            <div className="d-inline-flex">
-                                <a className="text-dark px-2" href="">
-                                    <i className="fab fa-facebook-f"></i>
-                                </a>
-                                <a className="text-dark px-2" href="">
-                                    <i className="fab fa-twitter"></i>
-                                </a>
-                                <a className="text-dark px-2" href="">
-                                    <i className="fab fa-linkedin-in"></i>
-                                </a>
-                                <a className="text-dark px-2" href="">
-                                    <i className="fab fa-pinterest"></i>
-                                </a>
-                            </div>
+                            {/* <strong className="text-dark mr-2">Share on:</strong> */}
+                            {/* <div className="d-inline-flex"> */}
+                            <WhatsappButton  text={"For Quick Shopping Click Here"}/>
+                            {/* </div> */}
                         </div>
                     </div>
                 </div>

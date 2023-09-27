@@ -1,5 +1,5 @@
 import React from 'react'
-
+import WhatsappButton from "../whatsappButton/index"
 function Footer() {
   return (
     <>
@@ -142,8 +142,16 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-               
-                <a href="#" className="btn btn-primary back-to-top">
+                <WhatsappButton text={"Quick Shopping"} styles={"whats-app "}/>
+               {/* <div className="btn btn-success whats-app d-flex justify-center items-center" style={{marginRight:"4rem"}}>
+               <i style={{fontSize: "3rem"}}  class="fa-brands fa-square-whatsapp fa-beat-fade"></i> 
+               <span style={{
+                    textAlign: "center",
+                    paddingTop: "0.8rem",
+                    paddingLeft: "0.5rem"
+                }}>Quick Shopping</span>
+               </div> */}
+                <a href="#" className="btn btn-primary back-to-top ">
                     <i className="fa fa-angle-double-up" />
                 </a>
     </>

@@ -32,8 +32,6 @@ function MyApp({ Component, pageProps }) {
                     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
                     <link href="css/style.css" rel="stylesheet" />
 
-
-
                     <script async src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                     <script async src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
                     <script async src="lib/easing/easing.min.js"></script>
@@ -42,7 +40,7 @@ function MyApp({ Component, pageProps }) {
                     <script async src="mail/contact.js"></script>
                     <script async src="js/main.js"></script>
                 </Head>
-                <Provider store={store}>
+               
                 <Component {...pageProps} />
                 <ToastContainer
                     position="top-right"
@@ -54,16 +52,18 @@ function MyApp({ Component, pageProps }) {
                     draggable
                     pauseOnHover
                 />
-                </Provider>
+               
             </>
         );
     };
 
     return (
         <>
-            <Layout>
-                <WrappedComponent />
-            </Layout>
+            <Provider store={store}>
+                <Layout>
+                    <WrappedComponent />
+                </Layout>
+            </Provider>
         </>
 
     );

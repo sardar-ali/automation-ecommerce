@@ -9477,7 +9477,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .btn-square {
-  width: 40px;
+  width: 60px;
   height: 40px;
 }
 
@@ -9692,7 +9692,14 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 0;
   list-style-type: none;
 }
-
+.whats-app {
+  position: fixed;
+  /* display: none; */
+  right: 30px;
+  bottom: 30px;
+  z-index: 11;
+  animation: action 1s infinite alternate;
+}
 .back-to-top {
   position: fixed;
   display: none;
@@ -9724,6 +9731,10 @@ a.text-dark:hover, a.text-dark:focus {
   margin-top:1.5rem;
   padding: 1.7rem;
   border-radius: 0.5rem;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .login-button { 

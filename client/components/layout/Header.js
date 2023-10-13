@@ -1,12 +1,14 @@
 import Link from 'next/link'
+import {useState} from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import WhatsappButton from "../whatsappButton/index"
 
 function Header() {
     const cart = useSelector((state) => state?.cart?.cartItems);
-    console.log("cart header ::", cart);
-    console.log("cart header length ::", cart?.length);
-
+    const [search, setSearch] = useState()
+    const catagories = useSelector((state) => state?.category?.categories);
+console.log("search ::", search)
     return (
         <>
             <div className="container-fluid">
@@ -126,6 +128,9 @@ function Header() {
                             <div className="input-group">
                                 <input
                                     type="text"
+                                    name="search"
+                                    value={search}
+                                    onChange={(e)=>setSearch(e.target.value)}
                                     className="form-control"
                                     placeholder="Search for products"
                                 />
@@ -137,9 +142,9 @@ function Header() {
                             </div>
                         </form>
                     </div>
-                    <div className="col-lg-4 col-6 text-right">
-                       <WhatsappButton  text={"Quick Shop Now"}/>
-                    </div>
+                    {/* <div className="col-lg-4 col-6 text-right">
+                        <WhatsappButton text={"Quick Shop Now"} />
+                    </div> */}
                 </div>
             </div>
 
@@ -165,7 +170,7 @@ function Header() {
                             style={{ width: "calc(100% - 30px)", zIndex: 999 }}
                         >
                             <div className="navbar-nav w-100">
-                                <div className="nav-item dropdown dropright">
+                                {/* <div className="nav-item dropdown dropright">
                                     <a
                                         href="#"
                                         className="nav-link dropdown-toggle"
@@ -184,11 +189,13 @@ function Header() {
                                             Babys Dresses
                                         </a>
                                     </div>
-                                </div>
-                                <a href="" className="nav-item nav-link">
-                                    Shirts
-                                </a>
-                                <a href="" className="nav-item nav-link">
+                                </div> */}
+                                {catagories?.map((itm) => {
+                                    return (<a href="#" keys={itm?._id} className="nav-item nav-link">
+                                        {itm?.name}
+                                    </a>)
+                                })}
+                                {/* <a href="" className="nav-item nav-link">
                                     Jeans
                                 </a>
                                 <a href="" className="nav-item nav-link">
@@ -211,7 +218,7 @@ function Header() {
                                 </a>
                                 <a href="" className="nav-item nav-link">
                                     Shoes
-                                </a>
+                                </a> */}
                             </div>
                         </nav>
                     </div>

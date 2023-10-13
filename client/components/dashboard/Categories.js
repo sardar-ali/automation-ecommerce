@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../services/api/category'
+import { getCategories } from '../../redux/slices/categorySlice';
+
 
 function Categories() {
+    const dispatch = useDispatch();
 
     const [categoryList, setCategoryList] = useState([]);
 
@@ -9,6 +13,8 @@ function Categories() {
         const response = await getCategory();
         if (response?.data?.status) {
             setCategoryList(response?.data?.data?.categories)
+            console.log("response ::", response?.data?.data?.categories)
+            dispatch(getCategories(response?.data?.data?.categories))
         }
 
     }

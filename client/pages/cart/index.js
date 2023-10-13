@@ -45,7 +45,6 @@ function Cart() {
                                                 <div class="input-group-btn">
                                                     <button class="btn btn-sm btn-primary btn-minus" onClick={() => {
                                                         if (item?.quantity > 1) {
-                                                            console.log("i am clicked")
                                                             dispatch(decreaseCartItemQuantity(item))
                                                         }
                                                     }}>
@@ -55,7 +54,6 @@ function Cart() {
                                                 <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value={item?.quantity} />
                                                 <div class="input-group-btn">
                                                     <button class="btn btn-sm btn-primary btn-plus" onClick={() => {
-                                                        console.log("i am clicked!")
                                                         dispatch(increaseCartItemQuantity(item))
                                                     }}>
                                                         <i class="fa fa-plus"></i>

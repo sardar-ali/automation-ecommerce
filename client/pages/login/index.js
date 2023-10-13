@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-
+import { redirect, useRouter } from 'next/navigation';  
 import { userLogin } from '../../services/api/auth/index';
 
 function Login() {
-
+const router = useRouter();
     const [formData, setFormData ] = useState({
         email: "",
         password: ""
@@ -26,6 +26,8 @@ function Login() {
         if (result?.data?.status) {
             console.log("result ::", result)
             toast.success(result?.data?.data?.message)
+            // navigate("/")
+            router.push("/")
         }
     }
 

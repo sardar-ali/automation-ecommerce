@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/slices/cartSlice';
+import { getProducts } from '../../redux/slices/productSlice';
 import { useRouter } from "next/router";
 import { getProduct } from '../../services/api/product';
 
@@ -8,13 +9,14 @@ import { getProduct } from '../../services/api/product';
 function Products() {
     const router = useRouter();
     const cart = useSelector((state) => state?.cart?.cartItems);
+    const product = useSelector((state) => state?.product?.products);
     const dispatch = useDispatch();
 
     const [productList, setProductList] = useState([]);
 
 
-    const detailHandler = () => {
-        router.push("/product-details/1")
+    const detailHandler = (id) => {
+        router.push(`/product-details/${id}`)
     }
 
     const products = [
@@ -88,6 +90,8 @@ function Products() {
         const response = await getProduct();
         if (response?.data?.status) {
             setProductList(response?.data?.data?.product)
+            console.log("i am here :::", response?.data?.data?.product )
+           dispatch( getProducts(response?.data?.data?.product))
         }
 
     }
@@ -110,7 +114,7 @@ function Products() {
                     <span className="bg-secondary pr-3">Products</span>
                 </h2>
                 <div className="row px-xl-5">
-                    {products?.map((product, ind) => {
+                    {productList?.map((product, ind) => {
                         return (
 
                             <div className="col-lg-3 col-md-4 col-sm-6 pb-1" key={ind}>
@@ -141,7 +145,7 @@ function Products() {
 
                                     </div>
                                     <div className="text-center py-4">
-                                        <a className="h6 text-decoration-none text-truncate cursor-pointer" onClick={detailHandler}>
+                                        <a className="h6 text-decoration-none text-truncate cursor-pointer" onClick={()=> detailHandler(product?._id)}>
                                             {product?.name}
                                         </a>
                                         <div className="d-flex align-items-center justify-content-center mt-2">

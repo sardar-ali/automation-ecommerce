@@ -11,6 +11,8 @@ export const CREATE_PRODUCT = `${BASE_URL}/product/create-product`;
 export const GET_PRODUCT = `${BASE_URL}/product/get-products`;
 export const UPDATE_PRODUCT = `${BASE_URL}/product/update-product`;
 export const DELETE_PRODUCT = `${BASE_URL}/product/delete-product`;
+export const GET_SINGLE_PRODUCT = `${BASE_URL}/product/get-single-product`;
+
 
 
 // category urls 

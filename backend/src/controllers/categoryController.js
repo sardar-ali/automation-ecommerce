@@ -5,7 +5,8 @@ const uploadImageOnCloudinary = require("../middleware/uploadFileOnCloudinary")
 const createCategory = async (req, res) => {
     try {
 
-
+        console.log("body ::", req?.body)
+        console.log("file ::", req?.file)
 
         const file = req?.file;
         if (!file) {
@@ -20,7 +21,7 @@ const createCategory = async (req, res) => {
         // const basePath = `${req?.protocol}://${req?.get("host")}/public/images/category/`
         // const fileName = req?.file?.filename
         // const category = await Category.create({ ...req?.body, image: `${basePath}${fileName}` });
-       
+
         const category = await Category.create({ ...req?.body, image: `${imageUrl}` });
 
 
@@ -104,7 +105,7 @@ const updateCategory = async (req, res) => {
 
         const file = req?.file;
         let imageUrl;
-        
+
         if (!file) {
             imageUrl = req?.body?.image
         } else {

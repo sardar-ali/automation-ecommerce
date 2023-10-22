@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-
+import { redirect, useRouter } from 'next/navigation';  
 import { userLogin } from '../../services/api/auth/index';
 
 function Login() {
-
+const router = useRouter();
     const [formData, setFormData ] = useState({
         email: "",
         password: ""
@@ -23,9 +23,15 @@ function Login() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const result = await userLogin(formData);
+        console.log("result ::", result )
         if (result?.data?.status) {
+            // localStorage.setItem("token", result?.data?.data?.user?.token)
+            localStorage.setItem('token', result?.data?.data?.user?.token);
             console.log("result ::", result)
+            console.log("message ::", result?.data?.data?.message)
             toast.success(result?.data?.data?.message)
+            // navigate("/")
+            router.push("/")
         }
     }
 

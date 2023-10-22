@@ -142,7 +142,7 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-                <WhatsappButton text={"Quick Shopping"} styles={"whats-app "}/>
+                <WhatsappButton text={"Quick Shopping"} styles={"whats-app"}/>
                {/* <div className="btn btn-success whats-app d-flex justify-center items-center" style={{marginRight:"4rem"}}>
                <i style={{fontSize: "3rem"}}  class="fa-brands fa-square-whatsapp fa-beat-fade"></i> 
                <span style={{

@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+// import { useNavigate } from "react-router-dom";
+ import { useRouter } from 'next/navigation'; 
 import { toast } from 'react-toastify';
 import { userSignup } from '../../services/api/auth/index';
 
 function Signup() {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
@@ -29,6 +32,8 @@ function Signup() {
         if (result?.data?.status) {
             toast.success(result?.data?.data?.message);
             console.log("result ::", result?.data?.data)
+            // navigate("/")
+            router.push("/")
 
         }
 

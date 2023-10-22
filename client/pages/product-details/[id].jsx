@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { useRouter } from 'next/router';
+ import {getSingleProduct} from "../../services/api/product/index"
 import WhatsappButton from "../../components/whatsappButton"
 function ProductDetails() {
-    const product = [
+    const router = useRouter();
+   const [product, setProduct] =  useState({})
+    const { id } = router.query; 
+    console.log("iddd ::", id)
+
+    const productImages = [
         "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180",
         "https://tse3.mm.bing.net/th?id=OIP.jRbZoud-eoU5ni7lsTjRKwHaHa&pid=Api&P=0&h=180",
         "https://tse3.mm.bing.net/th?id=OIP.jRbZoud-eoU5ni7lsTjRKwHaHa&pid=Api&P=0&h=180",
@@ -9,6 +16,18 @@ function ProductDetails() {
         "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180",
     ]
 
+    const getproduct = async(id) => { 
+        const response = await getSingleProduct(id);
+        if (response?.data?.status) {
+            setProduct(response?.data?.data?.product)
+        }
+    }
+    useEffect (()=>{
+        getproduct(id)
+    },[id]);
+
+
+    console.log("product ::", product)
     return (
         <div className="container-fluid pb-5">
             <div className="row px-xl-5">
@@ -17,9 +36,9 @@ function ProductDetails() {
                     <div id="product-carousel" className="carousel slide" data-ride="carousel">
                         <div className="carousel-inner bg-light">
                             <div className="carousel-item active">
-                                <img className="img-fluid w-100 product-detail-img " src={product[0]} alt="" />
+                                <img className="img-fluid w-100 product-detail-img " src={product?.image} alt="" />
                             </div>
-                             {product?.map((url, ind) => {
+                             {productImages?.map((url, ind) => {
                                 return (
                                     <div className="carousel-item" key={ind}>
                                         <img className="img-fluid w-100 product-detail-img " src={url} alt="" />
@@ -48,7 +67,7 @@ function ProductDetails() {
 
                 <div className="col-lg-7 h-auto mb-30">
                     <div className="h-100 bg-light p-30">
-                        <h3>Product Name Goes Here</h3>
+                        <h3>{product?.name}</h3>
                         <div className="d-flex mb-3">
                             <div className="text-primary mr-2">
                                 <small className="fas fa-star"></small>
@@ -59,11 +78,9 @@ function ProductDetails() {
                             </div>
                             <small className="pt-1">(99 Reviews)</small>
                         </div>
-                        <h3 className="font-weight-semi-bold mb-4">$150.00</h3>
-                        <p className="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                            clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                            Nonumy</p>
-                        <div className="d-flex mb-3">
+                        <h3 className="font-weight-semi-bold mb-4">{product?.price}</h3>
+                        <p className="mb-4">{product?.short_description}</p>
+                        {/* <div className="d-flex mb-3">
                             <strong className="text-dark mr-3">Sizes:</strong>
                             <form>
                                 <div className="custom-control custom-radio custom-control-inline">
@@ -87,8 +104,8 @@ function ProductDetails() {
                                     <label className="custom-control-label" for="size-5">XL</label>
                                 </div>
                             </form>
-                        </div>
-                        <div className="d-flex mb-4">
+                        </div> */}
+                        {/* <div className="d-flex mb-4">
                             <strong className="text-dark mr-3">Colors:</strong>
                             <form>
                                 <div className="custom-control custom-radio custom-control-inline">
@@ -112,7 +129,7 @@ function ProductDetails() {
                                     <label className="custom-control-label" for="color-5">Green</label>
                                 </div>
                             </form>
-                        </div>
+                        </div> */}
                         <div className="d-flex align-items-center mb-4 pt-2">
                             <div className="input-group quantity mr-3" style={{ width: "130px" }}>
                                 <div className="input-group-btn">
@@ -147,17 +164,16 @@ function ProductDetails() {
                         <div className="nav nav-tabs mb-4">
                             <a className="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                             <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
-                            <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                            {/* <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a> */}
                         </div>
                         <div className="tab-content">
                             <div className="tab-pane fade show active" id="tab-pane-1">
                                 <h4 className="mb-3">Product Description</h4>
-                                <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                                <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                                <p>{product?.short_description}</p>
                             </div>
                             <div className="tab-pane fade" id="tab-pane-2">
                                 <h4 className="mb-3">Additional Information</h4>
-                                <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
+                                <p>{product?.full_description}</p>
                                 <div className="row">
                                     <div className="col-md-6">
                                         <ul className="list-group list-group-flush">
@@ -193,7 +209,7 @@ function ProductDetails() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="tab-pane-3">
+                            {/* <div className="tab-pane fade" id="tab-pane-3">
                                 <div className="row">
                                     <div className="col-md-6">
                                         <h4 className="mb-4">1 review for "Product Name"</h4>
@@ -244,7 +260,7 @@ function ProductDetails() {
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

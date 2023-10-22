@@ -41,8 +41,11 @@ html {
 }
 
 @media (min-width: 992px) {
-  .container, .container-sm, .container-md, .container-lg {
+  .container, .container-fluid, .container-sm, .container-md, .container-lg {
+    flex-direction: column;
     max-width: 960px;
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 

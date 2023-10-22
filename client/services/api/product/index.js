@@ -1,10 +1,13 @@
 import axios from "axios"
-import { GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from "../..";
+import { GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_SINGLE_PRODUCT, GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY } from "../..";
 
 
-export const createProduct = async (data) => {
+export const createProduct = async (data, token) => {
+    console.log("data token ::", token)
     try {
-        const response = await axios.post(`${CREATE_PRODUCT}`, data)
+        const response = await axios.post(`${CREATE_PRODUCT}`, data, {
+            headers: { authorization: `Bearer ${token}` },
+        })
         return response;
     } catch (error) {
         return error
@@ -29,6 +32,15 @@ export const updateProduct = async (id, data) => {
     }
 }
 
+export const getSingleProduct = async (id) => {
+    try {
+        const response = await axios.get(`${GET_SINGLE_PRODUCT}/${id}`)
+        return response;
+    } catch (error) {
+        return error
+    }
+}
+
 export const deleteProduct = async (id) => {
     try {
         const response = await axios.delete(`${DELETE_PRODUCT}/${id}`)
@@ -39,3 +51,11 @@ export const deleteProduct = async (id) => {
 }
 
 
+export const getAllProductOfSpecificCategory = async (id) => {
+    try {
+        const response = await axios.get(`${GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY}/${id}`)
+        return response;
+    } catch (error) {
+        return error
+    }
+}

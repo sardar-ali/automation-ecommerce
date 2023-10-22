@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../services/api/category'
+import { getCategories } from '../../redux/slices/categorySlice';
+
 
 function Categories() {
+    const dispatch = useDispatch();
 
     const [categoryList, setCategoryList] = useState([]);
 
@@ -9,6 +14,8 @@ function Categories() {
         const response = await getCategory();
         if (response?.data?.status) {
             setCategoryList(response?.data?.data?.categories)
+            console.log("response ::", response?.data?.data?.categories)
+            dispatch(getCategories(response?.data?.data?.categories))
         }
 
     }
@@ -27,7 +34,7 @@ function Categories() {
                 {categoryList?.map((itm) => {
                     return (
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                            <a className="text-decoration-none" href="">
+                            <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}>
                                 <div className="cat-item d-flex align-items-center mb-4" style={{position:"relative"}}>
                                     <div
                                         className="overflow-hidden"
@@ -48,7 +55,7 @@ function Categories() {
                                         <i class="fa-solid fa-pen-to-square" style={{margin:"1rem 0", color:"black"}}></i>
                                     </div>
 
-                            </a>
+                            </Link>
                         </div>
                     )
                 })}

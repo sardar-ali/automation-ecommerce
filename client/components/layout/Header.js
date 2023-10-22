@@ -1,12 +1,14 @@
 import Link from 'next/link'
+import {useState} from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import WhatsappButton from "../whatsappButton/index"
 
 function Header() {
     const cart = useSelector((state) => state?.cart?.cartItems);
-    console.log("cart header ::", cart);
-    console.log("cart header length ::", cart?.length);
-
+    const [search, setSearch] = useState()
+    const catagories = useSelector((state) => state?.category?.categories);
+console.log("search ::", search)
     return (
         <>
             <div className="container-fluid">
@@ -38,7 +40,7 @@ function Header() {
                                     My Account
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <Link href="/login" className="dropdown-item" type="button">
+                                    <Link href="/login" className="dropdown-item" type="button" >
                                         Sign in
                                     </Link>
                                     <Link href="/signup" className="dropdown-item" type="button">
@@ -126,6 +128,9 @@ function Header() {
                             <div className="input-group">
                                 <input
                                     type="text"
+                                    name="search"
+                                    value={search}
+                                    onChange={(e)=>setSearch(e.target.value)}
                                     className="form-control"
                                     placeholder="Search for products"
                                 />
@@ -137,9 +142,9 @@ function Header() {
                             </div>
                         </form>
                     </div>
-                    <div className="col-lg-4 col-6 text-right">
-                       <WhatsappButton  text={"Quick Shop Now"}/>
-                    </div>
+                    {/* <div className="col-lg-4 col-6 text-right">
+                        <WhatsappButton text={"Quick Shop Now"} />
+                    </div> */}
                 </div>
             </div>
 
@@ -165,7 +170,7 @@ function Header() {
                             style={{ width: "calc(100% - 30px)", zIndex: 999 }}
                         >
                             <div className="navbar-nav w-100">
-                                <div className="nav-item dropdown dropright">
+                                {/* <div className="nav-item dropdown dropright">
                                     <a
                                         href="#"
                                         className="nav-link dropdown-toggle"
@@ -184,11 +189,13 @@ function Header() {
                                             Babys Dresses
                                         </a>
                                     </div>
-                                </div>
-                                <a href="" className="nav-item nav-link">
-                                    Shirts
-                                </a>
-                                <a href="" className="nav-item nav-link">
+                                </div> */}
+                                {catagories?.map((itm) => {
+                                    return (<a href="#" keys={itm?._id} className="nav-item nav-link">
+                                        {itm?.name}
+                                    </a>)
+                                })}
+                                {/* <a href="" className="nav-item nav-link">
                                     Jeans
                                 </a>
                                 <a href="" className="nav-item nav-link">
@@ -211,13 +218,13 @@ function Header() {
                                 </a>
                                 <a href="" className="nav-item nav-link">
                                     Shoes
-                                </a>
+                                </a> */}
                             </div>
                         </nav>
                     </div>
                     <div className="col-lg-9">
                         <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                            <a href="" className="text-decoration-none d-block d-lg-none">
+                            <a href="/" className="text-decoration-none d-block d-lg-none">
                                 <span className="h1 text-uppercase text-dark bg-light px-2">
                                     Multi
                                 </span>
@@ -241,12 +248,12 @@ function Header() {
                                     <a href="index.html" className="nav-item nav-link active">
                                         Home
                                     </a>
-                                    <a href="shop.html" className="nav-item nav-link">
-                                        Shop
-                                    </a>
-                                    <a href="detail.html" className="nav-item nav-link">
-                                        Shop Detail
-                                    </a>
+                                    <Link href="/create-product" className="dropdown-item" style={{color:"white"}}>
+                                               Add Product
+                                            </Link>
+                                            <Link href="/create-category" className="dropdown-item" style={{color:"white"}}>
+                                                Add Category
+                                            </Link>
                                     <div className="nav-item dropdown">
                                         <a
                                             href="#"
@@ -256,12 +263,12 @@ function Header() {
                                             Pages <i className="fa fa-angle-down mt-1" />
                                         </a>
                                         <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="cart.html" className="dropdown-item">
-                                                Shopping Cart
+                                            {/* <a href="/create-product" className="dropdown-item">
+                                               Add Product
                                             </a>
-                                            <a href="checkout.html" className="dropdown-item">
-                                                Checkout
-                                            </a>
+                                            <a href="create-category" className="dropdown-item">
+                                                Add Category
+                                            </a> */}
                                         </div>
                                     </div>
                                     <a href="contact.html" className="nav-item nav-link">

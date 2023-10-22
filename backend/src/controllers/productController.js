@@ -17,6 +17,7 @@ const uploadImageOnCloudinary = require("../middleware/uploadFileOnCloudinary")
 const createProduct = async (req, res) => {
     try {
 
+        console.log("File", req?.file)
         const category = Category.findById(req?.body?.category);
 
         if (!category) {
@@ -68,7 +69,7 @@ const createProduct = async (req, res) => {
 // get products
 const getProduct = async (req, res) => {
     try {
-        const product = await Product.find().populate("category");
+        const product = await Product.find().populate("category", "name");
 
         if (!product) {
             return res.status(400).json({
@@ -159,7 +160,7 @@ const deleteProduct = async (req, res) => {
 
 // get products
 const getSingleProduct = async (req, res) => {
-    const {id} = req?.params
+    const { id } = req?.params
     try {
         const product = await Product.findById(id);
 
@@ -186,4 +187,36 @@ const getSingleProduct = async (req, res) => {
     }
 }
 
-module.exports = { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct }
+// get products
+const getAllProductOfSpecificCategory = async (req, res) => {
+    const { id } = req?.params;
+    console.log("id:::", id)
+
+    try {
+        const products = await Product.find();
+        // const products = await Product.find({ category: id }).populate('category').exec();
+        console.log("products:::", products)
+        if (!products) {
+            return res.status(400).json({
+                status: false,
+                message: "Product not found!"
+            })
+        }
+
+        res.status(200).json({
+            status: true,
+            data: {
+                products,
+                message: "Product get successfully!"
+            }
+        })
+
+    } catch (error) {
+        return res.status(400).json({
+            status: false,
+            error
+        })
+    }
+}
+
+module.exports = { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory }

@@ -40,7 +40,7 @@ console.log("search ::", search)
                                     My Account
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <Link href="/login" className="dropdown-item" type="button">
+                                    <Link href="/login" className="dropdown-item" type="button" >
                                         Sign in
                                     </Link>
                                     <Link href="/signup" className="dropdown-item" type="button">
@@ -224,7 +224,7 @@ console.log("search ::", search)
                     </div>
                     <div className="col-lg-9">
                         <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                            <a href="" className="text-decoration-none d-block d-lg-none">
+                            <a href="/" className="text-decoration-none d-block d-lg-none">
                                 <span className="h1 text-uppercase text-dark bg-light px-2">
                                     Multi
                                 </span>
@@ -248,12 +248,12 @@ console.log("search ::", search)
                                     <a href="index.html" className="nav-item nav-link active">
                                         Home
                                     </a>
-                                    <a href="shop.html" className="nav-item nav-link">
-                                        Shop
-                                    </a>
-                                    <a href="detail.html" className="nav-item nav-link">
-                                        Shop Detail
-                                    </a>
+                                    <Link href="/create-product" className="dropdown-item" style={{color:"white"}}>
+                                               Add Product
+                                            </Link>
+                                            <Link href="/create-category" className="dropdown-item" style={{color:"white"}}>
+                                                Add Category
+                                            </Link>
                                     <div className="nav-item dropdown">
                                         <a
                                             href="#"
@@ -263,12 +263,12 @@ console.log("search ::", search)
                                             Pages <i className="fa fa-angle-down mt-1" />
                                         </a>
                                         <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="cart.html" className="dropdown-item">
-                                                Shopping Cart
+                                            {/* <a href="/create-product" className="dropdown-item">
+                                               Add Product
                                             </a>
-                                            <a href="checkout.html" className="dropdown-item">
-                                                Checkout
-                                            </a>
+                                            <a href="create-category" className="dropdown-item">
+                                                Add Category
+                                            </a> */}
                                         </div>
                                     </div>
                                     <a href="contact.html" className="nav-item nav-link">

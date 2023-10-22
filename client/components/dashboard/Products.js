@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/slices/cartSlice';
 import { getProducts } from '../../redux/slices/productSlice';
 import { useRouter } from "next/router";
-import { getProduct } from '../../services/api/product';
+import { getProduct, getAllProductOfSpecificCategory } from '../../services/api/product';
 
 
-function Products() {
+function Products({isCategory, categoryId}) {
     const router = useRouter();
     const cart = useSelector((state) => state?.cart?.cartItems);
     const product = useSelector((state) => state?.product?.products);
@@ -14,6 +14,7 @@ function Products() {
 
     const [productList, setProductList] = useState([]);
 
+console.log("isCategory ::", isCategory)
 
     const detailHandler = (id) => {
         router.push(`/product-details/${id}`)
@@ -96,9 +97,22 @@ function Products() {
 
     }
 
+    const getProductBySelectedCategory = async(categoryId)=>{
+        const response = await getAllProductOfSpecificCategory(categoryId);
+        if (response?.data?.status) {
+            setProductList(response?.data?.data?.product)
+            console.log("i am here by category :::", response?.data?.data?.product )
+           dispatch( getProducts(response?.data?.data?.product))
+        }
+
+    }
     useEffect(() => {
-        getProductList()
-    }, [])
+        if(isCategory){
+            getProductBySelectedCategory(categoryId)
+        } else { 
+            getProductList()
+        }
+    }, [isCategory])
 
 
 

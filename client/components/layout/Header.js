@@ -5,6 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import WhatsappButton from "../whatsappButton/index"
 
 function Header() {
+    
+let token;
+let admin;
+
+if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    // Now you can safely use localStorage
+    token = localStorage.getItem('token') 
+    admin = localStorage.getItem('isOwner') 
+}
+
+
     const cart = useSelector((state) => state?.cart?.cartItems);
     const [search, setSearch] = useState()
     const catagories = useSelector((state) => state?.category?.categories);
@@ -244,31 +255,16 @@ console.log("search ::", search)
                                 className="collapse navbar-collapse justify-content-between"
                                 id="navbarCollapse"
                             >
-                                <div className="navbar-nav mr-auto py-0">
-                                    <a href="index.html" className="nav-item nav-link active">
-                                        Home
-                                    </a>
-                                    <Link href="/create-product" className="dropdown-item" style={{color:"white"}}>
-                                               Add Product
-                                            </Link>
-                                            <Link href="/create-category" className="dropdown-item" style={{color:"white"}}>
-                                                Add Category
-                                            </Link>
+                              <div className="navbar-nav mr-auto py-0">
+                                     <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
+                                            Add Product
+                                        </Link>
+                                        <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
+                                            Add Category
+                                        </Link>
+                                   
                                     <div className="nav-item dropdown">
-                                        <a
-                                            href="#"
-                                            className="nav-link dropdown-toggle"
-                                            data-toggle="dropdown"
-                                        >
-                                            Pages <i className="fa fa-angle-down mt-1" />
-                                        </a>
                                         <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            {/* <a href="/create-product" className="dropdown-item">
-                                               Add Product
-                                            </a>
-                                            <a href="create-category" className="dropdown-item">
-                                                Add Category
-                                            </a> */}
                                         </div>
                                     </div>
                                     <a href="contact.html" className="nav-item nav-link">

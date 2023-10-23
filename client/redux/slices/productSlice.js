@@ -11,8 +11,16 @@ const productSlice = createSlice({
        state.products = action.payload;
     },
 
+    removeProduct: (state, action) => {
+      console.log("actions :::", action)
+      // Filter out the products to remove based on some identifier (e.g., ID)
+     const result = state.products.filter(product => product._id !== action?.payload);
+     console.log("result actions:::", result)
+      state.products = result;
+    },
+
   },
 });
 
-export const { getProducts } = productSlice.actions;
+export const { getProducts, removeProduct } = productSlice.actions;
 export default productSlice.reducer;

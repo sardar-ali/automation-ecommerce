@@ -1,6 +1,42 @@
 import React from 'react'
+import Select from 'react-select'
 
 function ShippingAddress() {
+
+    const customStyles = {
+        // height:"3.5rem"
+        // Style the control container (the input field)
+        // control: (provided, state) => ({
+        //   ...provided,
+        //   minHeight: '40px', // Adjust the height as needed
+        // }),
+      
+        // Style the single-value container
+        // singleValue: (provided, state) => ({
+        //   ...provided,
+        //   minHeight: '40px', // Adjust the height as needed
+        // }),
+      
+        // Style the input field
+        input: (provided, state) => ({
+          ...provided,
+          height: '2.8rem', 
+          borderRadius:"1rem"
+          // Adjust the height as needed
+        }),
+      
+        // Add more styles as needed
+      };
+      
+    const options = [
+        { value: 'Sharjah', label: 'Sharjah' },
+        { value: 'Dubai', label: 'Dubai' },
+        { value: 'Abu Dhabi', label: 'Abu   Dhabi' },
+        { value: 'Ajman', label: 'Ajman' },
+        { value: 'Umm Al Quwain', label: 'Umm Al Quwain' }, 
+        { value: 'Fujairah', label: 'Fujairah' }, 
+        { value: 'Ras Al Khaimah', label: 'Ras Al Khaimah' }, 
+      ]
 
     return (
         <div className="container-fluid d-flex ">
@@ -12,16 +48,23 @@ function ShippingAddress() {
                             <input type="text" className="form-control input-field" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Enter your active phone number" />
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your country" />
+                            <input type="text" className="form-control input-field" value = {"United Arab Emirates"} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your country" />
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your state" />
+                        <div className="form-group" >
+                            {/* <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your state" /> */}
+                            <Select
+                            styles ={customStyles}
+                            //  className="form-control input-field"
+                             placeholder="Enter your state"
+                             options={options}
+                              />
+
                         </div>
                         <div className="form-group">
                             <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your city" />
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your postal code" />
+                            {/* <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your postal code" /> */}
                         </div>
                         <div className="form-group">
                             <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your complete address" />

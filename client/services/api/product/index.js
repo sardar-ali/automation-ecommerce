@@ -41,9 +41,11 @@ export const getSingleProduct = async (id) => {
     }
 }
 
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (id, token) => {
     try {
-        const response = await axios.delete(`${DELETE_PRODUCT}/${id}`)
+        const response = await axios.delete(`${DELETE_PRODUCT}/${id}`, {
+            headers: { authorization: `Bearer ${token}` },
+          })
         return response;
     } catch (error) {
         return error

@@ -1,14 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategory } from '../../services/api/category'
-import { getCategories } from '../../redux/slices/categorySlice';
+import { getCategory, deleteCategory } from '../../services/api/category'
+import { getCategories, removeCategory } from '../../redux/slices/categorySlice';
+// import Categories from './Categories';
 
 
 function Categories() {
+
     const dispatch = useDispatch();
+    const Categories = useSelector((state) => state?.category?.categories);
 
     const [categoryList, setCategoryList] = useState([]);
+
+    let token;
+    let admin;
+
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+        // Now you can safely use localStorage
+        token = localStorage.getItem('token')
+    admin = localStorage.getItem('isOwner') 
+
+    }
+
+
+    console.log("admin ::", admin );
 
     const getCategoryList = async () => {
         const response = await getCategory();
@@ -24,6 +42,14 @@ function Categories() {
         getCategoryList()
     }, [])
 
+    const deleteCategoryHandler = async (id) => {
+        const response = await deleteCategory(id, token)
+        console.log("response :::", response)
+        if (response?.data?.status) {
+            toast.success(response?.data?.data?.message);
+            dispatch(removeCategory(id))
+        }
+    }
 
     return (
         <div className="container-fluid pt-5">
@@ -31,31 +57,31 @@ function Categories() {
                 <span className="bg-secondary pr-3">Categories</span>
             </h2>
             <div className="row px-xl-5 pb-3">
-                {categoryList?.map((itm) => {
+                {Categories?.map((itm) => {
                     return (
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                            <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}>
-                                <div className="cat-item d-flex align-items-center mb-4" style={{position:"relative"}}>
-                                    <div
-                                        className="overflow-hidden"
-                                        style={{ width: 100, height: 100 }}
-                                    >
+                            <div className="cat-item d-flex align-items-center mb-4" style={{ position: "relative" }}>
+                                <div
+                                    className="overflow-hidden"
+                                    style={{ width: 100, height: 100 }}
+                                >
+                                    <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}>
                                         <img
                                             className="img-fluid category-img"
                                             src={itm?.image}
                                             alt="" />
-                                    </div>
-                                    <div className="flex-fill pl-3">
-                                        <h6>{itm?.name}</h6>
-                                        <small className="text-body">100 Products</small>
-                                    </div>
+                                    </Link>
                                 </div>
-                                <div style={{ position:"absolute" , display: "flex" , flexDirection:"column", justifyConten:"center", alignItem:"center", margin:"1rem 1rem", fontSize:"1.2rem", top:"0.5rem", right:"1rem" }}>
-                                        <i class="fa-solid fa-trash" style={{color:"red"}}></i>
-                                        <i class="fa-solid fa-pen-to-square" style={{margin:"1rem 0", color:"black"}}></i>
-                                    </div>
+                                <div className="flex-fill pl-3">
+                                    <h6>{itm?.name}</h6>
+                                    <small className="text-body">100 Products</small>
+                                </div>
+                            </div>
+                            {admin !== "false" &&  <div style={{ position: "absolute", display: "flex", flexDirection: "column", justifyConten: "center", alignItem: "center", margin: "1rem 1rem", fontSize: "1.2rem", top: "0.5rem", right: "1rem" }}>
+                                <i class="fa-solid fa-trash" style={{ color: "red" }} onClick={() => deleteCategoryHandler(itm?._id)}></i>
+                                <i class="fa-solid fa-pen-to-square" style={{ margin: "1rem 0", color: "black" }}></i>
+                            </div>}
 
-                            </Link>
                         </div>
                     )
                 })}

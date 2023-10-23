@@ -33,9 +33,16 @@ export const updateCategory = async (id, data) => {
     }
 }
 
-export const deleteCategory = async (id) => {
+export const deleteCategory = async (id, token) => {
+    console.log("id :::", id)
+    console.log("token is here :::", token);
+
+
+    
     try {
-        const response = await axios.delete(`${DELETE_CATEGORY}/${id}`)
+        const response = await axios.delete(`${DELETE_CATEGORY}/${id}`, {
+            headers: { authorization: `Bearer ${token}` },
+          })
         return response;
     } catch (error) {
         return error

@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/slices/cartSlice';
-import { getProducts } from '../../redux/slices/productSlice';
+import { getProducts, removeProduct } from '../../redux/slices/productSlice';
 import { useRouter } from "next/router";
-import { getProduct, getAllProductOfSpecificCategory } from '../../services/api/product';
+import { getProduct, getAllProductOfSpecificCategory, deleteProduct } from '../../services/api/product';
 
 
 function Products({isCategory, categoryId}) {
     const router = useRouter();
     const cart = useSelector((state) => state?.cart?.cartItems);
-    const product = useSelector((state) => state?.product?.products);
+    const productList = useSelector((state) => state?.product?.products);
     const dispatch = useDispatch();
 
-    const [productList, setProductList] = useState([]);
+    const [productLists, setProductList] = useState([]);
 
-console.log("isCategory ::", isCategory)
+console.log("productList ::", productList)
+
+
+let token;
+let admin;
+
+if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    // Now you can safely use localStorage
+    token = localStorage.getItem('token') 
+    admin = localStorage.getItem('isOwner') 
+}
+
+
 
     const detailHandler = (id) => {
         router.push(`/product-details/${id}`)
@@ -91,7 +105,6 @@ console.log("isCategory ::", isCategory)
         const response = await getProduct();
         if (response?.data?.status) {
             setProductList(response?.data?.data?.product)
-            console.log("i am here :::", response?.data?.data?.product )
            dispatch( getProducts(response?.data?.data?.product))
         }
 
@@ -101,11 +114,12 @@ console.log("isCategory ::", isCategory)
         const response = await getAllProductOfSpecificCategory(categoryId);
         if (response?.data?.status) {
             setProductList(response?.data?.data?.product)
-            console.log("i am here by category :::", response?.data?.data?.product )
            dispatch( getProducts(response?.data?.data?.product))
         }
 
     }
+
+
     useEffect(() => {
         if(isCategory){
             getProductBySelectedCategory(categoryId)
@@ -114,12 +128,18 @@ console.log("isCategory ::", isCategory)
         }
     }, [isCategory])
 
-
-
     const handleAddToCart = (item) => {
         dispatch(addToCart({ ...item, quantity: 1 }));
     };
 
+
+    const deleteProductHandler = async (id) => {
+        const response = await deleteProduct(id, token)
+        if (response?.data?.status) {
+            toast.success(response?.data?.message);
+            dispatch(removeProduct(id))
+        }
+    }
 
     return (
         <>
@@ -177,10 +197,10 @@ console.log("isCategory ::", isCategory)
                                             <small>{product?.reviews}</small>
                                         </div>
 
-                                        <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
-                                            <i class="fa-solid fa-trash cursor-pointer" style={{ color: "red" }}></i>
+                                        { admin  !== "false" ? <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
+                                            <i class="fa-solid fa-trash cursor-pointer" style={{ color: "red" }} onClick = {()=> deleteProductHandler(product?._id)}></i>
                                             <i class="fa-solid fa-pen-to-square cursor-pointer" style={{ color: "black" }}></i>
-                                        </div>
+                                        </div> : ""}
                                     </div>
 
                                 </div>

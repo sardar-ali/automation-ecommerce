@@ -143,7 +143,7 @@ const deleteProduct = async (req, res) => {
                 error: { message: "Product not deleted!" }
             })
         }
-        res.status(400).json({
+        res.status(200).json({
             status: true,
             product,
             message: "Product deleted successfully!"

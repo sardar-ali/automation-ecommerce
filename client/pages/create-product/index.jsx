@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { redirect, useRouter } from 'next/navigation';
-import { createProduct } from '../../services/api/product/index';
-// import { userLogin } from '../../services/api/auth/index';
+import { useSearchParams } from 'next/navigation'
+import { useDispatch, useSelector } from 'react-redux';
+import Select from 'react-select'
+
+import { createProduct, getSingleProduct, updateProduct } from '../../services/api/product/index';
+
+
 
 function AddProduct() {
-
-    let token ;
+    const Categories = useSelector((state) => state?.category?.categories);
+    console.log("Categories ::", Categories)
+    let token;
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-        // Now you can safely use localStorage
-       token =  localStorage.getItem('token')
-      } 
-
-
-console.log("token is hre :::", token)
+        token = localStorage.getItem('token')
+    }
 
     const router = useRouter();
+    const searchParams = useSearchParams()
+    const isEdit = searchParams.get('isEdit')
+    const id = searchParams.get('id')
+
+
     const [productFormData, setFormData] = useState({
         name: "",
         price: "",
@@ -25,6 +32,7 @@ console.log("token is hre :::", token)
         full_description: "",
         image: ""
     });
+
 
     const { name, price, category, short_description, full_description, image } = productFormData;
 
@@ -46,27 +54,67 @@ console.log("token is hre :::", token)
 
     }
 
+
     const onSubmit = async (e) => {
 
         e.preventDefault();
-          const formData = new FormData();
+        const formData = new FormData();
         for (const key in productFormData) {
-        console.log("obj test   ::", key)
-
-        formData.append(key, productFormData[key]);
+            if(key === "category"){
+                formData.append(key, productFormData[key]?.value);
+            } else{
+            formData.append(key, productFormData[key]);
+            }
         }
-        console.log("formData ::", productFormData)
 
-const result = await createProduct(formData, token);
-
-        if (result?.data?.status) {
-            console.log("result ::", result)
-            toast.success(result?.data?.data?.message)
-            router.push("/")
+        if (window?.location?.search) {
+            const result = await updateProduct(id, formData, token);
+            if (result?.data?.status) {
+                toast.success(result?.data?.data?.message)
+                router.push("/")
+            }
+        } else {
+            const result = await createProduct(formData, token);
+            if (result?.data?.status) {
+                toast.success(result?.data?.data?.message)
+                router.push("/")
+            }
         }
+
     }
 
-    console.log("productFormData ::", productFormData)
+    const getProduct = async (id) => {
+        const response = await getSingleProduct(id);
+        const data = response?.data?.data?.product;
+        const category = Categories?.find((itm) => itm?._id === data?.category?._id)
+        setFormData({
+            name: data?.name,
+            price: data?.price,
+            category: { label: category?.name, value: category?._id },
+            short_description: data?.short_description,
+            full_description: data?.full_description,
+            image: data?.image
+        });
+    }
+
+
+    useEffect(() => {
+        if (window?.location?.search) {
+            getProduct(id)
+        }
+    }, [])
+
+    const customStyles = {
+
+
+        // Style the input field
+        input: (provided, state) => ({
+            ...provided,
+            height: '2.8rem',
+            borderRadius: "1rem"
+        }),
+
+    };
 
     return (
         <div className="d-flex justify-content-center">
@@ -81,7 +129,28 @@ const result = await createProduct(formData, token);
                         </div>
                         <div className="form-group">
                             {/* <label for="exampleInputcategory1">category</label> */}
-                            <input type="category" name="category" value={category} onChange={handleChange} className="form-control input-field" id="exampleInputprice1" placeholder="Enter your category" />
+                            {/* <input type="category" name="category" value={category} onChange={handleChange} className="form-control input-field" id="exampleInputprice1" placeholder="Enter your category" /> */}
+                            {/* <div className="form-group" > */}
+                            {/* <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your state" /> */}
+                            <Select
+                                styles={customStyles}
+                                onChange ={(e)=>setFormData((prev) => ({
+                                ...prev,
+                                category: e
+                            }))
+}
+                                //  className="form-control input-field"
+                                value={category}
+                                placeholder="Enter your state"
+                                options={Categories?.map((itm) => {
+                                    return {
+                                        label: itm?.name,
+                                        value: itm?._id
+                                    }
+                                })}
+                               
+                            />
+
                         </div>
                         <div className="form-group">
                             {/* <label for="exampleInputprice1">price</label> */}

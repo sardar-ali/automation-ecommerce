@@ -24,9 +24,11 @@ export const getCategory = async (data) => {
     }
 }
 
-export const updateCategory = async (id, data) => {
+export const updateCategory = async (id, data, token) => {
     try {
-        const response = await axios.put(`${UPDATE_CATEGORY}/${id}`, data)
+        const response = await axios.put(`${UPDATE_CATEGORY}/${id}`, data,  {
+            headers: { authorization: `Bearer ${token}` },
+          })
         return response;
     } catch (error) {
         return error
@@ -34,15 +36,21 @@ export const updateCategory = async (id, data) => {
 }
 
 export const deleteCategory = async (id, token) => {
-    console.log("id :::", id)
-    console.log("token is here :::", token);
-
-
     
     try {
         const response = await axios.delete(`${DELETE_CATEGORY}/${id}`, {
             headers: { authorization: `Bearer ${token}` },
           })
+        return response;
+    } catch (error) {
+        return error
+    }
+}
+
+export const getSingleCategory = async (id) => {
+    
+    try {
+        const response = await axios.get(`${GET_SINGLE_CATEGORY}/${id}`)
         return response;
     } catch (error) {
         return error

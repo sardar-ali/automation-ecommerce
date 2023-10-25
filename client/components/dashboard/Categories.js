@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-
+import { useRouter } from "next/router";
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategory, deleteCategory } from '../../services/api/category'
 import { getCategories, removeCategory } from '../../redux/slices/categorySlice';
-// import Categories from './Categories';
 
 
 function Categories() {
-
+    const router = useRouter();
     const dispatch = useDispatch();
     const Categories = useSelector((state) => state?.category?.categories);
 
@@ -51,6 +50,10 @@ function Categories() {
         }
     }
 
+    const editProductHandler = async (id) => {
+        router.push(`/create-category?isEdit=true&&id=${id}`)
+    }
+
     return (
         <div className="container-fluid pt-5">
             <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
@@ -79,7 +82,7 @@ function Categories() {
                             </div>
                             {admin !== "false" &&  <div style={{ position: "absolute", display: "flex", flexDirection: "column", justifyConten: "center", alignItem: "center", margin: "1rem 1rem", fontSize: "1.2rem", top: "0.5rem", right: "1rem" }}>
                                 <i class="fa-solid fa-trash" style={{ color: "red" }} onClick={() => deleteCategoryHandler(itm?._id)}></i>
-                                <i class="fa-solid fa-pen-to-square" style={{ margin: "1rem 0", color: "black" }}></i>
+                                <i class="fa-solid fa-pen-to-square" style={{ margin: "1rem 0", color: "black" }} onClick={() => editProductHandler(itm?._id)} ></i>
                             </div>}
 
                         </div>

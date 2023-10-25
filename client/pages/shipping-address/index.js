@@ -4,28 +4,15 @@ import Select from 'react-select'
 function ShippingAddress() {
 
     const customStyles = {
-        // height:"3.5rem"
-        // Style the control container (the input field)
-        // control: (provided, state) => ({
-        //   ...provided,
-        //   minHeight: '40px', // Adjust the height as needed
-        // }),
-      
-        // Style the single-value container
-        // singleValue: (provided, state) => ({
-        //   ...provided,
-        //   minHeight: '40px', // Adjust the height as needed
-        // }),
+       
       
         // Style the input field
         input: (provided, state) => ({
           ...provided,
           height: '2.8rem', 
           borderRadius:"1rem"
-          // Adjust the height as needed
         }),
       
-        // Add more styles as needed
       };
       
     const options = [

@@ -1,4 +1,5 @@
 const cloudinary = require('cloudinary').v2;
+const mongoose = require('mongoose');
 const fs = require("fs");
 const Product = require("../models/productModel")
 const Category = require("../models/categoryModel")
@@ -69,7 +70,7 @@ const createProduct = async (req, res) => {
 // get products
 const getProduct = async (req, res) => {
     try {
-        const product = await Product.find().populate("category", "name");
+        const product = await Product.find().populate("category", "_id,name");
 
         if (!product) {
             return res.status(400).json({
@@ -162,7 +163,7 @@ const deleteProduct = async (req, res) => {
 const getSingleProduct = async (req, res) => {
     const { id } = req?.params
     try {
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).populate("category", "_id,name");
 
         if (!product) {
             return res.status(400).json({
@@ -171,10 +172,20 @@ const getSingleProduct = async (req, res) => {
             })
         }
 
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    category: new mongoose.Types.ObjectId(product?.category?._id),
+                },
+            },
+        ]);
+
+
         res.status(200).json({
             status: true,
             data: {
                 product,
+                relatedProducts: products,
                 message: "Product get successfully!"
             }
         })
@@ -193,29 +204,24 @@ const getAllProductOfSpecificCategory = async (req, res) => {
     console.log("id:::", id)
 
     try {
-        const products = await Product.find();
-        // const products = await Product.find({ category: id }).populate('category').exec();
-        console.log("products:::", products)
-        if (!products) {
-            return res.status(400).json({
-                status: false,
-                message: "Product not found!"
-            })
-        }
+        // const category = req.params.category;
 
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    category: new mongoose.Types.ObjectId(id),
+                },
+            },
+        ]);
         res.status(200).json({
             status: true,
             data: {
-                products,
+                productS,
                 message: "Product get successfully!"
             }
         })
-
-    } catch (error) {
-        return res.status(400).json({
-            status: false,
-            error
-        })
+    } catch (err) {
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 

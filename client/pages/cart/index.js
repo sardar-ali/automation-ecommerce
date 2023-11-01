@@ -1,17 +1,18 @@
 import Link from 'next/link'
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { increaseCartItemQuantity, decreaseCartItemQuantity,removeFromCart } from "../../redux/slices/cartSlice"
+import { increaseCartItemQuantity, decreaseCartItemQuantity, removeFromCart } from "../../redux/slices/cartSlice"
 
 function Cart() {
+
     const dispatch = useDispatch()
     const cartItems = useSelector((state) => state?.cart?.cartItems);
-    
+
     const totalPrice = useMemo(() => {
         return cartItems?.reduce((acc, currentItem) => {
-          return acc + ((currentItem?.price * 1) * (currentItem?.quantity * 1));
+            return acc + ((currentItem?.price * 1) * (currentItem?.quantity * 1));
         }, 0);
-      }, [cartItems]);
+    }, [cartItems]);
 
 
     return (
@@ -61,110 +62,26 @@ function Cart() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">AED {(item?.price * 1) * ( item?.quantity * 1)}</td>
+                                        <td class="align-middle">AED {(item?.price * 1) * (item?.quantity * 1)}</td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-danger" onClick={() => {
-                                                        dispatch(removeFromCart(item))
-                                                    }}><i class="fa fa-times"></i>
+                                                dispatch(removeFromCart(item))
+                                            }}><i class="fa fa-times"></i>
                                             </button></td>
                                     </tr>)
                             })}
-                            {/* <tr>
-                            <td class="align-middle"><img src="img/product-2.jpg" alt="" style={{width: "50px"}} /> Product Name</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style={{width: "100px"}}>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1" />
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-3.jpg" alt="" style={{width: "50px" }}/> Product Name</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style={{width: "100px"}}>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1" />
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-4.jpg" alt="" style={{width: "50px"}} /> Product Name</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style={{width: "100px"}}>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1" />
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="img/product-5.jpg" alt="" style={{width: "50px"}} /> Product Name</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style={{width: "100px"}}>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1" />
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr> */}
                         </tbody>
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <form class="mb-30" action="">
+                    {/* <form class="mb-30" action="">
                         <div class="input-group">
                             <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code" />
                             <div class="input-group-append">
                                 <button class="btn btn-primary">Apply Coupon</button>
                             </div>
                         </div>
-                    </form>
+                    </form> */}
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
                     <div class="bg-light p-30 mb-5">
                         <div class="border-bottom pb-2">
@@ -180,7 +97,7 @@ function Cart() {
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5>AED 160</h5>
+                                <h5>AED {totalPrice + 10}</h5>
                             </div>
                             <Link href="/shipping-address" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</Link>
                         </div>

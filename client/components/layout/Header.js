@@ -1,25 +1,31 @@
 import Link from 'next/link'
-import {useState} from 'react'
-
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import WhatsappButton from "../whatsappButton/index"
+import { searchItems } from '../../redux/slices/productSlice';
 
 function Header() {
-    
-let token;
-let admin;
 
-if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-    // Now you can safely use localStorage
-    token = localStorage.getItem('token') 
-    admin = localStorage.getItem('isOwner') 
-}
+    let token;
+    let admin;
 
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+        // Now you can safely use localStorage
+        token = localStorage.getItem('token')
+        admin = localStorage.getItem('isOwner')
+    }
+    const dispatch = useDispatch()
 
     const cart = useSelector((state) => state?.cart?.cartItems);
     const [search, setSearch] = useState()
     const catagories = useSelector((state) => state?.category?.categories);
-console.log("search ::", search)
+    const [isListVisible, setListVisible] = useState(false);
+
+    // Function to toggle the list's visibility
+    const toggleList = () => {
+      setListVisible(!isListVisible);
+    };
+
     return (
         <>
             <div className="container-fluid">
@@ -141,7 +147,10 @@ console.log("search ::", search)
                                     type="text"
                                     name="search"
                                     value={search}
-                                    onChange={(e)=>setSearch(e.target.value)}
+                                    onChange={(e) => {
+                                        setSearch(e.target.value)
+                                        dispatch(searchItems(e.target.value))
+                                    }}
                                     className="form-control"
                                     placeholder="Search for products"
                                 />
@@ -168,6 +177,7 @@ console.log("search ::", search)
                             data-toggle="collapse"
                             href="#navbar-vertical"
                             style={{ height: 65, padding: "0 30px" }}
+                            onClick={toggleList}
                         >
                             <h6 className="text-dark m-0">
                                 <i className="fa fa-bars mr-2" />
@@ -180,7 +190,7 @@ console.log("search ::", search)
                             id="navbar-vertical"
                             style={{ width: "calc(100% - 30px)", zIndex: 999 }}
                         >
-                            <div className="navbar-nav w-100">
+                          {  isListVisible && <div className="navbar-nav w-100">
                                 {/* <div className="nav-item dropdown dropright">
                                     <a
                                         href="#"
@@ -202,9 +212,9 @@ console.log("search ::", search)
                                     </div>
                                 </div> */}
                                 {catagories?.map((itm) => {
-                                    return (<a href="#" keys={itm?._id} className="nav-item nav-link">
+                                    return (<Link href={`/product-list-by-selected-category/${itm?._id}`} keys={itm?._id} className="nav-item nav-link">
                                         {itm?.name}
-                                    </a>)
+                                    </Link>)
                                 })}
                                 {/* <a href="" className="nav-item nav-link">
                                     Jeans
@@ -230,7 +240,7 @@ console.log("search ::", search)
                                 <a href="" className="nav-item nav-link">
                                     Shoes
                                 </a> */}
-                            </div>
+                            </div>}
                         </nav>
                     </div>
                     <div className="col-lg-9">
@@ -251,22 +261,26 @@ console.log("search ::", search)
                             >
                                 <span className="navbar-toggler-icon" />
                             </button>
+                            {admin !=="false" ?
                             <div
                                 className="collapse navbar-collapse justify-content-between"
                                 id="navbarCollapse"
                             >
-                              <div className="navbar-nav mr-auto py-0">
-                                     <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
-                                            Add Product
-                                        </Link>
-                                        <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
-                                            Add Category
-                                        </Link>
-                                   
+                                <div className="navbar-nav mr-auto py-0">
+                                    <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
+                                        Add Product
+                                    </Link>
+                                    <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
+                                        Add Category
+                                    </Link>
+
                                     <div className="nav-item dropdown">
                                         <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                         </div>
                                     </div>
+                                    <a href="contact.html" className="nav-item nav-link">
+                                        Services
+                                    </a>
                                     <a href="contact.html" className="nav-item nav-link">
                                         Contact
                                     </a>
@@ -292,6 +306,51 @@ console.log("search ::", search)
                                     </Link>
                                 </div>
                             </div>
+                            : <div
+                                className="collapse navbar-collapse justify-content-between"
+                                id="navbarCollapse"
+                            >
+                                <div className="navbar-nav mr-auto py-0">
+                                    {/* <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
+                                        Add Product
+                                    </Link>
+                                    <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
+                                        Add Category
+                                    </Link> */}
+
+                                    <div className="nav-item dropdown">
+                                        <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                        </div>
+                                    </div>
+                                    <a href="contact.html" className="nav-item nav-link">
+                                        Contact
+                                    </a>
+                                    <a href="contact.html" className="nav-item nav-link">
+                                        Services
+                                    </a>
+                                </div>
+                                <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                                    <a href="" className="btn px-0">
+                                        <i className="fas fa-heart text-primary" />
+                                        <span
+                                            className="badge text-secondary border border-secondary rounded-circle"
+                                            style={{ paddingBottom: 2 }}
+                                        >
+                                            0
+                                        </span>
+                                    </a>
+                                    <Link href="/cart" className="btn px-0 ml-3">
+                                        <i className="fas fa-shopping-cart text-primary" />
+                                        <span
+                                            className="badge text-secondary border border-secondary rounded-circle"
+                                            style={{ paddingBottom: 2 }}
+                                        >
+                                            {cart?.length}
+                                        </span>
+                                    </Link>
+                                </div>
+                            </div>
+                        }
                         </nav>
                     </div>
                 </div>

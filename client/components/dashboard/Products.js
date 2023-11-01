@@ -14,6 +14,8 @@ function Products({ isCategory, categoryId }) {
 
     const cart = useSelector((state) => state?.cart?.cartItems);
     const productList = useSelector((state) => state?.product?.products);
+    const searchText = useSelector((state) => state?.product?.searchText);
+    console.log("searchText :::", searchText)
     const dispatch = useDispatch();
 
     const [productLists, setProductList] = useState([]);
@@ -116,9 +118,10 @@ function Products({ isCategory, categoryId }) {
 
     const getProductBySelectedCategory = async (categoryId) => {
         const response = await getAllProductOfSpecificCategory(categoryId);
+        console.log("response testingssss::", response)
         if (response?.data?.status) {
-            setProductList(response?.data?.data?.product)
-            dispatch(getProducts(response?.data?.data?.product))
+            setProductList(response?.data?.data?.products)
+            dispatch(getProducts(response?.data?.data?.products))
         }
 
     }
@@ -150,6 +153,7 @@ function Products({ isCategory, categoryId }) {
         router.push(`/create-product?isEdit=true&&id=${id}`)
     }
 
+    console.log("productList ::", productList)
 
 
     return (
@@ -159,7 +163,17 @@ function Products({ isCategory, categoryId }) {
                     <span className="bg-secondary pr-3">Products</span>
                 </h2>
                 <div className="row px-xl-5">
-                    {productList?.map((product, ind) => {
+                    {productList?.filter((itm)=>{
+                        if(searchText){
+
+                            if(itm?.name?.toLowerCase()?.includes(searchText?.toLowerCase()) || itm?.category?.name.toLowerCase()?.includes(searchText?.toLowerCase())) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                        return true
+                    })?.map((product, ind) => {
                         return (
 
                             <div className="col-lg-3 col-md-4 col-sm-6 pb-1" key={ind}>

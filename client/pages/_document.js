@@ -39,8 +39,8 @@ class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
-                <script async  src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+                {/* <script async  src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script> */}
                 </body>
             </Html>
         );

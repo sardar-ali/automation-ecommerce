@@ -1,26 +1,30 @@
 // slices/cartSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
-  products: []
+  products: [],
+  searchText:"",
 }
 const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
+
     getProducts: (state, action) => {
        state.products = action.payload;
     },
 
     removeProduct: (state, action) => {
-      console.log("actions :::", action)
-      // Filter out the products to remove based on some identifier (e.g., ID)
      const result = state.products.filter(product => product._id !== action?.payload);
-     console.log("result actions:::", result)
       state.products = result;
     },
+
+    searchItems: (state, action) => {
+      console.log("actions :::",action.payload)
+      state.searchText = action.payload;
+   },
 
   },
 });
 
-export const { getProducts, removeProduct } = productSlice.actions;
+export const { getProducts, removeProduct, searchItems } = productSlice.actions;
 export default productSlice.reducer;

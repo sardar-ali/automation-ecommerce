@@ -70,7 +70,7 @@ const createProduct = async (req, res) => {
 // get products
 const getProduct = async (req, res) => {
     try {
-        const product = await Product.find().populate("category", "_id,name");
+        const product = await Product.find().populate("category");
 
         if (!product) {
             return res.status(400).json({
@@ -204,24 +204,65 @@ const getAllProductOfSpecificCategory = async (req, res) => {
     console.log("id:::", id)
 
     try {
-        // const category = req.params.category;
+
+        // const products = await Product.aggregate([
+        //     {
+        //         $match: {
+        //             category: new mongoose.Types.ObjectId(id),
+        //         },
+        //     },
+        // ]);
+
+
+
+        const categoryId = new mongoose.Types.ObjectId(id);
 
         const products = await Product.aggregate([
             {
                 $match: {
-                    category: new mongoose.Types.ObjectId(id),
+                    category: categoryId,
+                },
+            },
+            {
+                $lookup: {
+                    from: 'categories', // The name of the collection to perform the lookup
+                    localField: 'category', // The local field to match with the foreign field
+                    foreignField: '_id', // The foreign field to match with the local field
+                    as: 'categoryInfo', // The alias for the merged category document
+                },
+            },
+            {
+                $unwind: '$categoryInfo', // Unwind the categoryInfo array to get a single object
+            },
+            {
+                $project: {
+                    _id: 1, // product collection fields
+                    name: 1, // product collection fields
+                    price: 1, // product collection fields
+                    image: 1, // product collection fields
+
+                    // Add more fields you want to project here
+                    category: {
+                        name: '$categoryInfo.name', // Extract category name
+                        _id: '$categoryInfo._id',
+                    }// Extract category id
                 },
             },
         ]);
+
+        // console.log("products ::", products)s
         res.status(200).json({
             status: true,
             data: {
-                productS,
+                products,
                 message: "Product get successfully!"
             }
         })
     } catch (err) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(400).json({
+            status: false,
+            error
+        })
     }
 }
 

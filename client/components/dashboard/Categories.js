@@ -11,7 +11,8 @@ function Categories() {
     const router = useRouter();
     const dispatch = useDispatch();
     const Categories = useSelector((state) => state?.category?.categories);
-
+    const searchText = useSelector((state) => state?.product?.searchText);
+    console.log("searchText :::", searchText)
     const [categoryList, setCategoryList] = useState([]);
 
     let token;
@@ -60,7 +61,17 @@ function Categories() {
                 <span className="bg-secondary pr-3">Categories</span>
             </h2>
             <div className="row px-xl-5 pb-3">
-                {Categories?.map((itm) => {
+                {Categories?.filter((itm)=>{
+                        if(searchText){
+
+                            if(itm?.name?.toLowerCase()?.includes(searchText)) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                        return true
+                    })?.map((itm) => {
                     return (
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <div className="cat-item d-flex align-items-center mb-4" style={{ position: "relative" }}>

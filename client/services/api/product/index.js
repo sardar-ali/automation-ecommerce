@@ -3,7 +3,6 @@ import { GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_SINGLE
 
 
 export const createProduct = async (data, token) => {
-    console.log("data token ::", token)
     try {
         const response = await axios.post(`${CREATE_PRODUCT}`, data, {
             headers: { authorization: `Bearer ${token}` },
@@ -23,9 +22,11 @@ export const getProduct = async (data) => {
     }
 }
 
-export const updateProduct = async (id, data) => {
+export const updateProduct = async (id, data, token) => {
     try {
-        const response = await axios.put(`${UPDATE_PRODUCT}/${id}`, data)
+        const response = await axios.put(`${UPDATE_PRODUCT}/${id}`, data,  {
+            headers: { authorization: `Bearer ${token}` },
+          })
         return response;
     } catch (error) {
         return error
@@ -41,9 +42,11 @@ export const getSingleProduct = async (id) => {
     }
 }
 
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (id, token) => {
     try {
-        const response = await axios.delete(`${DELETE_PRODUCT}/${id}`)
+        const response = await axios.delete(`${DELETE_PRODUCT}/${id}`, {
+            headers: { authorization: `Bearer ${token}` },
+          })
         return response;
     } catch (error) {
         return error

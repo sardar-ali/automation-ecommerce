@@ -8,27 +8,30 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const existingProduct = state?.cartItems?.find((item) => item.id === action.payload.id);
+      console.log("action.payload ::", action.payload)
+      const existingProduct = state?.cartItems?.find((item) => item._id === action.payload._id);
       if (!existingProduct) {
         state?.cartItems?.push(action.payload);
-      }
+      } 
     },
 
     increaseCartItemQuantity: (state, action) => {
-     let ind = state?.cartItems?.findIndex(item => item.id === action?.payload.id)
+     let ind = state?.cartItems?.findIndex(item => item._id === action?.payload._id)
       if ( ind !==-1) {
         console.log("state.cartItems[ind]", state.cartItems[ind])
         state.cartItems[ind].quantity += 1
+      } else { 
+          state?.cartItems?.push(action.payload);
       }
     },
 
     removeFromCart: (state, action) => {
-      const allProduct = state?.cartItems?.filter((item) => item.id !== action?.payload?.id);
+      const allProduct = state?.cartItems?.filter((item) => item._id !== action?.payload?._id);
       state.cartItems = allProduct;
     },
 
     decreaseCartItemQuantity: (state, action) => {
-      const existingProduct = state?.cartItems?.find((item) => item.id === action.payload.id);
+      const existingProduct = state?.cartItems?.find((item) => item._id === action.payload._id);
       if (existingProduct ) {
         existingProduct.quantity -= 1;
       }

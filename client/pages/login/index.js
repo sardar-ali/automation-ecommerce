@@ -27,6 +27,8 @@ const router = useRouter();
         if (result?.data?.status) {
             // localStorage.setItem("token", result?.data?.data?.user?.token)
             localStorage.setItem('token', result?.data?.data?.user?.token);
+            localStorage.setItem('isOwner', result?.data?.data?.user?.isAdmin);
+
             console.log("result ::", result)
             console.log("message ::", result?.data?.data?.message)
             toast.success(result?.data?.data?.message)

@@ -1,23 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
-import { redirect, useRouter } from 'next/navigation';  
-import { createCategory } from '../../services/api/category/index';
+import { useSearchParams } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation';
+import { createCategory, getSingleCategory, updateCategory } from '../../services/api/category/index';
+
 
 function AddCategory() {
 
+    const searchParams = useSearchParams()
+    const isEdit = searchParams.get('isEdit')
+    const id = searchParams.get('id')
+
     const router = useRouter();
-    const [categoryFormData, setFormData ] = useState({
+    const [categoryFormData, setFormData] = useState({
         name: "",
-        image:""
+        image: ""
     });
 
 
-    let token ;
+    let token;
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
         // Now you can safely use localStorage
-       token =  localStorage.getItem('token')
-      } 
+        token = localStorage.getItem('token')
+    }
 
 
     const { name, image } = categoryFormData;
@@ -43,29 +49,51 @@ function AddCategory() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        if (isEdit) {
 
-        const formData = new FormData();
-        for (const key in categoryFormData) {
-        console.log("obj test   ::", key)
+            const formData = new FormData();
+            for (const key in categoryFormData) {
+                formData.append(key, categoryFormData[key]);
+            }
 
-        formData.append(key, categoryFormData[key]);
-        }
-        console.log("formData ::", formData)
+            const result = await updateCategory(id, formData, token);
+            if (result?.data?.status) {
+                toast.success(result?.data?.data?.message)
+                router.push("/")
+            }
 
+        } else {
 
+            const formData = new FormData();
+            for (const key in categoryFormData) {
+                formData.append(key, categoryFormData[key]);
+            }
 
+            const result = await createCategory(formData, token);
+            if (result?.data?.status) {
+                toast.success(result?.data?.data?.message)
+                router.push("/")
+            }
 
-
-        const result = await createCategory(formData, token);
-        if (result?.data?.status) {
-            console.log("result ::", result)
-            toast.success(result?.data?.data?.message)
-            // navigate("/")
-            router.push("/")
         }
     }
 
-    console.log("categoryFormData ::", categoryFormData)
+
+
+    const getCategory = async (id) => {
+        const response = await getSingleCategory(id);
+        const data = response?.data?.data?.category;
+        setFormData({
+            name: data?.name,
+            image: data?.image
+        });
+    }
+
+    useEffect(() => {
+        if (isEdit) {
+            getCategory(id)
+        }
+    }, [])
 
     return (
         <div className="d-flex justify-content-center">
@@ -78,11 +106,11 @@ function AddCategory() {
                             <input type="name" name="name" value={name} onChange={handleChange} className="form-control input-field" id="exampleInputname1" aria-describedby="nameHelp" placeholder="Enter your name" />
                         </div>
                         {/* <div className="form-group"> */}
-                            {/* <label for="exampleInputimage">image</label> */}
-                            <input type="file" name="image" onChange={handleChange}  placeholder="Enter your price" />
+                        {/* <label for="exampleInputimage">image</label> */}
+                        <input type="file" name="image" onChange={handleChange} placeholder="Enter your price" />
                         {/* </div> */}
                         {/* <div className="form-group"> */}
-                            <input type="submit" className="form-control input-field  btn-primary" id="exampleInputname1" aria-describedby="nameHelp" value="Add Category" />
+                        <input type="submit" className="form-control input-field  btn-primary" id="exampleInputname1" aria-describedby="nameHelp" value="Add Category" />
                         {/* </div> */}
 
                         {/* <button type="submit" className="btn btn-primary login-button">Submit</button> */}

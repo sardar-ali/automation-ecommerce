@@ -92,7 +92,7 @@ function ShippingAddress() {
                 </div>
             </div>
 
-            <div className="card login-card ml-5">
+            <div className="card address-card ml-5">
                 <h5 className="card-header py-4">Payment Details</h5>
                 <div className="card-body mx-4 my-5">
 

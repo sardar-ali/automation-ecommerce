@@ -23,7 +23,7 @@ function Header() {
 
     // Function to toggle the list's visibility
     const toggleList = () => {
-      setListVisible(!isListVisible);
+        setListVisible(!isListVisible);
     };
 
     return (
@@ -133,7 +133,7 @@ function Header() {
                     <div className="col-lg-4">
                         <Link href="/" className="text-decoration-none">
                             <span className="h1 text-uppercase text-primary bg-dark px-2">
-                                Multi
+                                Khan
                             </span>
                             <span className="h1 text-uppercase text-dark bg-primary px-2 ml-n1">
                                 Shop
@@ -152,7 +152,7 @@ function Header() {
                                         dispatch(searchItems(e.target.value))
                                     }}
                                     className="form-control"
-                                    placeholder="Search for products"
+                                    placeholder="Search for product by product name or categroy name"
                                 />
                                 <div className="input-group-append">
                                     <span className="input-group-text bg-transparent text-primary">
@@ -190,7 +190,7 @@ function Header() {
                             id="navbar-vertical"
                             style={{ width: "calc(100% - 30px)", zIndex: 999 }}
                         >
-                          {  isListVisible && <div className="navbar-nav w-100">
+                            {isListVisible && <div className="navbar-nav w-100">
                                 {/* <div className="nav-item dropdown dropright">
                                     <a
                                         href="#"
@@ -212,7 +212,7 @@ function Header() {
                                     </div>
                                 </div> */}
                                 {catagories?.map((itm) => {
-                                    return (<Link href={`/product-list-by-selected-category/${itm?._id}`} keys={itm?._id} className="nav-item nav-link">
+                                    return (<Link href={`/product-list-by-selected-category/${itm?._id}`} keys={itm?._id} onClick={() => setListVisible(!isListVisible)} className="nav-item nav-link">
                                         {itm?.name}
                                     </Link>)
                                 })}
@@ -247,7 +247,7 @@ function Header() {
                         <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                             <a href="/" className="text-decoration-none d-block d-lg-none">
                                 <span className="h1 text-uppercase text-dark bg-light px-2">
-                                    Multi
+                                    Khan
                                 </span>
                                 <span className="h1 text-uppercase text-light bg-primary px-2 ml-n1">
                                     Shop
@@ -261,96 +261,96 @@ function Header() {
                             >
                                 <span className="navbar-toggler-icon" />
                             </button>
-                            {admin !=="false" ?
-                            <div
-                                className="collapse navbar-collapse justify-content-between"
-                                id="navbarCollapse"
-                            >
-                                <div className="navbar-nav mr-auto py-0">
-                                    <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
-                                        Add Product
-                                    </Link>
-                                    <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
-                                        Add Category
-                                    </Link>
+                            {admin !== "false" ?
+                                <div
+                                    className="collapse navbar-collapse justify-content-between"
+                                    id="navbarCollapse"
+                                >
+                                    <div className="navbar-nav mr-auto py-0">
+                                        <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
+                                            Add Product
+                                        </Link>
+                                        <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
+                                            Add Category
+                                        </Link>
 
-                                    <div className="nav-item dropdown">
-                                        <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                        <div className="nav-item dropdown">
+                                            <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            </div>
                                         </div>
+                                        <a href="contact.html" className="nav-item nav-link">
+                                            Services
+                                        </a>
+                                        <a href="contact.html" className="nav-item nav-link">
+                                            Contact
+                                        </a>
                                     </div>
-                                    <a href="contact.html" className="nav-item nav-link">
-                                        Services
-                                    </a>
-                                    <a href="contact.html" className="nav-item nav-link">
-                                        Contact
-                                    </a>
+                                    <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                                        <a href="" className="btn px-0">
+                                            <i className="fas fa-heart text-primary" />
+                                            <span
+                                                className="badge text-secondary border border-secondary rounded-circle"
+                                                style={{ paddingBottom: 2 }}
+                                            >
+                                                0
+                                            </span>
+                                        </a>
+                                        <Link href="/cart" className="btn px-0 ml-3">
+                                            <i className="fas fa-shopping-cart text-primary" />
+                                            <span
+                                                className="badge text-secondary border border-secondary rounded-circle"
+                                                style={{ paddingBottom: 2 }}
+                                            >
+                                                {cart?.length}
+                                            </span>
+                                        </Link>
+                                    </div>
                                 </div>
-                                <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                    <a href="" className="btn px-0">
-                                        <i className="fas fa-heart text-primary" />
-                                        <span
-                                            className="badge text-secondary border border-secondary rounded-circle"
-                                            style={{ paddingBottom: 2 }}
-                                        >
-                                            0
-                                        </span>
-                                    </a>
-                                    <Link href="/cart" className="btn px-0 ml-3">
-                                        <i className="fas fa-shopping-cart text-primary" />
-                                        <span
-                                            className="badge text-secondary border border-secondary rounded-circle"
-                                            style={{ paddingBottom: 2 }}
-                                        >
-                                            {cart?.length}
-                                        </span>
-                                    </Link>
-                                </div>
-                            </div>
-                            : <div
-                                className="collapse navbar-collapse justify-content-between"
-                                id="navbarCollapse"
-                            >
-                                <div className="navbar-nav mr-auto py-0">
-                                    {/* <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
+                                : <div
+                                    className="collapse navbar-collapse justify-content-between"
+                                    id="navbarCollapse"
+                                >
+                                    <div className="navbar-nav mr-auto py-0">
+                                        {/* <Link href="/create-product" className="nav-item nav-link active" style={{ color: "white" }}>
                                         Add Product
                                     </Link>
                                     <Link href="/create-category" className="nav-item nav-link active" style={{ color: "white" }}>
                                         Add Category
                                     </Link> */}
 
-                                    <div className="nav-item dropdown">
-                                        <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                        <div className="nav-item dropdown">
+                                            <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            </div>
                                         </div>
+                                        <a href="contact.html" className="nav-item nav-link">
+                                            Contact
+                                        </a>
+                                        <a href="contact.html" className="nav-item nav-link">
+                                            Services
+                                        </a>
                                     </div>
-                                    <a href="contact.html" className="nav-item nav-link">
-                                        Contact
-                                    </a>
-                                    <a href="contact.html" className="nav-item nav-link">
-                                        Services
-                                    </a>
+                                    <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                                        <a href="" className="btn px-0">
+                                            <i className="fas fa-heart text-primary" />
+                                            <span
+                                                className="badge text-secondary border border-secondary rounded-circle"
+                                                style={{ paddingBottom: 2 }}
+                                            >
+                                                0
+                                            </span>
+                                        </a>
+                                        <Link href="/cart" className="btn px-0 ml-3">
+                                            <i className="fas fa-shopping-cart text-primary" />
+                                            <span
+                                                className="badge text-secondary border border-secondary rounded-circle"
+                                                style={{ paddingBottom: 2 }}
+                                            >
+                                                {cart?.length}
+                                            </span>
+                                        </Link>
+                                    </div>
                                 </div>
-                                <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                    <a href="" className="btn px-0">
-                                        <i className="fas fa-heart text-primary" />
-                                        <span
-                                            className="badge text-secondary border border-secondary rounded-circle"
-                                            style={{ paddingBottom: 2 }}
-                                        >
-                                            0
-                                        </span>
-                                    </a>
-                                    <Link href="/cart" className="btn px-0 ml-3">
-                                        <i className="fas fa-shopping-cart text-primary" />
-                                        <span
-                                            className="badge text-secondary border border-secondary rounded-circle"
-                                            style={{ paddingBottom: 2 }}
-                                        >
-                                            {cart?.length}
-                                        </span>
-                                    </Link>
-                                </div>
-                            </div>
-                        }
+                            }
                         </nav>
                     </div>
                 </div>

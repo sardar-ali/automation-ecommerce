@@ -327,6 +327,21 @@ legend {
   white-space: normal;
 }
 
+.address-card {
+  width: 60rem;
+  margin-left: 3rem;
+}
+
+
+.whats-app {
+  position: fixed;
+  left: 10px;
+  bottom: 3rem;
+  z-index: 11;
+  animation: action 1s infinite alternate;
+}
+
+
 @media (max-width: 1200px) {
   legend {
     font-size: calc(1.275rem + 0.3vw);
@@ -649,6 +664,10 @@ pre code {
   .container-sm {
     max-width: 540px;
   }
+
+  /* .whats-app {
+    bottom: 8rem;
+  } */
 }
 
 @media (max-width: 768px) {
@@ -668,7 +687,12 @@ pre code {
   }
 
   .address-card {
-    width: 80%
+    width: 80%;
+    margin-bottom: 3rem;
+  }
+
+  .whats-app {
+    bottom: 15rem;
   }
 }
 
@@ -2137,6 +2161,10 @@ pre code {
 
   .table-responsive-sm>.table-bordered {
     border: 0;
+  }
+
+  .whats-app {
+    bottom: 6rem;
   }
 }
 
@@ -10890,14 +10918,6 @@ h6 {
   list-style-type: none;
 }
 
-.whats-app {
-  position: fixed;
-  /* display: none; */
-  right: 30px;
-  bottom: 30px;
-  z-index: 11;
-  animation: action 1s infinite alternate;
-}
 
 .back-to-top {
   position: fixed;
@@ -10922,11 +10942,6 @@ h6 {
 
 .login-card {
   width: 40rem;
-}
-
-.address-card {
-  width: 60rem;
-  margin-left: 3rem;
 }
 
 .input-field {

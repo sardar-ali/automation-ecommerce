@@ -8,13 +8,13 @@ function Footer() {
                     <div className="row px-xl-5 pt-5">
                         <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                             <h5 className="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                            <p className="mb-4">
+                            {/* <p className="mb-4">
                                 No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et
                                 dolor sed dolor. Rebum tempor no vero est magna amet no
-                            </p>
+                            </p> */}
                             <p className="mb-2">
                                 <i className="fa fa-map-marker-alt text-primary mr-3" />
-                                123 Street, New York, USA
+                                United Arab Emirates
                             </p>
                             <p className="mb-2">
                                 <i className="fa fa-envelope text-primary mr-3" />
@@ -22,7 +22,7 @@ function Footer() {
                             </p>
                             <p className="mb-0">
                                 <i className="fa fa-phone-alt text-primary mr-3" />
-                                +012 345 67890
+                                +971 55 730 8265
                             </p>
                         </div>
                         <div className="col-lg-8 col-md-12">
@@ -38,10 +38,10 @@ function Footer() {
                                             <i className="fa fa-angle-right mr-2" />
                                             Our Shop
                                         </a>
-                                        <a className="text-secondary mb-2" href="#">https://transform.tools/json-to-proptypes
+                                        {/* <a className="text-secondary mb-2" href="#">https://transform.tools/json-to-proptypes
                                             <i className="fa fa-angle-right mr-2" />
                                             Shop Detail
-                                        </a>
+                                        </a> */}
                                         <a className="text-secondary mb-2" href="#">
                                             <i className="fa fa-angle-right mr-2" />
                                             Shopping Cart
@@ -87,7 +87,7 @@ function Footer() {
                                 </div>
                                 <div className="col-md-4 mb-5">
                                     <h5 className="text-secondary text-uppercase mb-4">Newsletter</h5>
-                                    <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
+                                    {/* <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p> */}
                                     <form action="">
                                         <div className="input-group">
                                             <input
@@ -121,7 +121,7 @@ function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div
+                    {/* <div
                         className="row border-top mx-xl-5 py-4"
                         style={{ borderColor: "rgba(256, 256, 256, .1) !important" }}
                     >
@@ -140,17 +140,10 @@ function Footer() {
                         <div className="col-md-6 px-xl-0 text-center text-md-right">
                             <img className="img-fluid" src="img/payments.png" alt="" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <WhatsappButton text={"WhatsApp Chat"} styles={"whats-app"}/>
-               {/* <div className="btn btn-success whats-app d-flex justify-center items-center" style={{marginRight:"4rem"}}>
-               <i style={{fontSize: "3rem"}}  class="fa-brands fa-square-whatsapp fa-beat-fade"></i> 
-               <span style={{
-                    textAlign: "center",
-                    paddingTop: "0.8rem",
-                    paddingLeft: "0.5rem"
-                }}>Quick Shopping</span>
-               </div> */}
+               
                 <a href="#" className="btn btn-primary back-to-top ">
                     <i className="fa fa-angle-double-up" />
                 </a>

@@ -40,10 +40,11 @@ const signUpUser = async (req, res) => {
             }
         })
 
-    } catch (error) {
-        return res.status(404).json({
+    } catch (err) {
+        res.status(500).json({
             status: false,
-            error
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }
@@ -111,10 +112,11 @@ const loginUser = async (req, res) => {
         })
 
 
-    } catch (error) {
-        return res.status(404).json({
+    } catch (err) {
+        res.status(500).json({
             status: false,
-            error
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }
@@ -186,10 +188,11 @@ const loginAdmin = async (req, res) => {
             }
         })
 
-    } catch (error) {
-        return res.status(404).json({
+    } catch (err) {
+        res.status(500).json({
             status: false,
-            error
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 
@@ -235,8 +238,8 @@ const updateUser = async (req, res) => {
 
 
     } catch (error) {
-        return res.status(404).json({
-            status: true,
+        return res.status(500).json({
+            status: false,
             data: {
                 user,
                 error

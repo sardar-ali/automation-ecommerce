@@ -19,7 +19,6 @@ const productSlice = createSlice({
     },
 
     searchItems: (state, action) => {
-      console.log("actions :::",action.payload)
       state.searchText = action.payload;
    },
 

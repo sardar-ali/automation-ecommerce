@@ -21,7 +21,7 @@ function Categories({ categoryData }) {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
         // Now you can safely use localStorage
         token = localStorage.getItem('token')
-        admin = localStorage.getItem('isOwner')
+        admin = JSON.parse(localStorage.getItem('isOwner'))
     }
 
 
@@ -74,24 +74,24 @@ function Categories({ categoryData }) {
                 })?.map((itm) => {
                     return (
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                            <div className="cat-item d-flex align-items-center mb-4" style={{ position: "relative" }}>
-                                <div
-                                    className="overflow-hidden"
-                                    style={{ width: 100, height: 100 }}
-                                >
-                                    <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}>
+                            <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}>
+                                <div className="cat-item d-flex align-items-center mb-4" style={{ position: "relative" }}>
+                                    <div
+                                        className="overflow-hidden"
+                                        style={{ width: 100, height: 100 }}
+                                    >
                                         <img
                                             className="img-fluid category-img"
                                             src={itm?.image}
                                             alt="" />
-                                    </Link>
+                                    </div>
+                                    <div className="flex-fill pl-3">
+                                        <h6>{itm?.name}</h6>
+                                        <small className="text-body">100 Products</small>
+                                    </div>
                                 </div>
-                                <div className="flex-fill pl-3">
-                                    <h6>{itm?.name}</h6>
-                                    <small className="text-body">100 Products</small>
-                                </div>
-                            </div>
-                            {admin !== "false" && <div style={{ position: "absolute", display: "flex", flexDirection: "column", justifyConten: "center", alignItem: "center", margin: "1rem 1rem", fontSize: "1.2rem", top: "0.5rem", right: "1rem" }}>
+                            </Link>
+                            {admin && <div style={{ position: "absolute", display: "flex", flexDirection: "column", justifyConten: "center", alignItem: "center", margin: "1rem 1rem", fontSize: "1.2rem", top: "0.5rem", right: "1rem" }}>
                                 <i class="fa-solid fa-trash" style={{ color: "red" }} onClick={() => deleteCategoryHandler(itm?._id)}></i>
                                 <i class="fa-solid fa-pen-to-square" style={{ margin: "1rem 0", color: "black" }} onClick={() => editProductHandler(itm?._id)} ></i>
                             </div>}
@@ -100,7 +100,7 @@ function Categories({ categoryData }) {
                     )
                 })}
 
-                <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
+       {/*         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <a className="text-decoration-none" href="">
                         <div className="cat-item img-zoom d-flex align-items-center mb-4">
                             <div
@@ -160,7 +160,7 @@ function Categories({ categoryData }) {
                         </div>
                     </a>
                 </div>
-                <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
+                 <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <a className="text-decoration-none" href="">
                         <div className="cat-item img-zoom d-flex align-items-center mb-4">
                             <div
@@ -279,7 +279,7 @@ function Categories({ categoryData }) {
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> */}
                 {/* <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <a className="text-decoration-none" href="">
                                 <div className="cat-item img-zoom d-flex align-items-center mb-4">

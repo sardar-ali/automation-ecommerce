@@ -11,7 +11,7 @@ function Cart() {
     const totalPrice = useMemo(() => {
         return cartItems?.reduce((acc, currentItem) => {
             return acc + ((currentItem?.price * 1) * (currentItem?.quantity * 1));
-        }, 0);
+        }, 10) ;
     }, [cartItems]);
 
 
@@ -87,7 +87,7 @@ function Cart() {
                         <div class="border-bottom pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Subtotal</h6>
-                                <h6>AED {totalPrice}</h6>
+                                <h6>AED {totalPrice - 10}</h6>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Shipping</h6>
@@ -97,9 +97,9 @@ function Cart() {
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5>AED {totalPrice + 10}</h5>
+                                <h5>AED {totalPrice}</h5>
                             </div>
-                            <Link href="/shipping-address" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</Link>
+                            <Link href={`/shipping-address?dt=${totalPrice}`} class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</Link>
                         </div>
                     </div>
                 </div>

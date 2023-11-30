@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
+
 import { toast } from 'react-toastify';
-import { redirect, useRouter } from 'next/navigation';  
+import {  useRouter } from 'next/navigation';
 import { userLogin } from '../../services/api/auth/index';
 
 function Login() {
-const router = useRouter();
-    const [formData, setFormData ] = useState({
+    const router = useRouter();
+    const [formData, setFormData] = useState({
         email: "",
         password: ""
     });
@@ -23,14 +25,14 @@ const router = useRouter();
     const onSubmit = async (e) => {
         e.preventDefault();
         const result = await userLogin(formData);
-        console.log("result ::", result )
         if (result?.data?.status) {
-            // localStorage.setItem("token", result?.data?.data?.user?.token)
+
+            localStorage.setItem('user', result?.data?.data?.user?.id);
             localStorage.setItem('token', result?.data?.data?.user?.token);
             localStorage.setItem('isOwner', result?.data?.data?.user?.isAdmin);
 
-            console.log("result ::", result)
-            console.log("message ::", result?.data?.data?.message)
+            // console.log("result ::", result)
+            // console.log("message ::", result?.data?.data?.message)
             toast.success(result?.data?.data?.message)
             // navigate("/")
             router.push("/")
@@ -58,6 +60,7 @@ const router = useRouter();
 
                         {/* <button type="submit" className="btn btn-primary login-button">Submit</button> */}
                     </form>
+                    <Link href="/signup" style={{ color: "black" }}>Please signup if you don't have account?</Link>
                 </div>
             </div>
         </div>

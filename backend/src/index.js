@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser")
 const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 const { dbConnection } = require("./config/dbConnection");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use("/public/images/product", express.static("./public/images/product"));
 app.use("/api/v1/user", userRoutes)
 app.use("/api/v1/category", categoryRoutes)
 app.use("/api/v1/product", productRoutes)
+app.use("/api/v1/order", orderRoutes)
 
 app.listen(PORT, () => {
     console.log("Server is running on port ", PORT)

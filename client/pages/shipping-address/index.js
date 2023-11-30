@@ -1,7 +1,17 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+
 import Select from 'react-select'
+import { useDispatch, useSelector } from 'react-redux';
+import { placeOder } from "../../services/api/order";
 
 function ShippingAddress() {
+    const cartItems = useSelector((state) => state?.cart?.cartItems);
+
+    const router = useRouter();
+    const { dt } = router.query;
+
 
     const [addressFormData, setAddressFormData] = useState({
         phone: "",
@@ -12,6 +22,14 @@ function ShippingAddress() {
     })
 
     const { phone, country, state, city, address } = addressFormData;
+    let user;
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+        // Now you can safely use localStorage
+        user = localStorage.getItem('user');
+        // token = localStorage.getItem('token')
+        // admin = JSON.parse(localStorage.getItem('isOwner'))
+    }
+
 
     const customStyles = {
         // Style the input field
@@ -42,9 +60,15 @@ function ShippingAddress() {
 
     }
 
-    const onSubmitHandler = () => {
-        console.log(" on submit handler called")
+    const onSubmitHandler = async () => {
 
+        const response = await placeOder({ cartItems, addressFormData, totalPrice: dt, user });
+        if (response?.data?.status) {
+            toast.success(response?.data?.message);
+            router.push("/")
+        } else {
+            toast.error(response?.response?.data?.error?.message + ` ${response?.response?.data?.required} field is missings`);
+        }
     }
 
 

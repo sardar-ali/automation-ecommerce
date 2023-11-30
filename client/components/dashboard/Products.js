@@ -25,7 +25,7 @@ function Products({ isCategory, productsData }) {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
         // Now you can safely use localStorage
         token = localStorage.getItem('token')
-        admin = localStorage.getItem('isOwner')
+        admin = JSON.parse(localStorage.getItem('isOwner'))
     }
 
 
@@ -184,9 +184,9 @@ function Products({ isCategory, productsData }) {
                                         // src="img/product-1.jpg" 
                                         alt="" />
                                     <div className="product-action">
-                                        <a className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
+                                        <p className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
                                             <i className="fa fa-shopping-cart" />
-                                        </a>
+                                        </p>
                                         {/* <a className="btn btn-outline-dark btn-square" href="">
                                                 <i className="far fa-heart" />
                                             </a> */}
@@ -202,13 +202,13 @@ function Products({ isCategory, productsData }) {
                                 </div>
                                 <div className="text-center py-4">
                                     <div className=" cursor-pointer" onClick={() => detailHandler(product?._id)}>
-                                        <a className="h6 text-decoration-none text-truncate cursor-pointer">
+                                        <p className="h6 text-decoration-none text-truncate cursor-pointer">
                                             {product?.name}
-                                        </a>
+                                        </p>
                                         <div className="d-flex align-items-center justify-content-center mt-2">
-                                            <h5>{product?.price}</h5>
+                                            <h5> AED{product?.price}</h5>
                                             <h6 className="text-muted ml-2">
-                                                <del>{product?.price}</del>
+                                                <del>AED{product?.price}</del>
                                             </h6>
                                         </div>
                                         <div className="d-flex align-items-center justify-content-center mb-1">
@@ -220,7 +220,7 @@ function Products({ isCategory, productsData }) {
                                             <small>{product?.reviews}</small>
                                         </div>
                                     </div>
-                                    {admin !== "false" ? <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
+                                    {admin ? <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
                                         <i class="fa-solid fa-trash cursor-pointer" style={{ color: "red" }} onClick={() => deleteProductHandler(product?._id)}></i>
                                         <i class="fa-solid fa-pen-to-square cursor-pointer" style={{ color: "black" }} onClick={() => editProductHandler(product?._id)}></i>
                                     </div> : ""}

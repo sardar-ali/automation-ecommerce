@@ -12,7 +12,7 @@ function Header() {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
         // Now you can safely use localStorage
         token = localStorage.getItem('token')
-        admin = localStorage.getItem('isOwner')
+        admin = JSON.parse(localStorage.getItem('isOwner'))
     }
     const dispatch = useDispatch()
 
@@ -31,7 +31,7 @@ function Header() {
             <div className="container-fluid">
                 <div className="row bg-secondary py-1 px-xl-5">
                     <div className="col-lg-6 d-none d-lg-block">
-                        <div className="d-inline-flex align-items-center h-100">
+                        {/* <div className="d-inline-flex align-items-center h-100">
                             <a className="text-body mr-3" href="">
                                 About
                             </a>
@@ -44,7 +44,7 @@ function Header() {
                             <a className="text-body mr-3" href="">
                                 FAQs
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-lg-6 text-center text-lg-right">
                         <div className="d-inline-flex align-items-center">
@@ -67,7 +67,8 @@ function Header() {
                                 </div>
                             </div>
                             <div className="btn-group mx-2">
-                                <button
+                                +971551396801
+                                {/*  <button
                                     type="button"
                                     className="btn btn-sm btn-light dropdown-toggle"
                                     data-toggle="dropdown"
@@ -85,8 +86,9 @@ function Header() {
                                         CAD
                                     </button>
                                 </div>
+                                */}
                             </div>
-                            <div className="btn-group">
+                            {/* <div className="btn-group">
                                 <button
                                     type="button"
                                     className="btn btn-sm btn-light dropdown-toggle"
@@ -105,7 +107,7 @@ function Header() {
                                         RU
                                     </button>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="d-inline-flex align-items-center d-block d-lg-none">
                             <a href="" className="btn px-0 ml-2">
@@ -133,10 +135,10 @@ function Header() {
                     <div className="col-lg-4">
                         <Link href="/" className="text-decoration-none">
                             <span className="h1 text-uppercase text-primary bg-dark px-2">
-                                Khan
+                                Gate
                             </span>
                             <span className="h1 text-uppercase text-dark bg-primary px-2 ml-n1">
-                                Shop
+                                Automation
                             </span>
                         </Link>
                     </div>
@@ -247,10 +249,10 @@ function Header() {
                         <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                             <a href="/" className="text-decoration-none d-block d-lg-none">
                                 <span className="h1 text-uppercase text-dark bg-light px-2">
-                                    Khan
+                                    Gate
                                 </span>
                                 <span className="h1 text-uppercase text-light bg-primary px-2 ml-n1">
-                                    Shop
+                                    Automation
                                 </span>
                             </a>
                             <button
@@ -261,7 +263,7 @@ function Header() {
                             >
                                 <span className="navbar-toggler-icon" />
                             </button>
-                            {admin !== "false" ?
+                            {admin ?
                                 <div
                                     className="collapse navbar-collapse justify-content-between"
                                     id="navbarCollapse"
@@ -278,12 +280,14 @@ function Header() {
                                             <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             </div>
                                         </div>
-                                        <a href="contact.html" className="nav-item nav-link">
-                                            Services
-                                        </a>
-                                        <a href="contact.html" className="nav-item nav-link">
+                                        <Link href="/services" className="nav-item nav-link active" style={{ color: "white" }}>
+                                            Installation & Maintenance
+                                        </Link>
+
+                                        <Link href="/contact" className="nav-item nav-link active" style={{ color: "white" }}>
                                             Contact
-                                        </a>
+                                        </Link>
+
                                     </div>
                                     <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                                         <a href="" className="btn px-0">

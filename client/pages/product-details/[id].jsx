@@ -107,16 +107,16 @@ function ProductDetails({ productData, relatedProducts }) {
                             <div className="bg-light p-30">
                                 <div className="nav nav-tabs mb-4">
                                     <a className="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                                    <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
+                                    <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Specifications</a>
                                 </div>
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-pane-1">
-                                        <h4 className="mb-3">vProduct Description</h4>
-                                        <p>{productData?.short_description ? productData?.short_description :  productData?.short_description}</p>
+                                        <h4 className="mb-3">Product Description</h4>
+                                        <p>{productData?.short_description ? productData?.short_description : productData?.short_description}</p>
                                     </div>
                                     <div className="tab-pane fade" id="tab-pane-2">
-                                        <h4 className="mb-3">Additional Information</h4>
-                                        <p>{productData?.full_description ? productData?.full_description :  productData?.full_description}</p>
+                                        <h4 className="mb-3">Specifications</h4>
+                                        <p>{productData?.full_description ? productData?.full_description : productData?.full_description}</p>
                                     </div>
                                 </div>
                             </div>
@@ -140,18 +140,18 @@ function ProductDetails({ productData, relatedProducts }) {
                                                 src={product?.image}
                                                 alt="" />
                                             <div className="product-action">
-                                                <a className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
+                                                <p className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
                                                     <i className="fa fa-shopping-cart" />
-                                                </a>
+                                                </p>
                                             </div>
 
 
                                         </div>
                                         <div className="text-center py-4">
                                             <div className=" cursor-pointer" onClick={() => detailHandler(product?._id)}>
-                                                <a className="h6 text-decoration-none text-truncate cursor-pointer">
+                                                <p className="h6 text-decoration-none text-truncate cursor-pointer">
                                                     {product?.name}
-                                                </a>
+                                                </p>
                                                 <div className="d-flex align-items-center justify-content-center mt-2">
                                                     <h5>{product?.price}</h5>
                                                     <h6 className="text-muted ml-2">
@@ -222,7 +222,7 @@ export async function getStaticProps({ params }) {
             productData: response?.data?.data?.product,
             relatedProducts: response?.data?.data?.relatedProducts,
         },
-        revalidate: 10,
+        revalidate: 1,
     };
 }
 

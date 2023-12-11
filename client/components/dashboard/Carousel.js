@@ -37,10 +37,10 @@ const Carousel = () => {
                                         <h1 className="display-4 text-white mb-3 animate__animated animate__fadeInDown">
                                            Parking Gate
                                         </h1>
-                                        <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
+                                        {/* <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
                                             Lorem rebum magna amet lorem magna erat diam stet. Sadips
                                             duo stet amet amet ndiam elitr ipsum diam
-                                        </p>
+                                        </p> */}
                                         <a
                                             className="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                             href="#"
@@ -63,12 +63,12 @@ const Carousel = () => {
                                 <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div className="p-3" style={{ maxWidth: 700 }}>
                                         <h1 className="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                                            Automic Gate
+                                             Gate Barrier
                                         </h1>
-                                        <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
+                                        {/* <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
                                             Lorem rebum magna amet lorem magna erat diam stet. Sadips
                                             duo stet amet amet ndiam elitr ipsum diam
-                                        </p>
+                                        </p> */}
                                         <a
                                             className="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                             href="#"
@@ -93,10 +93,10 @@ const Carousel = () => {
                                         <h1 className="display-4 text-white mb-3 animate__animated animate__fadeInDown">
                                             Toll Gate
                                         </h1>
-                                        <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
+                                        {/* <p className="mx-md-5 px-5 animate__animated animate__bounceIn">
                                             Lorem rebum magna amet lorem magna erat diam stet. Sadips
                                             duo stet amet amet ndiam elitr ipsum diam
-                                        </p>
+                                        </p> */}
                                         <a
                                             className="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                             href="#"

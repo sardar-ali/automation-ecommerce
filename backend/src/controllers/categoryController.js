@@ -45,10 +45,12 @@ const createCategory = async (req, res) => {
         })
 
 
-    } catch (error) {
-        res.status(404).json({
-            status: true,
-            error
+    } catch (err) {
+
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }
@@ -64,10 +66,12 @@ const getAllCategory = async (req, res) => {
                 message: "Category get successfully!"
             }
         })
-    } catch (error) {
-        res.status(404).json({
-            status: true,
-            error,
+    } catch (err) {
+
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }
@@ -91,10 +95,12 @@ const getSingleCategory = async (req, res) => {
             }
         })
 
-    } catch (error) {
-        res.status(404).json({
-            status: true,
-            error,
+    } catch (err) {
+
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }
@@ -132,10 +138,12 @@ const updateCategory = async (req, res) => {
             }
         })
 
-    } catch (error) {
-        res.status(404).json({
-            status: true,
-            error,
+    } catch (err) {
+
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }
@@ -161,10 +169,12 @@ const deleteCategory = async (req, res) => {
             }
         })
 
-    } catch (error) {
-        res.status(404).json({
-            status: true,
-            error,
+    } catch (err) {
+
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
         })
     }
 }

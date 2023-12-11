@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
+
 // import { useNavigate } from "react-router-dom";
- import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { userSignup } from '../../services/api/auth/index';
 
@@ -27,12 +29,13 @@ function Signup() {
     const onSignup = async (e) => {
         e.preventDefault();
         const result = await userSignup(formData)
-        console.log("result ::", result)
+        // console.log("result ::", result)
 
         if (result?.data?.status) {
+            localStorage.setItem('token', result?.data?.data?.user?.token);
+            localStorage.setItem('isOwner', result?.data?.data?.user?.isAdmin);
+            localStorage.setItem('user', result?.data?.data?.user?.id);
             toast.success(result?.data?.data?.message);
-            console.log("result ::", result?.data?.data)
-            // navigate("/")
             router.push("/")
 
         }
@@ -72,6 +75,8 @@ function Signup() {
                         </div>
                         {/* <button type="submit" className="btn btn-primary login-button">Sign up</button> */}
                     </form>
+                    <Link href="/login" style={{ color: "black" }}>Please login if you have alread account?</Link>
+
                 </div>
             </div>
         </div>

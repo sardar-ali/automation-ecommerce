@@ -23,3 +23,8 @@ export const GET_CATEGORY = `${BASE_URL}/category/get-all-category`;
 export const GET_SINGLE_CATEGORY = `${BASE_URL}/category/get-single-category`;
 export const UPDATE_CATEGORY = `${BASE_URL}/category/update-category`;
 export const DELETE_CATEGORY = `${BASE_URL}/category/delete-category`;
+
+
+
+
+export const CREATE_ORDER = `${BASE_URL}/order/create-order`;

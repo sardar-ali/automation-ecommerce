@@ -67,7 +67,7 @@ function Header() {
                                 </div>
                             </div>
                             <div className="btn-group mx-2">
-                                +971557308265
+                                +971551396801
                                 {/*  <button
                                     type="button"
                                     className="btn btn-sm btn-light dropdown-toggle"
@@ -280,12 +280,14 @@ function Header() {
                                             <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             </div>
                                         </div>
-                                        <a href="contact.html" className="nav-item nav-link">
-                                            Services
-                                        </a>
-                                        <a href="contact.html" className="nav-item nav-link">
+                                        <Link href="/services" className="nav-item nav-link active" style={{ color: "white" }}>
+                                            Installation & Maintenance
+                                        </Link>
+
+                                        <Link href="/contact" className="nav-item nav-link active" style={{ color: "white" }}>
                                             Contact
-                                        </a>
+                                        </Link>
+
                                     </div>
                                     <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                                         <a href="" className="btn px-0">

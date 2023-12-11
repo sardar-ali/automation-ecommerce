@@ -60,10 +60,10 @@ function AddProduct() {
         e.preventDefault();
         const formData = new FormData();
         for (const key in productFormData) {
-            if(key === "category"){
+            if (key === "category") {
                 formData.append(key, productFormData[key]?.value);
-            } else{
-            formData.append(key, productFormData[key]);
+            } else {
+                formData.append(key, productFormData[key]);
             }
         }
 
@@ -134,21 +134,21 @@ function AddProduct() {
                             {/* <input type="text" className="form-control input-field" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your state" /> */}
                             <Select
                                 styles={customStyles}
-                                onChange ={(e)=>setFormData((prev) => ({
-                                ...prev,
-                                category: e
-                            }))
-}
+                                onChange={(e) => setFormData((prev) => ({
+                                    ...prev,
+                                    category: e
+                                }))
+                                }
                                 //  className="form-control input-field"
                                 value={category}
-                                placeholder="Enter your state"
+                                placeholder="Select Category"
                                 options={Categories?.map((itm) => {
                                     return {
                                         label: itm?.name,
                                         value: itm?._id
                                     }
                                 })}
-                               
+
                             />
 
                         </div>

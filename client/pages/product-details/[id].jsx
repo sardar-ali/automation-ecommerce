@@ -107,7 +107,7 @@ function ProductDetails({ productData, relatedProducts }) {
                             <div className="bg-light p-30">
                                 <div className="nav nav-tabs mb-4">
                                     <a className="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                                    <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
+                                    <a className="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Specifications</a>
                                 </div>
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="tab-pane-1">
@@ -115,7 +115,7 @@ function ProductDetails({ productData, relatedProducts }) {
                                         <p>{productData?.short_description ? productData?.short_description : productData?.short_description}</p>
                                     </div>
                                     <div className="tab-pane fade" id="tab-pane-2">
-                                        <h4 className="mb-3">Additional Information</h4>
+                                        <h4 className="mb-3">Specifications</h4>
                                         <p>{productData?.full_description ? productData?.full_description : productData?.full_description}</p>
                                     </div>
                                 </div>
@@ -222,7 +222,7 @@ export async function getStaticProps({ params }) {
             productData: response?.data?.data?.product,
             relatedProducts: response?.data?.data?.relatedProducts,
         },
-        revalidate: 10,
+        revalidate: 1,
     };
 }
 

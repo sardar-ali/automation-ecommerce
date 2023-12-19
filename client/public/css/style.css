@@ -336,7 +336,7 @@ legend {
 .whats-app {
   position: fixed;
   left: 10px;
-  bottom: 3rem;
+  bottom: 1rem;
   z-index: 11;
   animation: action 1s infinite alternate;
 }
@@ -2164,7 +2164,7 @@ pre code {
   }
 
   .whats-app {
-    bottom: 6rem;
+    bottom: 2rem;
   }
 }
 

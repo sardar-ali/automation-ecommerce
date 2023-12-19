@@ -23,8 +23,8 @@ app.use(cookieParser())
 dbConnection();
 
 //SERVE STATIC DIRECTORY
-app.use("/public/images/category", express.static("./public/images/category"));
-app.use("/public/images/product", express.static("./public/images/product"));
+//app.use("/public/images/category", express.static("./public/images/category"));
+//app.use("/public/images/product", express.static("./public/images/product"));
 
 app.use("/api/v1/user", userRoutes)
 app.use("/api/v1/category", categoryRoutes)

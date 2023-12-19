@@ -4,19 +4,19 @@ const User = require("../models/userModal");
 //check jwt token and verifying it
 const authMiddleware = async (req, res, next) => {
     let token;
-    console.log("Header ::", req?.headers)
+    // console.log("Header ::", req?.headers)
 
     if (req?.headers?.authorization?.startsWith("Bearer")) {
-        console.log("authorization ::", req?.headers?.authorization)
+        // console.log("authorization ::", req?.headers?.authorization)
 
         token = req?.headers?.authorization?.split(" ")[1];
-        console.log("token ::", token)
+        // console.log("token ::", token)
         try {
             const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-            console.log("decoded ::::", decoded)
+            // console.log("decoded ::::", decoded)
 
             const user = await User.findById(decoded?.id);
-            console.log("users ::::", user)
+            // console.log("users ::::", user)
             req.user = user;
             next();
         } catch (error) {

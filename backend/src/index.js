@@ -12,7 +12,6 @@ const app = express();
 const PORT = 4242;
 app.use(cors());
 app.use((req, res, next) => {
-    console.log("i am called")
     res.header('Access-Control-Allow-Origin', '*'); // '*' allows any origin, replace with your origin for better security
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');

@@ -72,13 +72,13 @@ const createOrder = async (req, res) => {
 
 }
 const getAllOrder = async (req, res) => {
-    console.log("Body :::", req?.body)
+    // console.log("Body :::", req?.body)
 }
 const getSingleOrder = async (req, res) => {
-    console.log("Body :::", req?.body)
+    // console.log("Body :::", req?.body)
 }
 const deleteOrder = async (req, res) => {
-    console.log("Body :::", req?.body)
+    // console.log("Body :::", req?.body)
 }
 
 module.exports = { createOrder, getAllOrder, getSingleOrder, deleteOrder }

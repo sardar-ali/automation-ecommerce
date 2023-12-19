@@ -44,7 +44,7 @@ function Categories({ categoryData }) {
 
     const deleteCategoryHandler = async (id) => {
         const response = await deleteCategory(id, token)
-        console.log("response :::", response)
+        // console.log("response :::", response)
         if (response?.data?.status) {
             toast.success(response?.data?.data?.message);
             dispatch(removeCategory(id))

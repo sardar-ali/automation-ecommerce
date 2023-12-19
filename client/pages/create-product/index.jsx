@@ -11,7 +11,7 @@ import { createProduct, getSingleProduct, updateProduct } from '../../services/a
 
 function AddProduct() {
     const Categories = useSelector((state) => state?.category?.categories);
-    console.log("Categories ::", Categories)
+    // console.log("Categories ::", Categories)
     let token;
 
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {

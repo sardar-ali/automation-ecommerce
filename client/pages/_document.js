@@ -9,8 +9,15 @@ class MyDocument extends Document {
                 <Head>
                     <meta charSet="utf-8" />
                     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-                    <meta content="Free HTML Templates" name="keywords" />
-                    <meta content="Free HTML Templates" name="description" />
+                    <meta content="gate barrier" name="keywords" />
+                    <meta content="sliding door sliding gate" name="keywords" />
+                    <meta content="swing gate sliding door" name="keywords" />
+                    <meta content="gate barrier" name="keywords" />
+                    <meta content="gate automation, automatic gate" name="keywords" />
+                    <meta content="gate barrier" name="description" />
+                    <meta content="sliding gate" name="description" />
+                    <meta content="swing gate, swing door," name="description" />
+                    <meta content="gate automation, automatic gate" name="description" />
                     <link href="img/favicon.ico" rel="icon" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link
@@ -25,7 +32,7 @@ class MyDocument extends Document {
                     <link href="lib/animate/animate.min.css" rel="stylesheet" />
                     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
                     <link href="css/style.css" rel="stylesheet" />
-
+                    <title>Gate Automation</title>
                 </Head>
                 <body>
                     <Main />

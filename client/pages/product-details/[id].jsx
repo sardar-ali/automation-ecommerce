@@ -116,7 +116,13 @@ function ProductDetails({ productData, relatedProducts }) {
                                     </div>
                                     <div className="tab-pane fade" id="tab-pane-2">
                                         <h4 className="mb-3">Specifications</h4>
-                                        <p>{productData?.full_description ? productData?.full_description : productData?.full_description}</p>
+                                        <p>{productData?.full_description.split(".").map((dt) => {
+                                            return (
+                                                <li>
+                                                    {dt}
+                                                </li>
+                                            )
+                                        })}</p>
                                     </div>
                                 </div>
                             </div>

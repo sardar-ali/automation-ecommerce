@@ -206,7 +206,7 @@ function Products({ isCategory, productsData }) {
                                             {product?.name}
                                         </p>
                                         <div className="d-flex align-items-center justify-content-center mt-2">
-                                            <h5> AED{product?.price}</h5>
+                                            <h5> AED{(product?.price) - (10)}</h5>
                                             <h6 className="text-muted ml-2">
                                                 <del>AED{product?.price}</del>
                                             </h6>

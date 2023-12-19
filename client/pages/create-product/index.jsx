@@ -161,8 +161,11 @@ function AddProduct() {
                             <input type="short_description" name="short_description" value={short_description} onChange={handleChange} className="form-control input-field" id="exampleInputshort_description" placeholder="Enter your short description" />
                         </div>
                         <div className="form-group">
+                            <div class="form-group">
+                                <textarea type="full_description" name="full_description" value={full_description} onChange={handleChange} className="form-control input-field" id="exampleInputshort_description" placeholder="Enter your full description or Specificarion" rows="5"></textarea>
+                            </div>
                             {/* <label for="exampleInputfull_description">full_description</label> */}
-                            <input type="full_description" name="full_description" value={full_description} onChange={handleChange} className="form-control input-field" id="exampleInputshort_description" placeholder="Enter your full description" />
+                            {/* <input type="full_description" name="full_description" value={full_description} onChange={handleChange} className="form-control input-field" id="exampleInputshort_description" placeholder="Enter your full description" /> */}
                         </div>
                         {/* <div className="form-group"> */}
                         {/* <label for="exampleInputimage">image</label> */}

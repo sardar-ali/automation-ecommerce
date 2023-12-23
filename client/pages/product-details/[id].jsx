@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import Head from 'next/head'
+
 import { useRouter } from 'next/router';
 import { increaseCartItemQuantity, decreaseCartItemQuantity, removeFromCart, addToCart } from "../../redux/slices/cartSlice"
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,6 +48,31 @@ function ProductDetails({ productData, relatedProducts }) {
 
     return (
         <>
+            <Head>
+                <title>{productData?.name}</title>
+                <meta charSet="utf-8" />
+                <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+                <meta
+                    name="keywords"
+                    content={productData?.short_description}
+                />
+                <meta name="description" content={productData?.full_description} />
+                <link href={productData?.image} rel="icon" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+                    rel="stylesheet"
+                />
+                <link
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+                    rel="stylesheet"
+                />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css"></link>
+                <link href="lib/animate/animate.min.css" rel="stylesheet" />
+                <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+                <link href="css/style.css" rel="stylesheet" />
+            </Head>
             <div>
                 <div className="container-fluid pb-5">
                     <div className="row px-xl-5">

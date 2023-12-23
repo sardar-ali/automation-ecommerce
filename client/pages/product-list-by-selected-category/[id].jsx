@@ -1,9 +1,7 @@
 import React from 'react'
 import Products from "../../components/dashboard/Products";
-import { getProduct, getAllProductOfSpecificCategory, deleteProduct, updateProduct } from '../../services/api/product';
+import { getAllProductOfSpecificCategory } from '../../services/api/product';
 import { getCategory } from '../../services/api/category';
-
-
 import { useRouter } from 'next/router';
 
 function ProductLisBySelectedCategory({ productsData }) {

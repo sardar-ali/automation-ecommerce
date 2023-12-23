@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import Head from 'next/head'
+
 import { toast } from 'react-toastify';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +8,7 @@ import { addToCart } from '../../redux/slices/cartSlice';
 import { getProducts, removeProduct } from '../../redux/slices/productSlice';
 import { useRouter } from "next/router";
 import { getProduct, getAllProductOfSpecificCategory, deleteProduct, updateProduct } from '../../services/api/product';
+import Product from './Product';
 
 
 function Products({ isCategory, productsData }) {
@@ -155,85 +158,65 @@ function Products({ isCategory, productsData }) {
 
 
     return (
-        <div className="container-fluid pt-5 pb-3">
-            <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
-                <span className="bg-secondary pr-3">Products</span>
-            </h2>
-            <div className="row px-xl-5">
-                {productsData?.filter((itm) => {
-                    if (searchText) {
+        <>
+            <Head>
+                <meta charSet="utf-8" />
+                <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-                        if (itm?.name?.toLowerCase()?.includes(searchText?.toLowerCase()) || itm?.category?.name.toLowerCase()?.includes(searchText?.toLowerCase())) {
-                            return true;
-                        } else {
-                            return false;
+                <meta
+                    name="keywords"
+                    content="Swing gate motor, Sliding gates motor, gate barriers, remote control, parking gates, garage door, gate automation, automatic gate, parking gate barrier"
+                />
+
+                <link href="img/favicon.ico" rel="icon" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+                    rel="stylesheet"
+                />
+                <link
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+                    rel="stylesheet"
+                />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css"></link>
+                <link href="lib/animate/animate.min.css" rel="stylesheet" />
+                <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+                <link href="css/style.css" rel="stylesheet" />
+                <title>{productsData?.length ? productsData[0]?.category?.name : "Gate Barriers"}</title>
+            </Head>
+            <div className="container-fluid pt-5 pb-3">
+                <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
+                    <span className="bg-secondary pr-3">{router?.query?.id ? productsData[0]?.category?.name : ""}Products</span>
+                </h2>
+                <div className="row px-xl-5">
+                    {productsData?.filter((itm) => {
+                        if (searchText) {
+
+                            if (itm?.name?.toLowerCase()?.includes(searchText?.toLowerCase()) || itm?.category?.name.toLowerCase()?.includes(searchText?.toLowerCase())) {
+                                return true;
+                            } else {
+                                return false;
+                            }
                         }
-                    }
-                    return true
-                })?.map((product, ind) => {
-                    return (
-
-                        <div className="col-lg-3 col-md-4 col-sm-6 pb-1" key={ind}>
-
-                            <div className="product-item bg-light mb-4">
-                                <div className="product-img position-relative overflow-hidden" style={{ position: "relative" }}>
-                                    <img
-                                        className="img-fluid w-100 main-img"
-                                        // style={{height:"15.5rem"}}
-                                        src={product?.image}
-                                        // src="img/product-1.jpg" 
-                                        alt="" />
-                                    <div className="product-action">
-                                        <p className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
-                                            <i className="fa fa-shopping-cart" />
-                                        </p>
-                                        {/* <a className="btn btn-outline-dark btn-square" href="">
-                                                <i className="far fa-heart" />
-                                            </a> */}
-                                        {/* <a className="btn btn-outline-dark btn-square" href="">
-                                                <i className="fa fa-sync-alt" />
-                                            </a> */}
-                                        {/* <a className="btn btn-outline-dark btn-square" href="">
-                                                <i className="fa fa-search" />
-                                            </a> */}
-                                    </div>
+                        return true
+                    })?.map((product, ind) => {
+                        return (
+                            <Product
+                                product={product}
+                                admin={admin}
+                                deleteProductHandler={deleteProductHandler}
+                                editProductHandler={editProductHandler}
+                                handleAddToCart={handleAddToCart}
+                                detailHandler={detailHandler}
+                            />
 
 
-                                </div>
-                                <div className="text-center py-4">
-                                    <div className=" cursor-pointer" onClick={() => detailHandler(product?._id)}>
-                                        <p className="h6 text-decoration-none text-truncate cursor-pointer">
-                                            {product?.name}
-                                        </p>
-                                        <div className="d-flex align-items-center justify-content-center mt-2">
-                                            <h5> AED{(product?.price) - (10)}</h5>
-                                            <h6 className="text-muted ml-2">
-                                                <del>AED{product?.price}</del>
-                                            </h6>
-                                        </div>
-                                        <div className="d-flex align-items-center justify-content-center mb-1">
-                                            <small className="fa fa-star text-primary mr-1" />
-                                            <small className="fa fa-star text-primary mr-1" />
-                                            <small className="fa fa-star text-primary mr-1" />
-                                            <small className="fa fa-star text-primary mr-1" />
-                                            <small className="fa fa-star text-primary mr-1" />
-                                            <small>{product?.reviews}</small>
-                                        </div>
-                                    </div>
-                                    {admin ? <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
-                                        <i class="fa-solid fa-trash cursor-pointer" style={{ color: "red" }} onClick={() => deleteProductHandler(product?._id)}></i>
-                                        <i class="fa-solid fa-pen-to-square cursor-pointer" style={{ color: "black" }} onClick={() => editProductHandler(product?._id)}></i>
-                                    </div> : ""}
-                                </div>
+                        )
+                    })}
 
-                            </div>
-                        </div>
-
-                    )
-                })}
-
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

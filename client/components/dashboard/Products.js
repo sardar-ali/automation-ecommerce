@@ -165,23 +165,15 @@ function Products({ isCategory, productsData }) {
 
                 <meta
                     name="keywords"
-                    content="Swing gate motor, Sliding gates motor, gate barriers, remote control, parking gates, garage door, gate automation, automatic gate, parking gate barrier"
+                    content="swing gate motor, sliding gates motor, gate barriers, remote control, parking gates, garage door, gate automation, automatic gate, parking gate barrier"
+                />
+                <meta
+                    name="description"
+                    content="Discover convenience and security with our comprehensive range of services at [Your Ecommerce Website]. From seamless installations of Swing Gate Motors, Sliding Gate Motors, Gate Barriers, Remote Controls, and Parking Gates to expert maintenance of Garage Doors, Gate Automation, and Automated Gate Systems, we ensure your peace of mind. Elevate your property's accessibility and safety with our specialized solutions and dedicated maintenance services, creating a seamless and secure environment for your convenience"
+                    key="desc"
                 />
 
                 <link href="img/favicon.ico" rel="icon" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-                    rel="stylesheet"
-                />
-                <link
-                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-                    rel="stylesheet"
-                />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css"></link>
-                <link href="lib/animate/animate.min.css" rel="stylesheet" />
-                <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-                <link href="css/style.css" rel="stylesheet" />
                 <title>{productsData?.length ? productsData[0]?.category?.name : "Gate Barriers"}</title>
             </Head>
             <div className="container-fluid pt-5 pb-3">

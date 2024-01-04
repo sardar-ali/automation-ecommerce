@@ -1,5 +1,7 @@
 import React from 'react'
-import WhatsappButton from "../whatsappButton/index"
+import Link from 'next/link'
+import WhatsappButton from "../whatsappButton/index";
+
 function Footer() {
     return (
         <>
@@ -8,10 +10,6 @@ function Footer() {
                 <div className="row px-xl-5 pt-5">
                     <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                         <h5 className="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                        {/* <p className="mb-4">
-                                No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et
-                                dolor sed dolor. Rebum tempor no vero est magna amet no
-                            </p> */}
                         <p className="mb-2">
                             <i className="fa fa-map-marker-alt text-primary mr-3" />
                             United Arab Emirates
@@ -30,10 +28,10 @@ function Footer() {
                             <div className="col-md-4 mb-5">
                                 <h5 className="text-secondary text-uppercase mb-4">Quick Shop</h5>
                                 <div className="d-flex flex-column justify-content-start">
-                                    <a className="text-secondary mb-2" href="#">
+                                    <Link className="text-secondary mb-2" href="/">
                                         <i className="fa fa-angle-right mr-2" />
                                         Home
-                                    </a>
+                                    </Link>
                                     <a className="text-secondary mb-2" href="#">
                                         <i className="fa fa-angle-right mr-2" />
                                         Our Shop
@@ -42,27 +40,27 @@ function Footer() {
                                             <i className="fa fa-angle-right mr-2" />
                                             Shop Detail
                                         </a> */}
-                                    <a className="text-secondary mb-2" href="#">
+                                    <Link className="text-secondary mb-2" href="/cart">
                                         <i className="fa fa-angle-right mr-2" />
                                         Shopping Cart
-                                    </a>
+                                    </Link>
                                     <a className="text-secondary mb-2" href="#">
                                         <i className="fa fa-angle-right mr-2" />
                                         Checkout
                                     </a>
-                                    <a className="text-secondary" href="#">
+                                    <Link className="text-secondary" href="/contact">
                                         <i className="fa fa-angle-right mr-2" />
                                         Contact Us
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="col-md-4 mb-5">
                                 <h5 className="text-secondary text-uppercase mb-4">My Account</h5>
                                 <div className="d-flex flex-column justify-content-start">
-                                    <a className="text-secondary mb-2" href="#">
+                                    <Link className="text-secondary mb-2" href="/">
                                         <i className="fa fa-angle-right mr-2" />
                                         Home
-                                    </a>
+                                    </Link>
                                     <a className="text-secondary mb-2" href="#">
                                         <i className="fa fa-angle-right mr-2" />
                                         Our Shop
@@ -71,18 +69,18 @@ function Footer() {
                                         <i className="fa fa-angle-right mr-2" />
                                         Shop Detail
                                     </a>
-                                    <a className="text-secondary mb-2" href="#">
+                                    <Link className="text-secondary mb-2" href="/cart">
                                         <i className="fa fa-angle-right mr-2" />
                                         Shopping Cart
-                                    </a>
+                                    </Link>
                                     <a className="text-secondary mb-2" href="#">
                                         <i className="fa fa-angle-right mr-2" />
                                         Checkout
                                     </a>
-                                    <a className="text-secondary" href="#">
+                                    <Link className="text-secondary" href="/contact">
                                         <i className="fa fa-angle-right mr-2" />
                                         Contact Us
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="col-md-4 mb-5">

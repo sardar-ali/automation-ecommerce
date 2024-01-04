@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from 'next/link'
 
 const Carousel = () => {
 
@@ -109,35 +109,23 @@ const Carousel = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-4">
-                    <div className="product-offer mb-30" style={{ height: 200 }}>
+                <div className="col-lg-4 cursor-pointer">
+                <Link href="/services">
+                    <div className="product-offer mb-30" style={{ height: 430 }}>
                         <img 
                         className="img-fluid" 
-                        src="https://tse4.mm.bing.net/th?id=OIP.6wuh1TB1YF5uYctqql0UcQHaE9&pid=Api&P=0&h=180"
-                        // src="img/offer-1.jpg" 
+                        // src="https://tse4.mm.bing.net/th?id=OIP.6wuh1TB1YF5uYctqql0UcQHaE9&pid=Api&P=0&h=180"
+                        src="img/services2.jpg" 
                         alt="" />
                         <div className="offer-text">
-                            <h6 className="text-white text-uppercase">Save 20%</h6>
-                            <h3 className="text-white mb-3">Special Offer</h3>
+                            {/* <h6 className="text-white text-uppercase">Save 20%</h6> */}
+                            <h5 className="text-white mb-3">KEEP YOUR PROPERTY SECURE</h5>
                             {/* <a href="" className="btn btn-primary">
                                 Shop Now
                             </a> */}
                         </div>
                     </div>
-                    <div className="product-offer mb-30" style={{ height: 200 }}>
-                        <img 
-                        className="img-fluid" 
-                        src="https://tse2.mm.bing.net/th?id=OIP.8dWXX3n6bZwDGO-iTfK2DwHaHa&pid=Api&P=0&h=180"
-                        // src="img/offer-2.jpg" 
-                        alt="" />
-                        <div className="offer-text">
-                            <h6 className="text-white text-uppercase">Save 20%</h6>
-                            <h3 className="text-white mb-3">Special Offer</h3>
-                            {/* <a href="" className="btn btn-primary">
-                                Shop Now
-                            </a> */}
-                        </div>
-                    </div>
+                </Link>
                 </div>
             </div>
         </div>

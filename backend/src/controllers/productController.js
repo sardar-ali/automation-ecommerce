@@ -96,179 +96,190 @@ const getProduct = async (req, res) => {
         })
     }
 }
-    // get products
-    const updateProduct = async (req, res) => {
-        try {
-            let imageUrl;
+// get products
+const updateProduct = async (req, res) => {
+    try {
+        let imageUrl;
 
-            if (req?.file) {
-                imageUrl = await uploadImageOnCloudinary(req?.file?.path)
-                // const basePath = `${req?.protocol}://${req?.get("host")}/public/images/product/`;
-                // const fileName = req?.file?.filename;
-                // imageUrl = `${basePath}${fileName}`;
-            } else {
-                imageUrl = req?.body?.image
-            }
+        if (req?.file) {
+            imageUrl = await uploadImageOnCloudinary(req?.file?.path)
+            // const basePath = `${req?.protocol}://${req?.get("host")}/public/images/product/`;
+            // const fileName = req?.file?.filename;
+            // imageUrl = `${basePath}${fileName}`;
+        } else {
+            imageUrl = req?.body?.image
+        }
 
-            const product = await Product.findByIdAndUpdate(req?.params?.id, { ...req?.body, image: imageUrl }, { new: true });
+        const product = await Product.findByIdAndUpdate(req?.params?.id, { ...req?.body, image: imageUrl }, { new: true });
 
-            if (!product) {
-                return res.status(400).json({
-                    status: false,
-                    message: "Product not updated!"
-                })
-            }
-
-            res.status(200).json({
-                status: true,
-                data: {
-                    product,
-                    message: "Product updated successfully!"
-                }
-            })
-
-        } catch (err) {
-            res.status(500).json({
+        if (!product) {
+            return res.status(400).json({
                 status: false,
-                error: { message: "Something went wrong!" },
-                err,
+                message: "Product not updated!"
             })
         }
-    }
 
-    const deleteProduct = async (req, res) => {
-        try {
-            const product = await Product.findByIdAndDelete(req?.params?.id);
-
-            if (!product) {
-                res.status(400).json({
-                    status: false,
-                    error: { message: "Product not deleted!" }
-                })
-            }
-            res.status(200).json({
-                status: true,
+        res.status(200).json({
+            status: true,
+            data: {
                 product,
-                message: "Product deleted successfully!"
-            })
-
-        } catch (err) {
-            res.status(500).json({
-                status: false,
-                error: { message: "Something went wrong!" },
-                err,
-            })
-        }
-    }
-
-
-    // get products
-    const getSingleProduct = async (req, res) => {
-        const { id } = req?.params
-        try {
-            const product = await Product.findById(id).populate("category", "_id,name");
-
-            if (!product) {
-                return res.status(400).json({
-                    status: false,
-                    message: "Product not found!"
-                })
+                message: "Product updated successfully!"
             }
+        })
 
-            const products = await Product.aggregate([
-                {
-                    $match: {
-                        category: new mongoose.Types.ObjectId(product?.category?._id),
-                    },
-                },
-            ]);
+    } catch (err) {
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
+        })
+    }
+}
 
+const deleteProduct = async (req, res) => {
+    try {
+        const product = await Product.findByIdAndDelete(req?.params?.id);
 
-            res.status(200).json({
-                status: true,
-                data: {
-                    product,
-                    relatedProducts: products,
-                    message: "Product get successfully!"
-                }
-            })
-
-        } catch (err) {
-            res.status(500).json({
+        if (!product) {
+            res.status(400).json({
                 status: false,
-                error: { message: "Something went wrong!" },
-                err,
+                error: { message: "Product not deleted!" }
             })
         }
+        res.status(200).json({
+            status: true,
+            product,
+            message: "Product deleted successfully!"
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
+        })
     }
-
-    // get products
-    const getAllProductOfSpecificCategory = async (req, res) => {
-        const { id } = req?.params;
-        console.log("id:::", id)
-
-        try {
-
-            // const products = await Product.aggregate([
-            //     {
-            //         $match: {
-            //             category: new mongoose.Types.ObjectId(id),
-            //         },
-            //     },
-            // ]);
+}
 
 
+// get products
+const getSingleProduct = async (req, res) => {
+    const { id } = req?.params
+    try {
+        const product = await Product.findById(id).populate("category", "_id,name");
 
-            const categoryId = new mongoose.Types.ObjectId(id);
-
-            const products = await Product.aggregate([
-                {
-                    $match: {
-                        category: categoryId,
-                    },
-                },
-                {
-                    $lookup: {
-                        from: 'categories', // The name of the collection to perform the lookup
-                        localField: 'category', // The local field to match with the foreign field
-                        foreignField: '_id', // The foreign field to match with the local field
-                        as: 'categoryInfo', // The alias for the merged category document
-                    },
-                },
-                {
-                    $unwind: '$categoryInfo', // Unwind the categoryInfo array to get a single object
-                },
-                {
-                    $project: {
-                        _id: 1, // product collection fields
-                        name: 1, // product collection fields
-                        price: 1, // product collection fields
-                        image: 1, // product collection fields
-
-                        // Add more fields you want to project here
-                        category: {
-                            name: '$categoryInfo.name', // Extract category name
-                            _id: '$categoryInfo._id',
-                        }// Extract category id
-                    },
-                },
-            ]);
-
-            // console.log("products ::", products)s
-            res.status(200).json({
-                status: true,
-                data: {
-                    products,
-                    message: "Product get successfully!"
-                }
-            })
-        } catch (err) {
-            res.status(500).json({
+        if (!product) {
+            return res.status(400).json({
                 status: false,
-                error: { message: "Something went wrong!" },
-                err,
+                message: "Product not found!"
             })
         }
-    }
 
-    module.exports = { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory }
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    category: new mongoose.Types.ObjectId(product?.category?._id),
+                },
+            },
+        ]);
+
+
+        res.status(200).json({
+            status: true,
+            data: {
+                product,
+                relatedProducts: products,
+                message: "Product get successfully!"
+            }
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
+        })
+    }
+}
+
+// get products
+const getAllProductOfSpecificCategory = async (req, res) => {
+    const name = req?.params?.name;
+    console.log("Params:::", req?.params)
+
+    const { id } = req?.params;
+    try {
+
+        // const category = await Category.findOne({ name })
+
+
+        // console.log("category ::", category);
+
+        // const categoryId = new mongoose.Types.ObjectId(category?._id);
+        // console.log("categoryId ::", categoryId);
+
+        // const products = await Product.aggregate([
+        //     {
+        //         $match: {
+        //             category: categoryId,
+        //         },
+        //     },
+        //     {
+        //         $lookup: {
+        //             from: 'categories', // The name of the collection to perform the lookup
+        //             localField: 'category', // The local field to match with the foreign field
+        //             foreignField: '_id', // The foreign field to match with the local field
+        //             as: 'categoryInfo', // The alias for the merged category document
+        //         },
+        //     },
+        //     {
+        //         $unwind: '$categoryInfo', // Unwind the categoryInfo array to get a single object
+        //     },
+        //     {
+        //         $project: {
+        //             _id: 1, // product collection fields
+        //             name: 1, // product collection fields
+        //             price: 1, // product collection fields
+        //             image: 1, // product collection fields
+
+        //             // Add more fields you want to project here
+        //             category: {
+        //                 name: '$categoryInfo.name', // Extract category name
+        //                 _id: '$categoryInfo._id',
+        //             }// Extract category id
+        //         },
+        //     },
+        // ]);
+
+
+        const category = await Category.findOne({ name });
+
+        if (!category) {
+            // If category doesn't exist
+            res.status(404).json({
+                status: false,
+                error: { message: "Category not found!" },
+            })// Return an empty array or handle accordingly
+        }
+
+        // Find all products with the found category ID
+        const products = await Product.find({ category: category._id });
+
+        // console.log("products ::", products)
+        res.status(200).json({
+            status: true,
+            data: {
+                products,
+                message: "Product get successfully!"
+            }
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
+        })
+    }
+}
+
+module.exports = { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory }

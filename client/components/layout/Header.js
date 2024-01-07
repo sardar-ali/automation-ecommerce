@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from 'react-redux';
 import WhatsappButton from "../whatsappButton/index"
 import { searchItems } from '../../redux/slices/productSlice';
 
 function Header() {
+    const router = useRouter();
 
     let token;
     let admin;
@@ -25,6 +27,8 @@ function Header() {
     const toggleList = () => {
         setListVisible(!isListVisible);
     };
+
+   
 
     return (
         <>
@@ -110,7 +114,7 @@ function Header() {
                             </div> */}
                         </div>
                         <div className="d-inline-flex align-items-center d-block d-lg-none">
-                            <a href="" className="btn px-0 ml-2">
+                            <a href="#" className="btn px-0 ml-2">
                                 <i className="fas fa-heart text-dark" />
                                 <span
                                     className="badge text-dark border border-dark rounded-circle"
@@ -177,7 +181,7 @@ function Header() {
                         <a
                             className="btn d-flex align-items-center justify-content-between bg-primary w-100"
                             data-toggle="collapse"
-                            href="#navbar-vertical"
+                            // href="#navbar-vertical"
                             style={{ height: 65, padding: "0 30px" }}
                             onClick={toggleList}
                         >
@@ -189,7 +193,7 @@ function Header() {
                         </a>
                         <nav
                             className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
-                            id="navbar-vertical"
+                            // id="navbar-vertical"
                             style={{ width: "calc(100% - 30px)", zIndex: 999 }}
                         >
                             {isListVisible && <div className="navbar-nav w-100">
@@ -214,9 +218,16 @@ function Header() {
                                     </div>
                                 </div> */}
                                 {catagories?.map((itm) => {
-                                    return (<Link href={`/product-list-by-selected-category/${itm?._id}`} keys={itm?._id} onClick={() => setListVisible(!isListVisible)} className="nav-item nav-link">
+                                    return (
+                                        <p onClick={() => {
+                                        setListVisible(!isListVisible);
+                                        router.push(`/product-list-by-selected-category/${itm?._id}`)
+                                        }}
+                                        // }} href={`/product-list-by-selected-category/${itm?._id}`}
+                                         keys={itm?._id}  className="nav-item nav-link">
                                         {itm?.name}
-                                    </Link>)
+                                    </p>
+                                    )
                                 })}
                                 {/* <a href="" className="nav-item nav-link">
                                     Jeans

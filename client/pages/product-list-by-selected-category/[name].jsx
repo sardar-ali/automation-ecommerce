@@ -25,11 +25,12 @@ export async function getStaticPaths() {
     if (result?.data?.status) {
         paths = result?.data?.data?.categories?.map((itm) => {
             return {
-                params: { id: `${itm?._id}` },
+                params: { name: `${itm?.name}` },
             };
         })
     }
 
+    console.log("pathssss sss :::", paths)
 
     // Return the paths and indicate that other paths should 404
     return {
@@ -39,8 +40,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    const name = encodeURIComponent(params?.name);
     // Fetch product data based on the dynamic route parameter (slug)
-    const response = await getAllProductOfSpecificCategory(params?.id);
+    const response = await getAllProductOfSpecificCategory(name);
+    console.log("response sss :::", response?.data)
 
     let productsData = []
     if (response?.data?.status) {
@@ -51,7 +54,7 @@ export async function getStaticProps({ params }) {
         props: {
             productsData: productsData,
         },
-        revalidate: 10,
+        revalidate: 2,
     };
 }
 

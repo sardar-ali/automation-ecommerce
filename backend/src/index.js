@@ -12,9 +12,9 @@ const app = express();
 const PORT = 4242;
 app.use(cors());
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*'); // '*' allows any origin, replace with your origin for better security
+    res.header('Access-Control-Allow-Origin', 'http://gateandbarriers.com'); // '*' allows any origin, replace with your origin for better security
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
 app.use(express.json());
@@ -30,6 +30,6 @@ app.use("/api/v1/category", categoryRoutes)
 app.use("/api/v1/product", productRoutes)
 app.use("/api/v1/order", orderRoutes)
 
-app.listen(PORT,'0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log("Server is running on port ", PORT)
 })

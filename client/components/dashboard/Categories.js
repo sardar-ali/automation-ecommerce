@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategory, deleteCategory } from '../../services/api/category'
 import { getCategories, removeCategory } from '../../redux/slices/categorySlice';
+import { getAllProductByCategoryName } from '../../services/api/product';
 
 
 function Categories({ categoryData }) {
@@ -55,6 +56,11 @@ function Categories({ categoryData }) {
         router.push(`/create-category?isEdit=true&&id=${id}`)
     }
 
+    const getCategoryProduct = async (name) => {
+        const response = await getAllProductByCategoryName(name);
+        console.log("response :::", response);
+    }
+
     return (
         <div className="container-fluid pt-5">
             <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
@@ -75,23 +81,23 @@ function Categories({ categoryData }) {
                     const name = itm?.name?.toLowerCase().split(" ").join("-");
                     return (
                         <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                            {/* <Link className="text-decoration-none" href={`/product-list-by-selected-category/${name}`}> */}
-                            <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}>
-                                <div className="cat-item d-flex align-items-center mb-4" style={{ position: "relative" }}>
-                                    <div
-                                        className="overflow-hidden"
-                                        style={{ width: 100, height: 100 }}
-                                    >
-                                        <img
-                                            className="img-fluid category-img"
-                                            src={itm?.image}
-                                            alt="" />
-                                    </div>
-                                    <div className="flex-fill pl-3">
-                                        <h6>{itm?.name}</h6>
-                                        <small className="text-body">100 Products</small>
-                                    </div>
+                            <Link className="text-decoration-none" href={`/categories/${name}`}>
+                            {/* <Link className="text-decoration-none" href={`/product-list-by-selected-category/${itm?._id}`}> */}
+                            <div className="cat-item d-flex align-items-center mb-4" style={{ position: "relative" }} onClick={() => getCategoryProduct(name)}>
+                                <div
+                                    className="overflow-hidden"
+                                    style={{ width: 100, height: 100 }}
+                                >
+                                    <img
+                                        className="img-fluid category-img"
+                                        src={itm?.image}
+                                        alt="" />
                                 </div>
+                                <div className="flex-fill pl-3">
+                                    <h6>{itm?.name}</h6>
+                                    <small className="text-body">100 Products</small>
+                                </div>
+                            </div>
                             </Link>
                             {
                                 admin && <div style={{ position: "absolute", display: "flex", flexDirection: "column", justifyConten: "center", alignItem: "center", margin: "1rem 1rem", fontSize: "1.2rem", top: "0.5rem", right: "1rem" }}>
@@ -105,7 +111,7 @@ function Categories({ categoryData }) {
                 })}
 
             </div>
-        </div >
+        </div>
     )
 }
 

@@ -1,3 +1,4 @@
+// const BASE_URL = "http://localhost:4242/api/v1"
 const BASE_URL = "http://178.16.138.60:4242/api/v1"
 
 // auth urls 

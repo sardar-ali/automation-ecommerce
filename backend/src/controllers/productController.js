@@ -274,11 +274,10 @@ const getAllProductOfSpecificCategory = async (req, res) => {
 
 // get products
 const getAllProductOfCategory = async (req, res) => {
-    const name = req?.params?.name;
+    const name = req?.params?.name?.toUpperCase().replaceAll("-", " ");
     console.log("Params :::", req?.params)
     console.log("name :::", name)
 
-    const { id } = req?.params;
     try {
 
         const category = await Category.findOne({ name });
@@ -287,7 +286,7 @@ const getAllProductOfCategory = async (req, res) => {
             // If category doesn't exist
             res.status(404).json({
                 status: false,
-                error: { message: "Category not found!" },
+                error: { message: "Category not found! ", name: name },
             })// Return an empty array or handle accordingly
         }
 

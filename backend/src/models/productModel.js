@@ -40,6 +40,16 @@ const productSchema = new mongoose.Schema({
     full_description: {
         type: String,
         required: true,
+    },
+    warranty: {
+        type: String,
+        default: "18 months"
+
+    },
+    brand: {
+        type: String,
+        default: "BFT"
+
     }
 }, {
     timestamps: true

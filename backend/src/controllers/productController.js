@@ -204,8 +204,8 @@ const getSingleProduct = async (req, res) => {
 
 // get products
 const getAllProductOfSpecificCategory = async (req, res) => {
-    const { name } = req?.params;
-    console.log("id:::", name)
+    const { id } = req?.params;
+    console.log("id:::", id)
 
     try {
 
@@ -219,12 +219,12 @@ const getAllProductOfSpecificCategory = async (req, res) => {
 
 
 
-        // const categoryId = new mongoose.Types.ObjectId(id);
+        const categoryId = new mongoose.Types.ObjectId(id);
 
         const products = await Product.aggregate([
             {
                 $match: {
-                    category: name,
+                    category: categoryId,
                 },
             },
             {
@@ -275,6 +275,7 @@ const getAllProductOfSpecificCategory = async (req, res) => {
 // get products
 const getAllProductOfCategory = async (req, res) => {
     const name = req?.params?.name;
+    console.log("Params :::", req?.params)
     console.log("name :::", name)
 
     const { id } = req?.params;

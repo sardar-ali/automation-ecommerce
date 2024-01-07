@@ -204,7 +204,6 @@ const getSingleProduct = async (req, res) => {
 
 // get products
 const getAllProductOfSpecificCategory = async (req, res) => {
-    console.log("name :::", name)
     const { name } = req?.params;
     console.log("id:::", name)
 
@@ -276,6 +275,7 @@ const getAllProductOfSpecificCategory = async (req, res) => {
 // get products
 const getAllProductOfCategory = async (req, res) => {
     const name = req?.params?.name;
+    console.log("name :::", name)
 
     const { id } = req?.params;
     try {

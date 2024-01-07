@@ -71,6 +71,7 @@ const createProduct = async (req, res) => {
 // get products
 const getProduct = async (req, res) => {
     try {
+        const updateResult = await Product.updateMany({}, [{ $set: { name: { $toUpper: '$name' } } }]);
         const product = await Product.find().populate("category");
 
         if (!product) {
@@ -164,9 +165,11 @@ const deleteProduct = async (req, res) => {
 
 // get products
 const getSingleProduct = async (req, res) => {
-    const { id } = req?.params
+    const name = req?.params?.name?.toUpperCase().replaceAll("-", " ");
+   
     try {
-        const product = await Product.findById(id).populate("category", "_id,name");
+
+        const product = await Product.findOne({ name }).populate("category", "_id,name");
 
         if (!product) {
             return res.status(400).json({
@@ -205,19 +208,8 @@ const getSingleProduct = async (req, res) => {
 // get products
 const getAllProductOfSpecificCategory = async (req, res) => {
     const { id } = req?.params;
-    console.log("id:::", id)
 
     try {
-
-        // const products = await Product.aggregate([
-        //     {
-        //         $match: {
-        //             category: new mongoose.Types.ObjectId(id),
-        //         },
-        //     },
-        // ]);
-
-
 
         const categoryId = new mongoose.Types.ObjectId(id);
 
@@ -275,8 +267,6 @@ const getAllProductOfSpecificCategory = async (req, res) => {
 // get products
 const getAllProductOfCategory = async (req, res) => {
     const name = req?.params?.name?.toUpperCase().replaceAll("-", " ");
-    console.log("Params :::", req?.params)
-    console.log("name :::", name)
 
     try {
 

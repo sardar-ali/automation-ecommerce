@@ -33,8 +33,8 @@ function Products({ isCategory, productsData }) {
 
 
 
-    const detailHandler = (id) => {
-        router.push(`/product-details/${id}`)
+    const detailHandler = (name) => {
+        router.push(`/product-details/${name}`)
     }
 
     // const products = [
@@ -192,6 +192,7 @@ function Products({ isCategory, productsData }) {
                         }
                         return true
                     })?.map((product, ind) => {
+                       
                         return (
                             <Product
                                 product={product}

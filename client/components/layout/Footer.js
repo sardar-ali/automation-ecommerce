@@ -32,22 +32,10 @@ function Footer() {
                                         <i className="fa fa-angle-right mr-2" />
                                         Home
                                     </Link>
-                                    <a className="text-secondary mb-2" href="#">
-                                        <i className="fa fa-angle-right mr-2" />
-                                        Our Shop
-                                    </a>
-                                    {/* <a className="text-secondary mb-2" href="#">https://transform.tools/json-to-proptypes
-                                            <i className="fa fa-angle-right mr-2" />
-                                            Shop Detail
-                                        </a> */}
                                     <Link className="text-secondary mb-2" href="/cart">
                                         <i className="fa fa-angle-right mr-2" />
                                         Shopping Cart
                                     </Link>
-                                    <a className="text-secondary mb-2" href="#">
-                                        <i className="fa fa-angle-right mr-2" />
-                                        Checkout
-                                    </a>
                                     <Link className="text-secondary" href="/contact">
                                         <i className="fa fa-angle-right mr-2" />
                                         Contact Us
@@ -61,25 +49,13 @@ function Footer() {
                                         <i className="fa fa-angle-right mr-2" />
                                         Home
                                     </Link>
-                                    <a className="text-secondary mb-2" href="#">
-                                        <i className="fa fa-angle-right mr-2" />
-                                        Our Shop
-                                    </a>
-                                    <a className="text-secondary mb-2" href="#">
-                                        <i className="fa fa-angle-right mr-2" />
-                                        Shop Detail
-                                    </a>
                                     <Link className="text-secondary mb-2" href="/cart">
                                         <i className="fa fa-angle-right mr-2" />
                                         Shopping Cart
                                     </Link>
-                                    <a className="text-secondary mb-2" href="#">
+                                    <Link className="text-secondary" href="/about-us">
                                         <i className="fa fa-angle-right mr-2" />
-                                        Checkout
-                                    </a>
-                                    <Link className="text-secondary" href="/contact">
-                                        <i className="fa fa-angle-right mr-2" />
-                                        Contact Us
+                                        About Us
                                     </Link>
                                 </div>
                             </div>

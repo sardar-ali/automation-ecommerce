@@ -18,7 +18,7 @@ function Product({ product, admin, deleteProductHandler, editProductHandler, han
                         </div>
                     </div>
                     <div className="text-center py-4">
-                        <div className=" cursor-pointer" onClick={() => detailHandler(product?._id)}>
+                        <div className=" cursor-pointer" onClick={() => detailHandler(product?.name?.toLowerCase().replaceAll(" ", "-"))}>
                             <p className="h6 text-decoration-none text-truncate cursor-pointer">
                                 {product?.name}
                             </p>

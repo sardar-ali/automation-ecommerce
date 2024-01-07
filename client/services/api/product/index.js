@@ -33,9 +33,9 @@ export const updateProduct = async (id, data, token) => {
     }
 }
 
-export const getSingleProduct = async (id) => {
+export const getSingleProduct = async (name) => {
     try {
-        const response = await axios.get(`${GET_SINGLE_PRODUCT}/${id}`)
+        const response = await axios.get(`${GET_SINGLE_PRODUCT}/${name}`)
         return response;
     } catch (error) {
         return error

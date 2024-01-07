@@ -42,8 +42,8 @@ function ProductDetails({ productData, relatedProducts }) {
     };
 
 
-    const detailHandler = (id) => {
-        router.push(`/product-details/${id}`)
+    const detailHandler = (name) => {
+        router.push(`/product-details/${name}`)
     }
 
     return (
@@ -181,7 +181,7 @@ function ProductDetails({ productData, relatedProducts }) {
 
                                         </div>
                                         <div className="text-center py-4">
-                                            <div className=" cursor-pointer" onClick={() => detailHandler(product?._id)}>
+                                            <div className=" cursor-pointer" onClick={() => detailHandler(product?.name?.toLowerCase().replaceAll(" ", "-"))}>
                                                 <p className="h6 text-decoration-none text-truncate cursor-pointer">
                                                     {product?.name}
                                                 </p>
@@ -233,8 +233,10 @@ export async function getStaticPaths() {
     let paths = [];
     if (response?.data?.status) {
         paths = response?.data?.data?.product?.map((itm) => {
+            const name = itm?.name?.toLowerCase().replaceAll(" ", "-");
+
             return {
-                params: { id: `${itm?._id}` },
+                params: { name },
             };
         })
     }
@@ -248,7 +250,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     // Fetch product data based on the dynamic route parameter (slug)
-    const response = await getSingleProduct(params.id);
+    const response = await getSingleProduct(params.name);
 
     return {
         props: {

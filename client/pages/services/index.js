@@ -4,11 +4,8 @@ function service() {
 
     return (
         <div className="container-fluid pt-5">
-            {/* <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
-                <span className="bg-secondary pr-3"> Installation and maintenance</span>
-            </h2> */}
             <div className="row px-xl-5 pb-3">
-                <h3 className="mx-auto text-info" style={{ textAlign: "center" }}> Installation Maintenance and Services</h3>
+                <h3 className="mx-auto text-info" style={{ textAlign: "center" }}> Installation  & Maintenance Services</h3>
                 <div className='service-container' style={{ display: "flex", alignItems: "flex-start", margin: "1rem 0" }}>
                     <img className="w-30 h-30" src="img/services.jpg" />
                     <div>

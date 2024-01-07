@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require('multer')
-const { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory } = require("../controllers/productController");
+const { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory, getAllProductOfCategory } = require("../controllers/productController");
 const { authMiddleware, isAdmin } = require("../middleware/authMiddleware");
 
 
@@ -22,8 +22,8 @@ router.post("/create-product", authMiddleware, isAdmin, uploadOption.single("ima
 router.put("/update-product/:id", authMiddleware, isAdmin, uploadOption.single("image"), updateProduct)
 router.delete("/delete-product/:id", authMiddleware, isAdmin, deleteProduct)
 router.get("/get-single-product/:id", getSingleProduct)
-// router.get("/get-all-product-by-specific-category/:id", getAllProductOfSpecificCategory)
-router.get("/get-all-product-by-specific-category/:name", getAllProductOfSpecificCategory)
+router.get("/get-all-product-by-specific-category/:id", getAllProductOfSpecificCategory)
+router.get("/get-all-product-by-category-name/:name", getAllProductOfCategory)
 
 router.get("/get-products", getProduct)
 

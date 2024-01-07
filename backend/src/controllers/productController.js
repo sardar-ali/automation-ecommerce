@@ -204,68 +204,58 @@ const getSingleProduct = async (req, res) => {
 
 // get products
 const getAllProductOfSpecificCategory = async (req, res) => {
-    const name = req?.params?.name;
-    console.log("Params:::", req?.params)
+    console.log("name :::", name)
+    const { name } = req?.params;
+    console.log("id:::", name)
 
-    const { id } = req?.params;
     try {
-
-        // const category = await Category.findOne({ name })
-
-
-        // console.log("category ::", category);
-
-        // const categoryId = new mongoose.Types.ObjectId(category?._id);
-        // console.log("categoryId ::", categoryId);
 
         // const products = await Product.aggregate([
         //     {
         //         $match: {
-        //             category: categoryId,
-        //         },
-        //     },
-        //     {
-        //         $lookup: {
-        //             from: 'categories', // The name of the collection to perform the lookup
-        //             localField: 'category', // The local field to match with the foreign field
-        //             foreignField: '_id', // The foreign field to match with the local field
-        //             as: 'categoryInfo', // The alias for the merged category document
-        //         },
-        //     },
-        //     {
-        //         $unwind: '$categoryInfo', // Unwind the categoryInfo array to get a single object
-        //     },
-        //     {
-        //         $project: {
-        //             _id: 1, // product collection fields
-        //             name: 1, // product collection fields
-        //             price: 1, // product collection fields
-        //             image: 1, // product collection fields
-
-        //             // Add more fields you want to project here
-        //             category: {
-        //                 name: '$categoryInfo.name', // Extract category name
-        //                 _id: '$categoryInfo._id',
-        //             }// Extract category id
+        //             category: new mongoose.Types.ObjectId(id),
         //         },
         //     },
         // ]);
 
 
-        const category = await Category.findOne({ name });
 
-        if (!category) {
-            // If category doesn't exist
-            res.status(404).json({
-                status: false,
-                error: { message: "Category not found!" },
-            })// Return an empty array or handle accordingly
-        }
+        // const categoryId = new mongoose.Types.ObjectId(id);
 
-        // Find all products with the found category ID
-        const products = await Product.find({ category: category._id });
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    category: name,
+                },
+            },
+            {
+                $lookup: {
+                    from: 'categories', // The name of the collection to perform the lookup
+                    localField: 'category', // The local field to match with the foreign field
+                    foreignField: '_id', // The foreign field to match with the local field
+                    as: 'categoryInfo', // The alias for the merged category document
+                },
+            },
+            {
+                $unwind: '$categoryInfo', // Unwind the categoryInfo array to get a single object
+            },
+            {
+                $project: {
+                    _id: 1, // product collection fields
+                    name: 1, // product collection fields
+                    price: 1, // product collection fields
+                    image: 1, // product collection fields
 
-        // console.log("products ::", products)
+                    // Add more fields you want to project here
+                    category: {
+                        name: '$categoryInfo.name', // Extract category name
+                        _id: '$categoryInfo._id',
+                    }// Extract category id
+                },
+            },
+        ]);
+
+        // console.log("products ::", products)s
         res.status(200).json({
             status: true,
             data: {
@@ -282,4 +272,40 @@ const getAllProductOfSpecificCategory = async (req, res) => {
     }
 }
 
-module.exports = { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory }
+
+// get products
+const getAllProductOfCategory = async (req, res) => {
+    const name = req?.params?.name;
+
+    const { id } = req?.params;
+    try {
+
+        const category = await Category.findOne({ name });
+
+        if (!category) {
+            // If category doesn't exist
+            res.status(404).json({
+                status: false,
+                error: { message: "Category not found!" },
+            })// Return an empty array or handle accordingly
+        }
+
+        // Find all products with the found category ID
+        const products = await Product.find({ category: category._id });
+
+        res.status(200).json({
+            status: true,
+            data: {
+                products,
+                message: "Product get successfully!"
+            }
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: false,
+            error: { message: "Something went wrong!" },
+            err,
+        })
+    }
+}
+module.exports = { createProduct, getProduct, updateProduct, deleteProduct, getSingleProduct, getAllProductOfSpecificCategory, getAllProductOfCategory }

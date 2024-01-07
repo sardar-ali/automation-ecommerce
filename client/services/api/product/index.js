@@ -1,5 +1,5 @@
 import axios from "axios"
-import { GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_SINGLE_PRODUCT, GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY } from "../..";
+import { GET_PRODUCT, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_SINGLE_PRODUCT, GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY, GET_ALL_PRODUCT_BY_CATEGORY_NAME } from "../..";
 
 
 export const createProduct = async (data, token) => {
@@ -54,11 +54,19 @@ export const deleteProduct = async (id, token) => {
 }
 
 
-export const getAllProductOfSpecificCategory = async (name) => {
-    console.log(" i heree *********** :::", name)
-    console.log("url ssss :::", `http://178.16.138.60:4242/api/v1/product/get-all-product-by-specific-category/${name}`)
+export const getAllProductOfSpecificCategory = async (id) => {
     try {
-        const response = await axios.get(`${GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY}/${name}`)
+        const response = await axios.get(`${GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY}/${id}`)
+        return response;
+    } catch (error) {
+        return error
+    }
+}
+
+export const getAllProductByCategoryName = async (name) => {
+
+    try {
+        const response = await axios.get(`${GET_ALL_PRODUCT_BY_CATEGORY_NAME}/${name}`)
         return response;
     } catch (error) {
         return error

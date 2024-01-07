@@ -13,6 +13,7 @@ export const UPDATE_PRODUCT = `${BASE_URL}/product/update-product`;
 export const DELETE_PRODUCT = `${BASE_URL}/product/delete-product`;
 export const GET_SINGLE_PRODUCT = `${BASE_URL}/product/get-single-product`;
 export const GET_ALL_PRODUCT_BY_SPECIFIC_CATEGORY = `${BASE_URL}/product/get-all-product-by-specific-category`;
+export const GET_ALL_PRODUCT_BY_CATEGORY_NAME = `${BASE_URL}/get-all-product-by-category-name`;
 
 
 

@@ -254,8 +254,8 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            productData: response?.data?.data?.product ? response?.data?.data?.product : null ,
-            relatedProducts: response?.data?.data?.relatedProducts,
+            productData: response?.data?.data?.product ? response?.data?.data?.product : null,
+            relatedProducts: response?.data?.data?.relatedProducts ? response?.data?.data?.relatedProducts : [],
         },
         revalidate: 1,
     };

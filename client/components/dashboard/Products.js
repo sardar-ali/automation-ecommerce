@@ -56,21 +56,6 @@ function Products({ isCategory, productsData }) {
 
     return (
         <>
-            {/* <Head>
-                <meta charSet="utf-8" />
-                <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-                <meta
-                    name="keywords"
-                    content="swing gate motor, sliding gates motor, gate barriers, remote control, parking gates, garage door, gate automation, automatic gate, parking gate barrier"
-                />
-                <meta
-                    name="description"
-                    content="We provide comprehensive Maintenance and Installations Services for Automatic Doors, Swing Gate Motors, Sliding Gate Motors, Gate Barriers, Remote Controls, Parking Gates, Garage Doors, Gate Automation, and Automated Gate Systems, Revolving Doors, Gate Operators, Garage Doors, Sectional Overhead Garage Doors, Traffic Barriers, Security Bollards and Parking Management Systems at Villas, Commercial & Residence Buildings, Super Markets, Hotels and Hospitals. The scope of service shall include preventive, curative and emergency maintenance services"
-                     key="desc"
-                />
-                <link href="img/favicon.ico" rel="icon" />
-                <title>{productsData?.length ? productsData[0]?.category?.name : "Gate Barriers"}</title>
-            </Head> */}
             <div className="container-fluid pt-5 pb-3">
                 <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
                     <span className="bg-secondary pr-3">{router?.query?.id ? productsData[0]?.category?.name : ""}Products</span>

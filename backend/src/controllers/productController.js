@@ -71,7 +71,8 @@ const createProduct = async (req, res) => {
 // get products
 const getProduct = async (req, res) => {
     try {
-        const updateResult = await Product.updateMany({}, [{ $set: { name: { $toUpper: '$name' } } }]);
+        // await Product.updateMany({}, { $set: { brand: "BFT" } })
+        // const updateResult = await Product.updateMany({}, [{ $set: { name: { $toUpper: '$name' } } }]);
         const product = await Product.find().populate("category");
 
         if (!product) {
@@ -166,7 +167,7 @@ const deleteProduct = async (req, res) => {
 // get products
 const getSingleProduct = async (req, res) => {
     const name = req?.params?.name?.toUpperCase().replaceAll("-", " ");
-   
+
     try {
 
         const product = await Product.findOne({ name }).populate("category", "_id,name");
@@ -267,21 +268,57 @@ const getAllProductOfSpecificCategory = async (req, res) => {
 // get products
 const getAllProductOfCategory = async (req, res) => {
     const name = req?.params?.name?.toUpperCase().replaceAll("-", " ");
-
+    // console.log("name ::", name)
     try {
 
         const category = await Category.findOne({ name });
 
         if (!category) {
             // If category doesn't exist
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 error: { message: "Category not found! ", name: name },
             })// Return an empty array or handle accordingly
         }
 
+        const categoryId = new mongoose.Types.ObjectId(category._id);
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    category: categoryId,
+                },
+            },
+            {
+                $lookup: {
+                    from: 'categories', // The name of the collection to perform the lookup
+                    localField: 'category', // The local field to match with the foreign field
+                    foreignField: '_id', // The foreign field to match with the local field
+                    as: 'categoryInfo', // The alias for the merged category document
+                },
+            },
+            {
+                $unwind: '$categoryInfo', // Unwind the categoryInfo array to get a single object
+            },
+            {
+                $project: {
+                    _id: 1, // product collection fields
+                    name: 1, // product collection fields
+                    price: 1, // product collection fields
+                    image: 1, // product collection fields
+
+                    // Add more fields you want to project here
+                    category: {
+                        name: '$categoryInfo.name', // Extract category name
+                        _id: '$categoryInfo._id',
+                        content: '$categoryInfo.content',
+                        meta_title: '$categoryInfo.meta_title',
+                        meta_description: '$categoryInfo.meta_description',
+                    }// Extract category id
+                },
+            },
+        ]);
         // Find all products with the found category ID
-        const products = await Product.find({ category: category._id });
+        // const products = await Product.find({ category: category._id }).populate("category");
 
         res.status(200).json({
             status: true,

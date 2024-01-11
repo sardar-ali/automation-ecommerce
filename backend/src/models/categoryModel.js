@@ -6,9 +6,18 @@ const categorySchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    image:{
-        type:String,
+    image: {
+        type: String,
         require: true,
+    },
+    content: {
+        type: String,
+    },
+    meta_title: {
+        type: String,
+    },
+    meta_description: {
+        type: String,
     }
 }, {
     timestamps: true,

@@ -91,7 +91,7 @@ function Categories({ categoryData }) {
                                     <img
                                         className="img-fluid category-img"
                                         src={itm?.image}
-                                        alt="" />
+                                        alt={itm?.name} />
                                 </div>
                                 <div className="flex-fill pl-3">
                                     <h6>{itm?.name}</h6>

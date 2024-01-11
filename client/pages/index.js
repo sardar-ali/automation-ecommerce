@@ -54,7 +54,6 @@ function Home({ productsData, categoryData }) {
             {/* Products Start */}
             <Products isCategory={false} productsData={productsData} />
             {/* Products ends */}
-
         </>
     )
 }

@@ -13,13 +13,9 @@ import Product from './Product';
 
 function Products({ isCategory, productsData }) {
     const router = useRouter();
-    // const cart = useSelector((state) => state?.cart?.cartItems);
-    // const productList = useSelector((state) => state?.product?.products);
     const searchText = useSelector((state) => state?.product?.searchText);
 
     const dispatch = useDispatch();
-
-    // const [productLists, setProductList] = useState([]);
 
     const { id } = router.query;
     let token;
@@ -37,106 +33,7 @@ function Products({ isCategory, productsData }) {
         router.push(`/product-details/${name}`)
     }
 
-    // const products = [
-    //     {
-    //         id: 1,
-    //         name: "product name",
-    //         price: "123.00",
-    //         reviews: 99,
-    //         image: "https://cdn.centennialcollege.ca/widencdn/img/centennialcollege/9tzcdepxzy/700x350px/new-parking-gates.jpeg?keep=c&quality=100&u=gxypq6",
 
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "product name",
-    //         price: "130.00",
-    //         reviews: 98,
-    //         image: "https://automaticgatesystems.com.au/wp-content/uploads/2018/01/IMG_6519-e1401375250282-1-1.jpg"
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "product name",
-    //         price: "132.00",
-    //         reviews: 102,
-    //         image: "img/moter-1.jpg",
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "product name",
-    //         price: "122.00",
-    //         reviews: 102,
-    //         image: "https://www.alamy.com/aggregator-api/download?url=https://c8.alamy.com/comp/HDRKB2/parking-lot-gate-and-entrance-HDRKB2.jpg"
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "product name",
-    //         price: "222.00",
-    //         reviews: 102,
-    //         image: "https://tse4.mm.bing.net/th?id=OIP.-x5UO5fFhlbBCeuIIOkwaAHaE4&pid=Api&P=0&h=180"
-    //     },
-    //     {
-    //         id: 6,
-    //         name: "product name",
-    //         price: "111.00",
-    //         reviews: 102,
-    //         image: "https://tse4.mm.bing.net/th?id=OIP.pi55WI9XPhvbvZN1TJA75gHaE8&pid=Api&P=0&h=180"
-    //     },
-    //     {
-    //         id: 7,
-    //         name: "product name",
-    //         price: "544.00",
-    //         reviews: 102,
-    //         image: "https://tse3.mm.bing.net/th?id=OIP.jRbZoud-eoU5ni7lsTjRKwHaHa&pid=Api&P=0&h=180"
-    //     },
-    //     {
-    //         id: 8,
-    //         name: "product name",
-    //         price: "333.00",
-    //         reviews: 102,
-    //         image: "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180"
-    //     },
-    //     {
-    //         id: 9,
-    //         name: "product name",
-    //         price: "567.00",
-    //         reviews: 102,
-    //         image: "https://tse2.mm.bing.net/th?id=OIP.IArnLLpa-i2sPKHIPxexyAHaDI&pid=Api&P=0&h=180"
-    //     },
-    // ]
-
-
-
-    const getProductList = async () => {
-        // const response = await getProduct();
-
-        // if (response?.data?.status) {
-        //     setProductList(response?.data?.data?.product)
-        //     dispatch(getProducts(response?.data?.data?.product))
-        // }
-
-        // if (productsData?.length) {
-        //     dispatch(getProducts(productsData))
-        // }
-    }
-
-    // const getProductBySelectedCategory = async (categoryId) => {
-    //     const response = await getAllProductOfSpecificCategory(categoryId);
-    //     if (response?.data?.status) {
-    //         setProductList(response?.data?.data?.products)
-    //         dispatch(getProducts(response?.data?.data?.products))
-    //     }
-
-    // }
-
-
-    // useEffect(() => {
-    //     if (isCategory && categoryId) {
-    //         getProductBySelectedCategory(categoryId)
-    //     }
-    //     // else {
-    //     //     getProductList()
-    //     // }
-    // }, [isCategory])
 
     const handleAddToCart = (item) => {
         dispatch(addToCart({ ...item, quantity: 1 }));
@@ -152,30 +49,28 @@ function Products({ isCategory, productsData }) {
     }
 
 
-    const editProductHandler = async (id) => {
-        router.push(`/create-product?isEdit=true&&id=${id}`)
+    const editProductHandler = async (id, name) => {
+        router.push(`/create-product?isEdit=true&&id=${id}&&name=${name}`)
     }
 
 
     return (
         <>
-            <Head>
+            {/* <Head>
                 <meta charSet="utf-8" />
                 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
                 <meta
                     name="keywords"
                     content="swing gate motor, sliding gates motor, gate barriers, remote control, parking gates, garage door, gate automation, automatic gate, parking gate barrier"
                 />
                 <meta
                     name="description"
-                    content="Discover convenience and security with our comprehensive range of services at [Your Ecommerce Website]. From seamless installations of Swing Gate Motors, Sliding Gate Motors, Gate Barriers, Remote Controls, and Parking Gates to expert maintenance of Garage Doors, Gate Automation, and Automated Gate Systems, we ensure your peace of mind. Elevate your property's accessibility and safety with our specialized solutions and dedicated maintenance services, creating a seamless and secure environment for your convenience"
-                    key="desc"
+                    content="We provide comprehensive Maintenance and Installations Services for Automatic Doors, Swing Gate Motors, Sliding Gate Motors, Gate Barriers, Remote Controls, Parking Gates, Garage Doors, Gate Automation, and Automated Gate Systems, Revolving Doors, Gate Operators, Garage Doors, Sectional Overhead Garage Doors, Traffic Barriers, Security Bollards and Parking Management Systems at Villas, Commercial & Residence Buildings, Super Markets, Hotels and Hospitals. The scope of service shall include preventive, curative and emergency maintenance services"
+                     key="desc"
                 />
-
                 <link href="img/favicon.ico" rel="icon" />
                 <title>{productsData?.length ? productsData[0]?.category?.name : "Gate Barriers"}</title>
-            </Head>
+            </Head> */}
             <div className="container-fluid pt-5 pb-3">
                 <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
                     <span className="bg-secondary pr-3">{router?.query?.id ? productsData[0]?.category?.name : ""}Products</span>
@@ -192,7 +87,6 @@ function Products({ isCategory, productsData }) {
                         }
                         return true
                     })?.map((product, ind) => {
-                       
                         return (
                             <Product
                                 product={product}
@@ -202,8 +96,6 @@ function Products({ isCategory, productsData }) {
                                 handleAddToCart={handleAddToCart}
                                 detailHandler={detailHandler}
                             />
-
-
                         )
                     })}
 

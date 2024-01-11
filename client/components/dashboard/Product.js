@@ -23,9 +23,9 @@ function Product({ product, admin, deleteProductHandler, editProductHandler, han
                                 {product?.name}
                             </p>
                             <div className="d-flex align-items-center justify-content-center mt-2">
-                                <h5> AED{(product?.price) - (10)}</h5>
+                                <h5> {(product?.price) - (10)} AED</h5>
                                 <h6 className="text-muted ml-2">
-                                    <del>AED{product?.price}</del>
+                                    <del>{product?.price} AED</del>
                                 </h6>
                             </div>
                             <div className="d-flex align-items-center justify-content-center mb-1">
@@ -39,7 +39,7 @@ function Product({ product, admin, deleteProductHandler, editProductHandler, han
                         </div>
                         {admin ? <div style={{ display: "flex", justifyContent: "space-around", alignItem: "baseline", fontSize: "1.5rem" }}>
                             <i class="fa-solid fa-trash cursor-pointer" style={{ color: "red" }} onClick={() => deleteProductHandler(product?._id)}></i>
-                            <i class="fa-solid fa-pen-to-square cursor-pointer" style={{ color: "black" }} onClick={() => editProductHandler(product?._id)}></i>
+                            <i class="fa-solid fa-pen-to-square cursor-pointer" style={{ color: "black" }} onClick={() => editProductHandler(product?._id, product?.name)}></i>
                         </div> : ""}
                     </div>
 

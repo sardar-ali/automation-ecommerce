@@ -92,7 +92,7 @@ function Header() {
                             </span>
                         </Link>
                     </div>
-                    <div className="col-lg-4 col-6 text-left">
+                    <div className="col-lg-4 col-6 ml-4 text-left">
                         <form action="">
                             <div className="input-group">
                                 <input
@@ -124,56 +124,17 @@ function Header() {
                          <a
                             className="btn d-flex align-items-center justify-content-between bg-primary w-100"
                             data-toggle="collapse"
-                            // href="#navbar-vertical"
                             style={{ height: 65, padding: "0 30px" }}
-                            // onClick={toggleList}
                         >
                             <h6 className="text-dark m-0">
-                                {/* <i className="fa fa-bars mr-2" /> */}
                                 Gate And Barriers
                             </h6>
-                            {/* <i className="fa fa-angle-down text-dark" /> */}
                         </a> 
                          <nav
                             className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                             // id="navbar-vertical"
                             style={{ width: "calc(100% - 30px)", zIndex: 999 }}
-                        >
-                          {/*  {isListVisible && <div className="navbar-nav w-100">
-                                 <div className="nav-item dropdown dropright">
-                                    <a
-                                        href="#"
-                                        className="nav-link dropdown-toggle"
-                                        data-toggle="dropdown"
-                                    >
-                                        Dresses <i className="fa fa-angle-right float-right mt-1" />
-                                    </a>
-                                    <div className="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                        <a href="" className="dropdown-item">
-                                            Mens Dresses
-                                        </a>
-                                        <a href="" className="dropdown-item">
-                                            Womens Dresses
-                                        </a>
-                                        <a href="" className="dropdown-item">
-                                            Babys Dresses
-                                        </a>
-                                    </div>
-                                </div> 
-                                {catagories?.map((itm) => {
-                                    return (
-                                        <p onClick={() => {
-                                        setListVisible(!isListVisible);
-                                        router.push(`/product-list-by-selected-category/${itm?._id}`)
-                                        }}
-                                        // }} href={`/product-list-by-selected-category/${itm?._id}`}
-                                         keys={itm?._id}  className="nav-item nav-link">
-                                        {itm?.name}
-                                    </p>
-                                    )
-                                })}
-                        
-                        */}</nav>
+                        ></nav>
                     </div> 
                         <div className="col-lg-9">
                             <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">

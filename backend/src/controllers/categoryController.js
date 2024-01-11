@@ -58,6 +58,7 @@ const createCategory = async (req, res) => {
 // get list of category 
 const getAllCategory = async (req, res) => {
     try {
+        
         const categories = await Category.find();
         res.status(200).json({
             status: true,

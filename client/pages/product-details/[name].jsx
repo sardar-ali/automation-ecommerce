@@ -86,7 +86,7 @@ function ProductDetails({ productData, relatedProducts }) {
                                     {productImages?.map((url, ind) => {
                                         return (
                                             <div className="carousel-item" key={ind}>
-                                                <img className="img-fluid w-100 product-detail-img " src={url} alt="" />
+                                                <img className="img-fluid w-100 product-detail-img " src={url} alt={productData?.name} />
                                             </div>
                                         )
                                     })}
@@ -113,7 +113,7 @@ function ProductDetails({ productData, relatedProducts }) {
                                     </div>
                                     <small className="pt-1">(99 Reviews)</small>
                                 </div>
-                                <h3 className="font-weight-semi-bold mb-4">{productData?.price ? productData?.price : product?.price}</h3>
+                                <h3 className="font-weight-semi-bold mb-4">{productData?.price ? productData?.price : product?.price} AED</h3>
                                 <p className="mb-4">{productData?.short_description ? productData?.short_description : product?.short_description}</p>
 
                                 <div className="d-flex align-items-center mb-4 pt-2">
@@ -122,7 +122,6 @@ function ProductDetails({ productData, relatedProducts }) {
                                         Cart</button>
                                 </div>
                                 <div className="d-flex pt-2">
-
                                     <WhatsappButton text={"Quick Shopping Click"} />
                                 </div>
                             </div>
@@ -171,7 +170,7 @@ function ProductDetails({ productData, relatedProducts }) {
                                             <img
                                                 className="img-fluid w-100 main-img"
                                                 src={product?.image}
-                                                alt="" />
+                                                alt={product?.name} />
                                             <div className="product-action">
                                                 <p className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
                                                     <i className="fa fa-shopping-cart" />
@@ -186,9 +185,9 @@ function ProductDetails({ productData, relatedProducts }) {
                                                     {product?.name}
                                                 </p>
                                                 <div className="d-flex align-items-center justify-content-center mt-2">
-                                                    <h5>{product?.price}</h5>
+                                                    <h5>{product?.price}  AED</h5>
                                                     <h6 className="text-muted ml-2">
-                                                        <del>{product?.price}</del>
+                                                        <del>{product?.price} AED </del>
                                                     </h6>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-center mb-1">

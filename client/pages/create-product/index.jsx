@@ -20,8 +20,9 @@ function AddProduct() {
 
     const router = useRouter();
     const searchParams = useSearchParams()
-    const isEdit = searchParams.get('isEdit')
-    const id = searchParams.get('id')
+    const isEdit = searchParams.get('isEdit');
+    const id = searchParams.get('id');
+    const names = searchParams.get('name');
 
 
     const [productFormData, setFormData] = useState({
@@ -83,30 +84,31 @@ function AddProduct() {
 
     }
 
-    const getProduct = async (id) => {
-        const response = await getSingleProduct(id);
-        const data = response?.data?.data?.product;
-        const category = Categories?.find((itm) => itm?._id === data?.category?._id)
-        setFormData({
-            name: data?.name,
-            price: data?.price,
-            category: { label: category?.name, value: category?._id },
-            short_description: data?.short_description,
-            full_description: data?.full_description,
-            image: data?.image
-        });
+
+    const getProduct = async (name) => {
+        if (name) {
+            const response = await getSingleProduct(name);
+            const data = response?.data?.data?.product;
+            const category = Categories?.find((itm) => itm?._id === data?.category?._id)
+            setFormData({
+                name: data?.name,
+                price: data?.price,
+                category: { label: category?.name, value: category?._id },
+                short_description: data?.short_description,
+                full_description: data?.full_description,
+                image: data?.image
+            });
+        }
     }
 
 
     useEffect(() => {
         if (window?.location?.search) {
-            getProduct(id)
+            getProduct(names)
         }
     }, [])
 
     const customStyles = {
-
-
         // Style the input field
         input: (provided, state) => ({
             ...provided,

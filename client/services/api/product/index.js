@@ -64,7 +64,6 @@ export const getAllProductOfSpecificCategory = async (id) => {
 }
 
 export const getAllProductByCategoryName = async (name) => {
-console.log("category name in api here :::", name)
     try {
         const response = await axios.get(`${GET_ALL_PRODUCT_BY_CATEGORY_NAME}/${name}`)
         return response;

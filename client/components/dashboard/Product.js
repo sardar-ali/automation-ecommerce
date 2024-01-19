@@ -19,9 +19,9 @@ function Product({ product, admin, deleteProductHandler, editProductHandler, han
                     </div>
                     <div className="text-center py-4">
                         <div className=" cursor-pointer" onClick={() => detailHandler(product?.name?.toLowerCase().replaceAll(" ", "-"))}>
-                            <p className="h6 text-decoration-none text-truncate cursor-pointer">
+                            <h3 className="h6 text-decoration-none text-truncate cursor-pointer">
                                 {product?.name}
-                            </p>
+                            </h3>
                             <div className="d-flex align-items-center justify-content-center mt-2">
                                 <h5> {(product?.price) - (10)} AED</h5>
                                 <h6 className="text-muted ml-2">

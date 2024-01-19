@@ -32,7 +32,7 @@ function CategoryScreen({ productsData }) {
             {productsData[0]?.category ?
                 <div className="container-fluid pt-5 bg-white mx-auto" style={{ display: "flex", justifyContent: "center", alignItem: "center", maxWidth: "90%" }}>
                     <div className="row px-xl-5 pb-3 mx-2">
-                        <h3 className="mx-auto text-info" style={{ textAlign: "center" }}> {productsData[0]?.category?.name}</h3>
+                        <h1 className="mx-auto text-info" style={{ textAlign: "center" }}> {productsData[0]?.category?.name}</h1>
                         <div>
                             {productsData[0]?.category?.content}
                         </div>

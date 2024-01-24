@@ -28,15 +28,15 @@ class MyDocument extends Document {
                     <link href="css/style.css" rel="stylesheet" />
                     <title>Gate Automation</title>
                     <meta name="google-site-verification" content="uWZTQAyJxacAnSo8GRbkG68M9AqiCccSfa0Qk1Dyr8g" />
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TY6NJFCN4J"></script>
+                    {/* <!-- Google tag (gtag.js) --> */}
+                    {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-TY6NJFCN4J"></script>
                     <script>
                         window.dataLayer = window.dataLayer || [];
-                        function gtag(){
-                            dataLayer.push(arguments)
-                        }
+                        function gtag(){dataLayer.push(arguments)}
                         gtag('js', new Date());
+
                         gtag('config', 'G-TY6NJFCN4J');
-                    </script>
+                    </script> */}
                 </Head>
                 <body>
                     <Main />

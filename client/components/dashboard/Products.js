@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
 
 import { toast } from 'react-toastify';
@@ -11,7 +11,7 @@ import { getProduct, getAllProductOfSpecificCategory, deleteProduct, updateProdu
 import Product from './Product';
 
 
-function Products({ isCategory, productsData }) {
+function Products({ isCategory, productsData}) {
     const router = useRouter();
     const searchText = useSelector((state) => state?.product?.searchText);
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,6 +27,11 @@ function Home({ productsData, categoryData }) {
 
     const user = useSelector((state) => state.user);
 
+    useEffect(() => {
+        if (categoryData?.length) {
+            dispatch(getCategories(categoryData))
+        }
+    }, [])
 
     return (
 
@@ -75,7 +80,7 @@ export async function getServerSideProps() {
     const result = await getCategory();
     let productsData = [];
     let categoryData = [];
-
+    console.log("result :::", result)
     if (result?.data?.status) {
         categoryData = result?.data?.data?.categories
     }

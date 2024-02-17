@@ -1,12 +1,17 @@
 import React from 'react'
+import Link from 'next/link'
+import Head from 'next/head'
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+
 import { getAllProductByCategoryName } from '../../services/api/product';
 import { getCategory } from '../../services/api/category';
 import Products from '../../components/dashboard/Products';
-import Head from 'next/head'
 
-function CategoryScreen({ productsData }) {
-
-
+function CategoryScreen({ productsData, categoryList }) {
+    const router = useRouter();
+    const query = router?.query?.name?.replaceAll("-", " ")?.toUpperCase();
+    const selectedCategory = categoryList?.find((itm) => itm?.name == query);
 
     return (
         <>
@@ -39,12 +44,35 @@ function CategoryScreen({ productsData }) {
                 isCategory={true}
                 productsData={productsData}
             />
-            {productsData[0]?.category ?
-                <div className="container-fluid pt-5 bg-white mx-auto" style={{ display: "flex", justifyContent: "center", alignItem: "center", maxWidth: "90%" }}>
-                    <div className="row px-xl-5 pb-3 mx-2">
-                        <h1 className="mx-auto text-info" style={{ textAlign: "center" }}> {productsData[0]?.category?.name}</h1>
+            {selectedCategory ?
+                <div className="container-fluid pt-5 bg-white mx-auto"
+                    style={{ wordSpacing: "1px", lineHeight: "2rem", fontSize: "1.2rem", maxWidth: "90%" }}>
+                    <div className="px-xl-5 pb-3 mx-2">
+                        <h1> {selectedCategory?.name}</h1>
                         <div>
-                            {productsData[0]?.category?.content}
+                            {selectedCategory?.content}
+                        </div>
+                        <ul className="my-5">
+                            {categoryList?.filter((itm) => itm?.name != query)?.map((dt) => {
+                                const name = dt?.name?.toLowerCase().split(" ").join("-");
+                                return (
+                                    <li>
+                                        <Link className=" text-info" href={`/categories/${name}`} >{dt?.name}</Link>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div className="flex d-flex flex-column  px-xl-5 pb-3 mx-2">
+                        <h2> {selectedCategory?.head2}</h2>
+                        <div>
+                            {selectedCategory?.content2}
+                        </div>
+                    </div>
+                    <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
+                        <h3> {selectedCategory?.head3}</h3>
+                        <div>
+                            {selectedCategory?.content3}
                         </div>
                     </div>
                 </div>
@@ -92,9 +120,13 @@ export async function getStaticProps({ params }) {
         productsData = response?.data?.data?.products
     }
 
+    const result = await getCategory();
+
+
     return {
         props: {
             productsData: productsData,
+            categoryList: result?.data?.data?.categories,
         },
         revalidate: 10,
     };

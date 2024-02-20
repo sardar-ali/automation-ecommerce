@@ -45,36 +45,58 @@ function CategoryScreen({ productsData, categoryList }) {
                 productsData={productsData}
             />
             {selectedCategory ?
-                <div className="container-fluid pt-5 bg-white mx-auto"
+                <div className="container-fluid pt-5 bg-white mx-auto mb-8"
                     style={{ wordSpacing: "1px", lineHeight: "2rem", fontSize: "1.2rem", maxWidth: "90%" }}>
                     <div className="px-xl-5 pb-3 mx-2">
                         <h1> {selectedCategory?.name}</h1>
                         <div>
                             {selectedCategory?.content}
                         </div>
-                        <ul className="my-5">
-                            {categoryList?.filter((itm) => itm?.name != query)?.map((dt) => {
-                                const name = dt?.name?.toLowerCase().split(" ").join("-");
-                                return (
-                                    <li>
-                                        <Link className=" text-info" href={`/categories/${name}`} >{dt?.name}</Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
+
                     </div>
-                    <div className="flex d-flex flex-column  px-xl-5 pb-3 mx-2">
-                        <h2> {selectedCategory?.head2}</h2>
-                        <div>
-                            {selectedCategory?.content2}
-                        </div>
-                    </div>
-                    <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
+                    {selectedCategory?.head2 &&
+                        <div className="flex d-flex flex-column  px-xl-5 pb-3 mx-2">
+                            <h2> {selectedCategory?.head2}</h2>
+                            <div>
+                                {selectedCategory?.content2}
+                            </div>
+                        </div>}
+
+                    {selectedCategory?.head3 && <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
                         <h3> {selectedCategory?.head3}</h3>
                         <div>
                             {selectedCategory?.content3}
                         </div>
-                    </div>
+                    </div>}
+
+                    {selectedCategory?.head4 && <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
+                        <h3> {selectedCategory?.head4}</h3>
+                        <div>
+                            {selectedCategory?.content4}
+                        </div>
+                    </div>}
+                    {selectedCategory?.head5 && <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
+                        <h3> {selectedCategory?.head5}</h3>
+                        <div>
+                            {selectedCategory?.content5}
+                        </div>
+                    </div>}
+                    {selectedCategory?.head6 && <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
+                        <h3> {selectedCategory?.head6}</h3>
+                        <div>
+                            {selectedCategory?.content6}
+                        </div>
+                    </div>}
+                    <ul className="my-5 mb-8">
+                        {categoryList?.filter((itm) => itm?.name != query)?.map((dt) => {
+                            const name = dt?.name?.toLowerCase().split(" ").join("-");
+                            return (
+                                <li>
+                                    <Link className=" text-info" href={`/categories/${name}`} >{dt?.name}</Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
                 </div>
                 :
                 <div className="container-fluid pt-5 bg-white mx-2" style={{ display: "flex", justifyContent: "center", alignItem: "center", margin: " 0 5rem" }}>

@@ -49,7 +49,7 @@ function ProductDetails({ productData, relatedProducts }) {
     return (
         <>
             <Head>
-                <title>{productData?.name}</title>
+                <title>{productData?.meta_title ? productData?.meta_title : productData?.name}</title>
                 <meta charSet="utf-8" />
                 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -57,7 +57,7 @@ function ProductDetails({ productData, relatedProducts }) {
                     name="keywords"
                     content={productData?.short_description}
                 />
-                <meta name="description" content={productData?.full_description} />
+                <meta name="description" content={productData?.meta_description ? productData?.meta_description : productData?.full_description} />
                 <link href={productData?.image} rel="icon" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
                 <link

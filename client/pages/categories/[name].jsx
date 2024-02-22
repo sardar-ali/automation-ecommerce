@@ -13,6 +13,7 @@ function CategoryScreen({ productsData, categoryList }) {
     const query = router?.query?.name?.replaceAll("-", " ")?.toUpperCase();
     const selectedCategory = categoryList?.find((itm) => itm?.name == query);
 
+
     return (
         <>
             <Head>
@@ -57,9 +58,13 @@ function CategoryScreen({ productsData, categoryList }) {
                     {selectedCategory?.head2 &&
                         <div className="flex d-flex flex-column  px-xl-5 pb-3 mx-2">
                             <h2> {selectedCategory?.head2}</h2>
-                            <div>
-                                {selectedCategory?.content2}
-                            </div>
+                            {selectedCategory?.content2?.split("*")?.map((itm) => {
+                                return (
+                                    <div>
+                                        {itm}
+                                    </div>
+                                )
+                            })}
                         </div>}
 
                     {selectedCategory?.head3 && <div className="px-xl-5 pb-3 mx-2 d-flex flex-column ">
@@ -89,7 +94,7 @@ function CategoryScreen({ productsData, categoryList }) {
                     </div>}
                     <ul className="my-5 mb-8">
                         {categoryList?.filter((itm) => itm?.name != query)?.map((dt) => {
-                            const name = dt?.name?.toLowerCase().split(" ").join("-");
+                            const name = dt?.name?.toLowerCase()?.split(" ")?.join("-");
                             return (
                                 <li>
                                     <Link className=" text-info" href={`/categories/${name}`} >{dt?.name}</Link>

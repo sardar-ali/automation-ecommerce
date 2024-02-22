@@ -46,6 +46,7 @@ function ProductDetails({ productData, relatedProducts }) {
         router.push(`/product-details/${name}`)
     }
 
+    console.log("productData ::", productData)
     return (
         <>
             <Head>

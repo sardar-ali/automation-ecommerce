@@ -35,7 +35,7 @@ function Cart() {
                                 return (
                                     <tr key={item?.id}>
                                         <td class="align-middle">
-                                            <img src={item?.image} alt="" style={{ width: "4rem", height: "4.8rem" }} />
+                                            <img src={item?.image} alt= {item?.name} style={{ width: "4rem", height: "4.8rem" }} />
                                         </td>
                                         <td class="align-middle">
                                             {item?.name}

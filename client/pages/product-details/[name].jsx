@@ -50,7 +50,7 @@ function ProductDetails({ productData, relatedProducts }) {
     return (
         <>
             <Head>
-                <title>{productData?.meta_title ? productData?.meta_title : productData?.name}</title>
+                <title>Buy {productData?.name} in Dubai & UAE 2024 </title>
                 <meta charSet="utf-8" />
                 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -58,7 +58,7 @@ function ProductDetails({ productData, relatedProducts }) {
                     name="keywords"
                     content={productData?.short_description}
                 />
-                <meta name="description" content={productData?.meta_description ? productData?.meta_description : productData?.full_description} />
+                <meta name="description" content={`Are you looking to buy the ${productData?.name} in Dubai and UAE in 2024? Explore new sources for automation control systems with ${productData?.name}  `} />
                 <link href={productData?.image} rel="icon" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
                 <link
@@ -94,7 +94,7 @@ function ProductDetails({ productData, relatedProducts }) {
                             <div id="product-carousel" className="carousel slide" data-ride="carousel">
                                 <div className="carousel-inner bg-light">
                                     <div className="carousel-item active">
-                                        <img className="img-fluid w-100 product-detail-img " src={productData?.image ? productData?.image : product?.image} alt="" />
+                                        <img className="img-fluid w-100 product-detail-img " src={productData?.image ? productData?.image : product?.image} alt={productData?.name} />
                                     </div>
                                     {productImages?.map((url, ind) => {
                                         return (
@@ -115,7 +115,7 @@ function ProductDetails({ productData, relatedProducts }) {
 
                         <div className="col-lg-7 h-auto mb-30">
                             <div className="h-100 bg-light p-30">
-                                <h3>{productData?.name ? productData?.name : product?.name}</h3>
+                                <h1>{productData?.name ? productData?.name : product?.name}</h1>
                                 <div className="d-flex mb-3">
                                     <div className="text-primary mr-2">
                                         <small className="fas fa-star"></small>

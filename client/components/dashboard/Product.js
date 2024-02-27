@@ -10,7 +10,7 @@ function Product({ product, admin, deleteProductHandler, editProductHandler, han
                         <img
                             className="img-fluid w-100 main-img"
                             src={product?.image}
-                            alt="" />
+                            alt={product?.name} />
                         <div className="product-action">
                             <p className="btn btn-outline-dark btn-square" onClick={() => handleAddToCart(product)}>
                                 <i className="fa fa-shopping-cart" />
